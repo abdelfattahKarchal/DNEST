@@ -37,7 +37,7 @@ class ReviewController extends Controller
     {
         $review = Review::create([
             'product_id' => $request->product_id,
-            'description' => $request->description,
+            'description' => htmlspecialchars($request->description) ,
             'user_id' => 1
             ]);
             if ($review->save()) {
