@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Begin Hiraola's Blog Details Right Sidebar Area -->
+    <!-- Begin Blog Details Right Sidebar Area -->
     <div class="hiraola-blog_area hiraola-blog_area-2 hiraola-blog-details hiraola-banner_area">
         <div class="container">
             <div class="row">
@@ -11,7 +11,8 @@
                             <div class="hiraola-recent-post">
                                 <div class="hiraola-recent-post-thumb">
                                     <a href="blog-details-left-sidebar.html">
-                                        <img class="img-full" src="{{ asset('front/assets/images/product/small-size/2-1.jpg')}}"
+                                        <img class="img-full"
+                                            src="{{ asset('front/assets/images/product/small-size/2-1.jpg') }}"
                                             alt="Hiraola's Product Image">
                                     </a>
                                 </div>
@@ -23,7 +24,8 @@
                             <div class="hiraola-recent-post">
                                 <div class="hiraola-recent-post-thumb">
                                     <a href="blog-details-left-sidebar.html">
-                                        <img class="img-full" src="{{ asset('front/assets/images/product/small-size/2-2.jpg')}}"
+                                        <img class="img-full"
+                                            src="{{ asset('front/assets/images/product/small-size/2-2.jpg') }}"
                                             alt="Hiraola's Product Image">
                                     </a>
                                 </div>
@@ -35,7 +37,8 @@
                             <div class="hiraola-recent-post">
                                 <div class="hiraola-recent-post-thumb">
                                     <a href="blog-details-left-sidebar.html">
-                                        <img class="img-full" src="{{ asset('front/assets/images/product/small-size/2-3.jpg')}}"
+                                        <img class="img-full"
+                                            src="{{ asset('front/assets/images/product/small-size/2-3.jpg') }}"
                                             alt="Hiraola's Product Image">
                                     </a>
                                 </div>
@@ -195,129 +198,77 @@
                 <div class="col-lg-9 order-lg-1 order-1">
                     <div class="blog-item">
                         <div class="blog-img img-hover_effect">
-                            <a href="blog-details-left-sidebar.html">
-                                <img src="{{ asset('front/assets/images/blog/1.jpg')}}" alt="Hiraola's Blog Image">
-                            </a>
+                            @if ($blog->media->label == 'image')
+                                <a href="blog-details-right-sidebar.html">
+                                    <img src="{{ asset($blog->path) }}" alt="{{ $blog->title }}">
+                                </a>
+                            @else
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe src="{{ asset($blog->path) }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            @endif
+                            {{-- <a href="blog-details-left-sidebar.html">
+                                <img src="{{ asset('front/assets/images/blog/1.jpg') }}"
+                                    alt="Hiraola's Blog Image">
+                                <img src="{{ asset($blog->path) }}" alt="{{ $blog->title }}">
+                            </a> --}}
                             <div class="blog-meta-2">
                                 <div class="blog-time_schedule">
-                                    <span class="day">25</span>
-                                    <span class="month">April</span>
+                                    <span class="day">{{ $blog->created_at->format('d') }}</span>
+                                    <span class="month">{{ $blog->created_at->format('F') }}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="blog-content">
                             <div class="blog-heading">
                                 <h5>
-                                    <a href="javascrip:void(0)">Blog Image Post</a>
+                                    <a href="javascrip:void(0)">{{ $blog->title }}</a>
                                 </h5>
                             </div>
                             <div class="blog-short_desc">
-                                <p>The most popular color is yellow which is made by adding silver and some copper. The
-                                    metals are melted together to form an alloy of the desired color and karat. It is very
-                                    important that all the ingredients are pure and that the amounts of each are weighed
-                                    very accurately to prevent porosity, which weakens the alloy.
-                                </p>
+                                <p> {{ $blog->description1 }} </p>
                             </div>
                         </div>
-                        <div class="hiraola-blog-blockquote">
-                            <blockquote>
-                                <p>The weight of evidence strongly supports a theme of healthful eating while allowing for
-                                    variations on that theme. A
-                                    diet of minimally processed foods close to nature, predominantly plants, is decisively
-                                    associated with health
-                                    promotion and disease prevention and is consistent with the salient components of
-                                    seemingly distinct dietary
-                                    approaches. Efforts to improve public health through diet are forestalled not for want
-                                    of knowledge about the
-                                    optimal feeding of Homo sapiens but for distractions associated with exaggerated claims,
-                                    and our failure to convert
-                                    what we reliably know into what we routinely do.
-                                </p>
-                            </blockquote>
-                        </div>
-                        <div class="blog-additional_information">
-                            <p>D colored diamonds are the rarest and most expensive of diamonds within the D-Z scale.
-                                Certain fancy colored diamonds will command the highest prices overall, and these will be
-                                discussed in separate tutorial. Many people enjoy diamonds in the near colorless range G-J,
-                                as they find a balance of size, clarity, and price to meet their needs.
-                            </p>
-                        </div>
-                        <div class="hiraola-social_link">
-                            <ul>
-                                <li class="facebook">
-                                    <a href="https://www.facebook.com" data-toggle="tooltip" target="_blank"
-                                        title="Facebook">
-                                        <i class="fab fa-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="twitter">
-                                    <a href="https://twitter.com" data-toggle="tooltip" target="_blank" title="Twitter">
-                                        <i class="fab fa-twitter-square"></i>
-                                    </a>
-                                </li>
-                                <li class="google-plus">
-                                    <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank"
-                                        title="Google Plus">
-                                        <i class="fab fa-google-plus"></i>
-                                    </a>
-                                </li>
-                                <li class="instagram">
-                                    <a href="https://rss.com" data-toggle="tooltip" target="_blank" title="Instagram">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="hiraola-comment-section">
-                            <h3>03 comment</h3>
-                            <ul>
-                                <li>
-                                    <div class="author-avatar">
-                                        <img src="{{ asset('front/assets/images/blog/user.png')}}" alt="User">
-                                    </div>
-                                    <div class="comment-body">
-                                        <span class="reply-btn"><a href="javascript:void(0)">reply</a></span>
-                                        <h5 class="comment-author">Edwin Adams</h5>
-                                        <div class="comment-post-date">
-                                            25 April, 2019 at 10:30am
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci
-                                            optio ex,
-                                            laboriosam
-                                            facilis non pariatur itaque illo sunt?</p>
-                                    </div>
-                                </li>
-                                <li class="comment-children">
-                                    <div class="author-avatar">
-                                        <img src="{{ asset('front/assets/images/blog/admin.png')}}" alt="Admin">
-                                    </div>
-                                    <div class="comment-body">
-                                        <span class="reply-btn"><a href="javascript:void(0)">reply</a></span>
-                                        <h5 class="comment-author">Anny Adams</h5>
-                                        <div class="comment-post-date">
-                                            25 April, 2019 at 11:00am
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores adipisci
-                                            optio ex,
-                                            laboriosam
-                                            facilis non pariatur itaque illo sunt?</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="author-avatar">
-                                        <img src="{{ asset('front/assets/images/blog/user.png')}}" alt="User">
-                                    </div>
-                                    <div class="comment-body">
-                                        <span class="reply-btn"><a href="javascript:void(0)">reply</a></span>
-                                        <h5 class="comment-author">Edwin Adams</h5>
-                                        <div class="comment-post-date">
-                                            25 April, 2019 at 06:50pm
-                                        </div>
-                                        <p>Thank You :)</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        @if ($blog->note)
+                            <div class="hiraola-blog-blockquote">
+                                <blockquote>
+                                    <p> {{ $blog->note }} </p>
+                                </blockquote>
+                            </div>
+                        @endif
+                        @if ($blog->description2)
+                            <div class="blog-additional_information">
+                                <p> {{ $blog->description2 }} </p>
+                            </div>
+                        @endif
+
+                        <x-front.media></x-front.media>
+
+                        @if ($blog->comments)
+                            <div class="hiraola-comment-section">
+                                <h3> <span id="commentsCount">{{ count($blog->comments) }}</span> comments</h3>
+                                <ul id="commentContent">
+                                    @foreach ($blog->comments as $comment)
+                                        <li>
+                                            <div class="author-avatar">
+                                                <img src="{{ asset('front/assets/images/blog/user.png') }}" alt="User">
+                                            </div>
+                                            <div class="comment-body">
+                                                <h5 class="comment-author">{{ $comment->user_name }}</h5>
+                                                <div class="comment-post-date">
+                                                    {{ $comment->created_at->format('d F, Y, H:i a') }}
+
+                                                </div>
+                                                <p> {{ $comment->description }} </p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
+
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="hiraola-blog-comment-wrapper">
                             <h3>leave a reply</h3>
                             <p>Your email address will not be published. Required fields are marked *</p>
@@ -326,24 +277,25 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <label>comment</label>
-                                            <textarea name="commnet" placeholder="Write a comment"></textarea>
+                                            <textarea id="comment" name="comment" placeholder="Write a comment"></textarea>
                                         </div>
                                         <div class="col-lg-4 col-md-4">
-                                            <label>Name</label>
-                                            <input type="text" class="coment-field" placeholder="Name">
+                                            <label for="user_name">Name</label>
+                                            <input type="text" id="user_name" name="user_name" class="coment-field"
+                                                placeholder="Name">
                                         </div>
                                         <div class="col-lg-4 col-md-4">
-                                            <label>Email</label>
-                                            <input type="text" class="coment-field" placeholder="Email">
+                                            <label for="user_email">Email</label>
+                                            <input type="email" id="user_email" name="user_email" class="coment-field"
+                                                placeholder="Email">
                                         </div>
-                                        <div class="col-lg-4 col-md-4">
-                                            <label>Website</label>
-                                            <input type="text" class="coment-field" placeholder="Website">
-                                        </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12 mt-3">
+                                            <div style="display: none" class="alert alert-danger errorsMessage"
+                                                role="alert"></div>
                                             <div class="comment-btn_wrap f-left">
                                                 <div class="hiraola-post-btn_area">
-                                                    <a class="hiraola-post_btn" href="javascript:void(0)">Post comment</a>
+                                                    <a onclick="addComment({{ $blog->id }})" class="hiraola-post_btn"
+                                                        href="javascript:void(0)">Post comment</a>
                                                 </div>
                                                 <!-- <input class="hiraola-post_btn" type="submit" name="submit" value="post comment"> -->
                                             </div>
@@ -357,5 +309,77 @@
             </div>
         </div>
     </div>
-    <!-- Hiraola's Blog Details Right Sidebar Area End Here -->
+    <!--Blog Details Right Sidebar Area End Here -->
+@endsection
+@section('js')
+    <script>
+        function addComment(blog_id) {
+            var comment = $('#comment').val();
+            var user_name = $('#user_name').val();
+            var user_email = $('#user_email').val();
+            console.log(blog_id, comment, user_email, user_name);
+            // if (comment && user_name && user_email) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: "{{ url('comments') }}",
+                data: {
+                    blog_id: blog_id,
+                    comment: comment,
+                    user_name: user_name,
+                    user_email: user_email
+                },
+                success: function(data) {
+                    console.log(data);
+                    var commentsCount = parseInt($.trim($('#commentsCount').text()));
+                    var longDateFormat = 'd MMMM, yyyy, HH:mm a';
+                    var date_comment = jQuery.format.date(data.created_at, longDateFormat)
+                    var commentContent = '';
+                    commentContent = `
+                                <li>
+                                    <div class="author-avatar">
+                                        <img src="{{ asset('front/assets/images/blog/user.png') }}" alt="User">
+                                    </div>
+                                    <div class="comment-body">
+                                        <h5 class="comment-author">` + data.user_name + `</h5>
+                                        <div class="comment-post-date">
+                                            ` + date_comment + `
+                                        </div>
+                                        <p> ` + data.description + ` </p>
+                                    </div>
+                                </li>
+                                                       
+                                                        `;
+                    $('#commentContent').append(commentContent);
+                    $('#commentsCount').text(commentsCount + 1);
+                    $('#comment').val('');
+                    $('#user_name').val('');
+                    $('#user_email').val('');
+                    Swal.fire({
+                        // position: 'top-end',
+                        icon: 'success',
+                        title: 'Your comment has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                error: function(data) {
+                    console.log(data.responseJSON.errors)
+                    $('.errorsMessage').empty();
+                    $.each(data.responseJSON.errors, function(key, value) {
+                        console.log(key + ": " + value);
+                        $('<span>' + value + '</span> <br>').appendTo('.errorsMessage');
+                    });
+                    $('.errorsMessage').show();
+                }
+            });
+            //}
+        };
+
+    </script>
+    <script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery-dateFormat.js') }}"></script>
+
 @endsection

@@ -67,7 +67,7 @@
 
                                     </ul>
                                 </li>
-                                <li><a href=" {{ route('blogs') }} ">Blog</a></li>
+                                <li><a href=" {{ route('blogs.index') }} ">Blog</a></li>
                                 <li><a href=" {{ route('aboutUs') }} ">About Us</a></li>
                                 <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
@@ -85,7 +85,7 @@
                                 </a>
                             </li> --}}
                             <li style="border-left: 1px solid rgba(0, 0, 0, 0.07);">
-                                <a href=" {{route('orders.index')}} ">
+                                <a href=" {{ route('orders.index') }} ">
                                     <i class="ion-bag"><sup> <span
                                                 class="badge badge-light card-counter">4</span></sup></i>
                                 </a>
@@ -125,7 +125,7 @@
                                         @endforeach($collections as $collection)
                                     </ul>
                                 </li>
-                                <li><a href=" {{ route('blogs') }} ">Blog</a></li>
+                                <li><a href=" {{ route('blogs.index') }} ">Blog</a></li>
                                 <li><a href=" {{ route('aboutUs') }} ">About Us</a></li>
                                 <li><a href="{{ route('contact') }}">Contact</a></li>
                             </ul>
@@ -142,7 +142,7 @@
                                 </a>
                             </li>
                             <li style="border-left: 1px solid rgba(0, 0, 0, 0.07);">
-                                <a href="cart.html">
+                                <a href="{{ route('orders.index') }}">
                                     <i class="ion-bag"><sup> <span
                                                 class="badge badge-light card-counter">4</span></sup></i>
                                 </a>
@@ -172,16 +172,16 @@
                             </a>
                             <ul class="sub-menu">
                                 @foreach ($collections as $collection)
-                                <li>
-                                <a href="{{ url('collections/' . $collection->id . '/products') }}">
-                                    <span class="mm-text">{{$collection->name}}</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a href="{{ url('collections/' . $collection->id . '/products') }}">
+                                            <span class="mm-text">{{ $collection->name }}</span>
+                                        </a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="{{ route('blogs') }}">
+                            <a href="{{ route('blogs.index') }}">
                                 <span class="mm-text">Blog</span>
                             </a>
                         </li>

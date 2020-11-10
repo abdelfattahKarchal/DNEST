@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Begin Hiraola's Single Product Area -->
-    {{-- @dd($product->images) --}}
+    <!-- Begin Single Product Area -->
     <div class="sp-area">
         <div class="container">
             <div class="sp-nav">
@@ -10,8 +9,8 @@
                         <div class="sp-img_area">
                             <div class="zoompro-border">
                                 <!--<img class="zoompro" src="assets/images/single-product/large-size/1.jpg"
-                                                                                data-zoom-image="assets/images/single-product/large-size/1.jpg"
-                                                                                 alt="Hiraola's Product Image" />-->
+                                                                                    data-zoom-image="assets/images/single-product/large-size/1.jpg"
+                                                                                     alt="Hiraola's Product Image" />-->
                                 @if (count($product->images))
                                     <img class="zoompro" src="{{ $product->images[0]->path_small ?? null }}"
                                         data-zoom-image="{{ $product->images[0]->path_large ?? null }}"
@@ -74,58 +73,52 @@
                                 <div class="quantity">
                                     <label>Quantity</label>
                                     <div class="cart-plus-minus">
-                                        <input name="quantity" id="quantity" type="number" class="cart-plus-minus-box" value="1">
+                                        <input name="quantity" id="quantity" type="number" class="cart-plus-minus-box"
+                                            value="1">
                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                     </div>
                                 </div>
                             @endif
-                            <div class="qty-btn_area">
+                            <div class="qty-btn_area" id="block-addTocart">
                                 <ul>
-                                    <li><a onclick="addToCard({{$product->id}})" class="qty-cart_btn" href="javascript:void(0)">Add To Cart</a></li>
+                                    @if (Session::has('productsCardSession'))
+                                        @php
+                                        $isExist = false;
+                                        @endphp
+                                        @foreach (Session::get('productsCardSession') as $key => $value)
+                                            @if ($product->id === $value->id)
+                                                @php
+                                                $isExist = true;
+                                                break;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                        @if ($isExist)
+                                            <li>Already in cart <a
+                                                    style="border: none; display: inline;padding: 0; color: blue"
+                                                    href="{{ route('cart') }}"> click here to check it</a> </li>
+                                        @else
+                                            <li><a onclick="addToCard({{ $product->id }})" class="qty-cart_btn"
+                                                    href="javascript:void(0)">Add To Cart</a></li>
+                                        @endif
+                                    @else
+                                        <li><a onclick="addToCard({{ $product->id }})" class="qty-cart_btn"
+                                                href="javascript:void(0)">Add To Cart</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
-                            <div class="hiraola-social_link">
-                                <ul>
-                                    <li class="facebook">
-                                        <a href="https://www.facebook.com" data-toggle="tooltip" target="_blank"
-                                            title="Facebook">
-                                            <i class="fab fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="twitter">
-                                        <a href="https://twitter.com" data-toggle="tooltip" target="_blank" title="Twitter">
-                                            <i class="fab fa-twitter-square"></i>
-                                        </a>
-                                    </li>
-                                    <li class="youtube">
-                                        <a href="https://www.youtube.com" data-toggle="tooltip" target="_blank"
-                                            title="Youtube">
-                                            <i class="fab fa-youtube"></i>
-                                        </a>
-                                    </li>
-                                    <li class="google-plus">
-                                        <a href="https://www.plus.google.com/discover" data-toggle="tooltip" target="_blank"
-                                            title="Google Plus">
-                                            <i class="fab fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li class="instagram">
-                                        <a href="https://rss.com" data-toggle="tooltip" target="_blank" title="Instagram">
-                                            <i class="fab fa-instagram"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <x-front.media></x-front.media>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Hiraola's Single Product Area End Here -->
+    <!-- Single Product Area End Here -->
 
-    <!-- Begin Hiraola's Single Product Tab Area -->
+    <!-- Begin Single Product Tab Area -->
     <div class="hiraola-product-tab_area-2 sp-product-tab_area">
         <div class="container">
             <div class="row">
@@ -159,7 +152,8 @@
                                                     @forelse ($product->reviews as $review)
                                                         <tr>
                                                             <td style="width: 50%;">
-                                                                <strong>{{ $review->user->name ?? '' }}</strong></td>
+                                                                <strong>{{ $review->user->name ?? '' }}</strong>
+                                                            </td>
                                                             <td class="text-right">{{ $review->created_at }}</td>
                                                         </tr>
                                                         <tr>
@@ -206,7 +200,7 @@
             </div>
         </div>
     </div>
-    <!-- Hiraola's Single Product Tab Area End Here -->
+    <!--Single Product Tab Area End Here -->
 
 
 @endsection
@@ -232,19 +226,20 @@
                         var date_review = jQuery.format.date(data.review.created_at, longDateFormat)
                         var reviewContent = '';
                         reviewContent = `
-                                            <tr>
-                                                <td style="width: 50%;">
-                                                    <strong>` + data.user.name + `</strong></td>
-                                                <td class="text-right">` + date_review + `</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <p>` + data.review.description + `</p>
-                                                </td>
-                                            </tr>
-                                            `;
+                                                <tr>
+                                                    <td style="width: 50%;">
+                                                        <strong>` + data.user.name + `</strong></td>
+                                                    <td class="text-right">` + date_review + `</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <p>` + data.review.description + `</p>
+                                                    </td>
+                                                </tr>
+                                                `;
                         $('#reviews-content').append(reviewContent);
                         $('#reviews-count').text(reviewsCount + 1);
+                        $('#con_message').val('');
                         Swal.fire({
                             // position: 'top-end',
                             icon: 'success',
@@ -278,21 +273,20 @@
                         quantity: selectedQantity,
                     },
                     success: function(data) {
-
+                        $("#block-addTocart").load(location.href + " #block-addTocart");
                         Swal.fire({
                             // position: 'top-end',
                             icon: 'success',
-                            title: 'Your review has been saved',
+                            title: 'Your product has been saved in cart',
                             showConfirmButton: false,
                             timer: 1500
                         })
                     }
                 });
             }
-            $('.card-counter').text(cardCount+1);
+            $('.card-counter').text(cardCount + 1);
 
-          }
-
+        }
 
     </script>
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
+use App\Blog;
+use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class ReviewController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,18 +37,16 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $review = Review::create([
-            'product_id' => $request->product_id,
-            'description' => htmlspecialchars($request->description),
-            'user_id' => 1
+        $validation = $request->validate([
+            'comment' => 'required',
+            'user_name' => 'required',
+            'user_email' => 'required|email',
         ]);
-        if ($review->save()) {
-            return [
-                'review' => $review,
-                'user' => $review->user
-            ];
-        }
-        return false;
+        $blog = Blog::findOrFail($request->blog_id);
+        $comment = Comment::create(['description'=>$request->comment , 'user_name'=> $request->user_name, 'user_email'=>$request->user_email]);
+        $blog->comments()->save($comment);
+        
+        return $comment;
     }
 
     /**
