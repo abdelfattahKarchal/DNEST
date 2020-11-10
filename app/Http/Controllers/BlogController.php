@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
+use App\Blog;
 use Illuminate\Http\Request;
 
-class ReviewController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,10 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $blogs = Blog::all();
+        return view('front.blog.list',[
+            'blogs' => $blogs
+        ]);
     }
 
     /**
@@ -35,18 +38,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $review = Review::create([
-            'product_id' => $request->product_id,
-            'description' => htmlspecialchars($request->description),
-            'user_id' => 1
-        ]);
-        if ($review->save()) {
-            return [
-                'review' => $review,
-                'user' => $review->user
-            ];
-        }
-        return false;
+        //
     }
 
     /**
@@ -57,7 +49,8 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        return view('front.blog.show',['blog'=>$blog]);
     }
 
     /**

@@ -34,9 +34,25 @@
                         <div class="hiraola-product_content">
                             <div class="product-desc_info">
                                 <h6><a class="product-name" href="{{route('products.show',['product'=> $product->id])}}"> {{ $product->name }} </a></h6>
-                                <div class="price-box">
-                                    <span class="new-price">${{ $product->unit_price }}</span>
+                                <div class="row">
+                                    <div class="price-box col-12">
+                                        <div class="row">
+                                            @php
+                                                $status_price = 'new-price';
+                                            @endphp
+                                            @if ($product->new_price)
+                                                @php
+                                                    $status_price = 'old-price';
+                                                @endphp
+                                                <div class="col-6"><span class="new-price">${{ $product->new_price }}</span></div>
+                                            @endif
+                                           
+                                            
+                                            <div class="col-6 text-right"><span class="{{ $status_price }}">${{ $product->unit_price }}</span></div>
+                                        </div>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

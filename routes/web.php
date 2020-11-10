@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/clear', function () {
+   //session()->flush();
+   dd(session()->get('productsCardSession'));
+  // session()->forget('productsCardSession');
+});
 Route::get('/welcome', function () {
     return view('welcome');
 });
@@ -26,6 +30,8 @@ Route::get('subcategory/{subcategory}/products', 'ProductController@productsBySu
 Route::post('products/search', 'ProductController@search');
 Route::post('orders/cache', 'OrderController@cache');
 Route::get('collections/{id}/products', 'CollectionController@productsByCollectionId');
+Route::get('carts/{id}/delete', 'CartController@delete');
+Route::post('carts/quantity/update', 'CartController@updateQuantity');
 Route::get('/leftSidebar', function () {
     return view('front.shop-left-sidebar');
 })->name('leftSidebar');
@@ -34,10 +40,9 @@ Route::get('/singleProduct', function () {
     return view('front.single-product');
 })->name('singleProduct');
 
-
-Route::get('/blogs', function () {
-    return view('front.blog-3-column');
-})->name('blogs');
+Route::resource('blogs','BlogController');
+Route::resource('comments','CommentController');
+//Route::get('/blogs', 'BlogController@index')->name('blogs');
 
 
 Route::get('/blog/details', function () {

@@ -4883,7 +4883,7 @@ button.li-btn:hover {
 .hiraola-product-tab_slider-3 .slide-item .single_product .hiraola-product_content,
 .shop-product-wrap .slide-item .single_product .hiraola-product_content {
   text-align: left;
-  padding: 0 20px 20px;
+  padding: 20px 20px 20px;
 }
 
 .hiraola-product_slider .slide-item .single_product .hiraola-product_content .product-desc_info h6,
