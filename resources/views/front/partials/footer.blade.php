@@ -31,10 +31,10 @@
                                 </div>
                                 <div class="footer-widgets">
                                     <ul>
-                                        <li><a href="#">SAHARA</a></li>
-                                        <li><a href="#">BERBER</a></li>
-                                        <li><a href="#">BASICS</a></li>
-                                        <li><a href="#">SFIFA</a></li>
+                                        @foreach ($collections as $collection)
+                                        <li><a href="{{ url('collections/' . $collection->id . '/products') }}">{{ $collection->name }}</a></li>
+                                        @endforeach
+                                        
                                     </ul>
                                 </div>
                             </div>

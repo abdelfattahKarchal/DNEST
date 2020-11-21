@@ -1,4 +1,4 @@
-<div class="popup_wrapper">
+<div class="popup_wrapper" id="newsletter">
     <div class="test">
         <span class="popup_off"><i class="ion-android-close"></i></span>
         <div class="subscribe_area text-center">
@@ -7,17 +7,30 @@
                 lookbooks
                 and
                 exclusive offers.</p>
+                <div style="display: none;" class="alert alert-danger errorsMessage"
+                        role="alert">The email must be a valid email address.</div>
             <div class="subscribe-form-group">
-                <form class="form-inline" action="#">
-                    <input class="form-control mr-2" autocomplete="on" type="email" name="message"
-                        id="message" placeholder="Enter your email address">
-                    <button class="btn btn-primary bg-primary" type="submit">subscribe</button>
+                <form class="form-inline" action="javascript:void(0)">
+                    <input class="form-control mr-2" autocomplete="on" type="email" name="newsletter_mail"
+                        id="newsletter_mail" placeholder="Enter your email address">
+                    <button id="newsletter-subscribe" class="btn btn-primary bg-primary" type="submit">subscribe</button>
                 </form>
             </div>
-            <div class="subscribe-bottom">
+            {{-- <div class="subscribe-bottom">
                 <input type="checkbox" id="newsletter-permission">
                 <label for="newsletter-permission">Don't show this popup again</label>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
+
+@section('js')
+
+<script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>
+
+@endsection
+
+
+
+
+

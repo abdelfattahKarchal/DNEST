@@ -71,15 +71,19 @@
             </div>
         </div> --}}
         <!-- Loading Area End Here -->
-        @if (Route::currentRouteName() == 'index')
+        @if (Session()->has('newsletter') && !Session()->has('isSaved'))
             <x-front.newsletter></x-front.newsletter>
         @endif
+        {{-- @if (Route::currentRouteName() == 'index')
+            <x-front.newsletter></x-front.newsletter>
+        @endif --}}
         <!-- Begin Hiraola's Newsletter Popup Area -->
 
         <!-- DNEST Offer -->
         <x-front.header-offer></x-front.header-offer>
         <!-- Begin Hiraola's Header Main Area Three -->
-        <x-front.header></x-front.header>
+        @include('front.partials.headers.header')
+        {{-- <x-front.header></x-front.header> --}}
         @yield('content')
 
         <!-- Begin Hiraola's Footer Area -->
@@ -141,6 +145,47 @@
     <!-- Main JS -->
     <script src="{{ asset('front/assets/js/main.js') }}"></script>
 
+    <script>
+        $(document).ready(function(){
+    
+            $('#newsletter-subscribe').click(function (e) { 
+            e.preventDefault();
+            var email = $('#newsletter_mail').val();
+            $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: "{{ url('newsletters') }}",
+                    data: {
+                        email: email,
+                    },
+                    success: function(data) {
+                        console.log('shgshsgshg');
+                        $('#newsletter').hide();
+                        Swal.fire({
+                            // position: 'top-end',
+                            icon: 'success',
+                            title: 'Your response has been saved',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    },
+                    error: function(data) {
+                    console.log(data.responseJSON.errors)
+                    $('.errorsMessage').empty();
+                    $.each(data.responseJSON.errors, function(key, value) {
+                        console.log(key + ": " + value);
+                        $('<span>' + value + '</span> <br>').appendTo('.errorsMessage');
+                    });
+                    $('.errorsMessage').show();
+                }
+                });
+        });
+    
+    });
+        
+    </script>
 
     @yield('js')
 </body>

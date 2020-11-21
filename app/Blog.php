@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
@@ -16,5 +17,10 @@ class Blog extends Model
     public function media()
     {
         return $this->belongsTo(Media::class);
+    }
+    //scope local last blogs
+    public function scopeLastBlogs(Builder $query)
+    {
+        return $query->orderBy(static::CREATED_AT,'desc');
     }
 }

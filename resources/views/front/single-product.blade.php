@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
     <!-- Begin Single Product Area -->
@@ -43,10 +44,19 @@
 
                             <div class="sp-essential_stuff">
                                 <ul>
-                                    <li>EX Tax: <a href="javascript:void(0)"><span>${{ $product->new_price }}</span> </a>
+                                    <li>Price: <a href="javascript:void(0)">
                                         @if ($product->new_price)
-                                            <del class="text-muted ml-2">${{ $product->unit_price }}</del>
+                                            <span class="new-price">${{ $product->new_price }}</span>
+                                            <del> <span class="new-price" style="color: #bababa;text-decoration: line-through;font-size: 14px;margin-left: 10px;">${{ $product->unit_price }}</span></del> 
+                                        @else
+                                        <span class="new-price">${{ $product->unit_price }}</span>
                                         @endif
+                                        
+
+
+
+
+                                        
                                     </li>
                                     <li>Brands <a href="javascript:void(0)">Buxton</a></li>
                                     <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
@@ -80,6 +90,7 @@
                                     </div>
                                 </div>
                             @endif
+                            
                             <div class="qty-btn_area" id="block-addTocart">
                                 <ul>
                                     @if (Session::has('productsCardSession'))
@@ -108,6 +119,7 @@
                                     @endif
 
                                 </ul>
+                                
                             </div>
                             <x-front.media></x-front.media>
                         </div>
@@ -258,15 +270,13 @@
             var cardCount = parseInt($('.card-counter').text()[0]);
             var selectedSize = $('#selected_size').find(":selected").val();
             var selectedQantity = $('#quantity').val()
-            console.log(selectedSize);
-            console.log(selectedQantity);
             if (product_id) {
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'POST',
-                    url: "{{ url('orders/cache') }}",
+                    url: "{{ url('carts/store') }}",
                     data: {
                         product_id: product_id,
                         size: selectedSize,

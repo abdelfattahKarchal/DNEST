@@ -97,7 +97,7 @@
 
 
     <!-- Begin Latest Blog Area -->
-    <x-front.latest-blog></x-front.latest-blog>
+    @include('front.partials.lastblog')
     <!-- end Latest Blog Area -->
 
 
@@ -107,3 +107,5 @@
     <!-- end Modal show product -->
     </div>
 @endsection
+
+

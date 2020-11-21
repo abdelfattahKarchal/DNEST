@@ -1,4 +1,3 @@
-<div class="col-lg-3 order-2 order-lg-1">
     <div class="hiraola-sidebar-catagories_area">
 
         <div class="category-module hiraola-sidebar_categories">
@@ -26,9 +25,12 @@
                                             <ul class="module-sub-list_item">
                                                 <li>
                                                     @foreach ($category->subCategories as $subCategory)
-                                                        <a class="subCategoryClick" {{--
-                                                            data-subCategory="{{ $subCategory->id }}"
-                                                            --}}
+                                                    @php
+                                                        $url = route('subcategory.products', $subCategory->id);
+                                                    @endphp
+                                                        <a onclick='findProductsBySubCategory("{{ $url }}",{{ $subCategory->id }})' class="subCategoryClick" 
+                                                            {{-- data-subCategory="{{ $subCategory->id }}" --}}
+                                                           
                                                             data-subCategory="{{ route('subcategory.products', $subCategory->id) }}"
                                                             href="javascript:void(0)"> {{ $subCategory->name }}
                                                             ({{ $subCategory->products->count() }})</a>
@@ -51,4 +53,4 @@
             </a>
         </div>
     </div>
-</div>
+

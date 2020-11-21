@@ -1,13 +1,11 @@
 <?php
 
-namespace App\View\Components\front;
+namespace App\View\Components;
 
-use App\Collection;
 use Illuminate\View\Component;
 
-class header extends Component
+class blogItem extends Component
 {
-    public $collections;
     /**
      * Create a new component instance.
      *
@@ -15,7 +13,7 @@ class header extends Component
      */
     public function __construct()
     {
-      $this->collections = Collection::all() ;
+        //
     }
 
     /**
@@ -25,6 +23,6 @@ class header extends Component
      */
     public function render()
     {
-        return view('components.front.header');
+        return view('components.front.blog-item');
     }
 }

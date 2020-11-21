@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\CollectionComposer;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer([
+        'front.partials.footer',
+        'front.partials.headers.header',
+        'front.shop-left-sidebar'
+        ]
+        , CollectionComposer::class);
     }
 }

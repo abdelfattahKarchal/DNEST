@@ -21,7 +21,7 @@
                             <div class="slide-item">
                                 <div class="single_product">
                                     <div class="product-img">
-                                        <a href="shop-left-sidebar.html">
+                                        <a href="{{ url('collections/' . $newCollection->id . '/products') }}">
                                             <img class="primary-img" style="height: 287px;"
                                                 {{-- src="{{ asset('front/assets/images/product/collections/sahara.jpg') }}" --}}
                                                 src="{{$newCollection->image1 }}"
@@ -36,7 +36,7 @@
                                     <div class="hiraola-product_content">
                                         <div class="product-desc_info text-center">
                                             <h6 class="mt-2"><a class="product-name"
-                                                    href="shop-left-sidebar.html">{{$newCollection->name}}</a></h6>
+                                                    href="{{ url('collections/' . $newCollection->id . '/products') }}">{{$newCollection->name}}</a></h6>
 
                                         </div>
                                     </div>

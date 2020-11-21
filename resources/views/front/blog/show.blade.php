@@ -48,150 +48,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hiraola-sidebar-catagories_area">
-
-                            <div class="category-module hiraola-sidebar_categories">
-                                <div class="category-module_heading">
-                                    <h5>Collections</h5>
-                                </div>
-                                <div class="module-body">
-                                    <ul class="module-list_item">
-                                        <li>
-                                            <a href="javascript:void(0)" class="text-uppercase font-weight-bold">SAHARA (18)
-                                            </a>
-                                            <ul class="module-sub-list_item">
-                                                <li>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">bagues (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Colliers (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bracelés (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <a href="javascript:void(0)" class="text-uppercase font-weight-bold">BERBER
-                                                (100)</a>
-                                            <ul class="module-sub-list_item">
-                                                <li>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bagues (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Colliers (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bracelés (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <a href="javascript:void(0)" class="text-uppercase font-weight-bold">BASICS
-                                                (300)</a>
-                                            <ul class="module-sub-list_item">
-                                                <li>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bagues (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Colliers (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bracelés (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-                                            <a href="javascript:void(0)" class="text-uppercase font-weight-bold">SFIFA
-                                                (250)</a>
-                                            <ul class="module-sub-list_item">
-                                                <li>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bagues (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Colliers (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="javascript:void(0)"
-                                                        class="text-capitalize font-weight-bold">Bracelés (18)</a>
-                                                    <ul class="module-sub-list_item">
-                                                        <li>
-                                                            <a href="javascript:void(0)">Hommes(18)</a>
-                                                            <a href="javascript:void(0)">Femmes(18)</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {{-- begin left sidebar --}}
+              {{--   <x-front.left-sidebar :collections="$collections"></x-front.left-sidebar> --}}
+                {{-- end left sidebar --}}
 
                     </div>
                 </div>
@@ -246,7 +105,7 @@
 
                         @if ($blog->comments)
                             <div class="hiraola-comment-section">
-                                <h3> <span id="commentsCount">{{ count($blog->comments) }}</span> comments</h3>
+                                <h3> <span id="commentsCount">{{ count($blog->comments) }}</span> comment(s)</h3>
                                 <ul id="commentContent">
                                     @foreach ($blog->comments as $comment)
                                         <li>
@@ -263,8 +122,6 @@
                                             </div>
                                         </li>
                                     @endforeach
-
-
                                 </ul>
                             </div>
                         @endif
