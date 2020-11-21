@@ -5,10 +5,10 @@
     $sum = 0;
     @endphp
     <!-- Begin DENEST Cart Area -->
-    <div class="hiraola-cart-area">
+    <div class="hiraola-cart-area" id="cartDiv">
         <div class="container">
             <div class="row">
-                <div class="col-12" id="cartDiv">
+                <div class="col-12" >
                     @if (session()->has('status'))
                         <div class="alert alert-info" role="alert">
                             <strong>Info : </strong> {{ session()->get('status') }}
@@ -72,8 +72,7 @@
                                                             class="amount">${{ $product->quantity * ($product->new_price ?? $product->unit_price) }}</span>
                                                     </td>
                                                     @php
-                                                    $sum += ($product->quantity * ($product->new_price ??
-                                                    $product->unit_price))
+                                                    $sum += ($product->quantity * ($product->new_price ??$product->unit_price))
                                                     @endphp
 
                                                 </tr>
@@ -101,7 +100,7 @@
 
                                                 <li>Total <span>${{ $sum }}</span></li>
                                             </ul>
-                                            <a id="commadNow-btn" href="javascript:void(0)">Command now</a>
+                                            <a onclick="commandNow()" id="commadNow-btn" href="javascript:void(0)">Command now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -121,11 +120,13 @@
 @section('js')
     <script>
         function deleteProductCart(idProduct) {
+            var cardCount = parseInt($('.card-counter').text()[0]);
             $.ajax({
                 type: 'GET',
                 url: 'carts/' + idProduct + '/delete',
                 success: function(data) {
                     $("#cartDiv").load(location.href + " #cartDiv");
+                    $('.card-counter').text(cardCount -1);
                 }
             });
         }
@@ -154,10 +155,8 @@
         }
 
         // add command 
-
-        $('#commadNow-btn').click(function(e) {
-            e.preventDefault();
-            Swal.fire({
+function commandNow () { 
+    Swal.fire({
                 title: 'do you really want to place this order ?',
                 showCancelButton: true,
                 confirmButtonText: `Save`,
@@ -173,6 +172,7 @@
                         url: "{{ route('orders.store') }}",
                         success: function(data) {
                             if (data) {
+                                $('.card-counter').text(0);
                                 $("#cartDiv").load(location.href + " #cartDiv");
                             }
                         }
@@ -180,8 +180,8 @@
                     //Swal.fire('Saved!', '', 'success')
                 }
             });
-            //confirm("do you really want to place this order ?");
-        });
+ }
+        
 
     </script>
     <script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>

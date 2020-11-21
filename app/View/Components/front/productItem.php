@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class front.media extends Component
+class productItem extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class front.media extends Component
      */
     public function render()
     {
-        return view('components.front.media');
+        return view('components.front.product-item');
     }
 }

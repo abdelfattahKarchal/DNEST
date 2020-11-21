@@ -5,7 +5,9 @@
         <div class="container">
             <div class="row">
                 {{-- begin left sidebar --}}
-                <x-front.left-sidebar :collections="$collections"></x-front.left-sidebar>
+                <div class="col-lg-3 order-2 order-lg-1">
+                    <x-front.left-sidebar :collections="$collections"></x-front.left-sidebar>
+                </div>
                 {{-- end left sidebar --}}
 
                 <div class="col-lg-9 order-1 order-lg-2">
@@ -27,7 +29,7 @@
                     </div>
                     {{-- begin list of product --}}
                     <x-front.product-list
-                        :products=" $products ?? $collections[3]->categories[0]->subCategories[0]->products">
+                        :products=" $products">
                     </x-front.product-list>
 
                     <div class="row" id="pagination">

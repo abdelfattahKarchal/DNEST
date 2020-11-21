@@ -49,7 +49,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        //dd($id);
         $product = Product::findOrFail($id);
+        //dd($product);
         return view('front.single-product',[
             'product' => $product
         ]);
@@ -91,9 +93,7 @@ class ProductController extends Controller
 
     public function productsBySubCategoryId($id)
     {
-        ///if(isset($id)){
-
-       // }
+        
 
         $subCategory = SubCategory::findOrFail($id);
        // dd($subCategory);
@@ -103,6 +103,7 @@ class ProductController extends Controller
 
             return [
                 'products'=>$subCategory->products,
+                'sessionProducts' => session()->get('productsCardSession')
                 //'collections'=>$collections,
             ];
 
@@ -117,7 +118,10 @@ class ProductController extends Controller
         $products = DB::table('products')
                     ->where('name','like','%'.$request->name.'%')
                     ->get();
-       return $products;
+       return [
+           'products' => $products,
+           'sessionProducts' => session()->get('productsCardSession')
+       ];
     }
 
 }

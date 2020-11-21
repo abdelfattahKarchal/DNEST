@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Collection;
-use App\SubCategory;
+use App\NewsLetter;
 use Illuminate\Http\Request;
 
-class CollectionController extends Controller
+class NewsLetterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +14,7 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        // a extarnaliser vers view composer
-        $collections = Collection::with(['categories', 'categories.subCategories', 'categories.subCategories.products'])->get();
-        return view('front.shop-left-sidebar', [
-            //'collections' => $collections
-        ]);
+        //
     }
 
     /**
@@ -40,7 +35,16 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'email' => 'email',
+        ]);
+        //dd($request->email);
+        $newsLetter = NewsLetter::create(['email'=>$request->email]);
+        if($newsLetter){
+            session()->flush('newsletter');
+            session()->put('isSaved','isSaved');
+        }
+        return $newsLetter;
     }
 
     /**
@@ -86,18 +90,5 @@ class CollectionController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function productsByCollectionId($id)
-    {
-        $collection = Collection::find($id);
-        return view(
-            'front.shop-left-sidebar',
-            [
-                'products' => $collection->categories[0]->subCategories[0]->products,
-               // 'collections' => Collection::all()
-            ]
-        );
     }
 }

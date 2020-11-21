@@ -22,25 +22,10 @@ class OrderController extends Controller
     }
 
 
-    /* public function cache(Request $request)
-    {
-        $product= Product::findOrFail($request->product_id);
-        $size = Size::findOrFail($request->size);
-
-        $product->quantity = $request->quantity;
-        $product->size = $size;
-
-        array_push($this->productList,$product);
-        Cache::put('productsCardCache', $this->productList);
-       // dump((Cache::get('productsCardCache')));
-        dump(Cache::get('productsCardCache'));
-       // dump($product->sizes);
-        die();
-    } */
 
 
 
-    public function cache(Request $request)
+  /*   public function cache(Request $request)
     {
         if (!$request->session()->has('productsCardSession')) {
             $request->session()->put('productsCardSession', []);
@@ -54,7 +39,7 @@ class OrderController extends Controller
         $product->quantity = $request->quantity;
 
         $request->session()->push('productsCardSession', $product);
-    }
+    } */
 
 
 

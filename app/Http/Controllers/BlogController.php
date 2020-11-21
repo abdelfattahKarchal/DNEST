@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Collection;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -50,7 +51,10 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::findOrFail($id);
-        return view('front.blog.show',['blog'=>$blog]);
+        $collections = Collection::all();
+        return view('front.blog.show',[
+            'blog'=>$blog,
+            ]);
     }
 
     /**
