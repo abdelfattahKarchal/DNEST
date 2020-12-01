@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             //$table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->foreignId('collection_id')
+            $table->foreignId('collection_id')->nullable()
             ->constrained()
             ->onDelete('cascade');
             $table->text('description')->nullable();

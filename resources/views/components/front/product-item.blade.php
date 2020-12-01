@@ -44,9 +44,9 @@
                     </li>
                 @endif
 
-                <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
+                {{-- <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
                         href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                            class="ion-eye"></i></a></li>
+                            class="ion-eye"></i></a></li> --}}
             </ul>
         </div>
     </div>

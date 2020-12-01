@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->double('total_price');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('status_id')->constrained();
-            $table->text('shipping_address');
+            $table->text('shipping_address')->nullable();
             $table->timestamps();
         });
     }

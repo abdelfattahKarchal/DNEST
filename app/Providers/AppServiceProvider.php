@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer([
         'front.partials.footer',
         'front.partials.headers.header',
-        'front.shop-left-sidebar'
+        'front.shop-left-sidebar',
+        'backoffice.collections.list',
+        'backoffice.categories.form',
         ]
         , CollectionComposer::class);
     }

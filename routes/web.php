@@ -20,13 +20,38 @@ Route::get('/clear', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('backoffice.index');
+});
+
+
+Route::get('/categories', function () {
+    return view('backoffice.categories.list');
+});
+/** admisitration routes */
+Route::get('/admin/collections', function () {
+    return view('backoffice.collections.list');
+});
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::post('collections/active/{id}', 'CollectionController@active');
+Route::post('categories/active/{id}', 'CategoryController@active');
+Route::post('subcategories/active/{id}', 'SubCategoryController@active');
 Route::resource('collections', 'CollectionController');
 Route::resource('products', 'ProductController');
 Route::resource('reviews', 'ReviewController');
+Route::resource('subcategories', 'SubCategoryController');
+Route::resource('categories', 'CategoryController');
+Route::get('orders/notconfirmed/list', 'OrderController@listNotConfirmed');
+Route::get('orders/inprogress/list', 'OrderController@listInprogress');
+Route::get('orders/canceled/list', 'OrderController@listCanceled');
+Route::get('orders/confirmed/list', 'OrderController@listConfirmed');
+Route::post('orders/{id}/status', 'OrderController@updateStatut');
 Route::resource('orders', 'OrderController');
+
+
 Route::get('subcategory/{subcategory}/products', 'ProductController@productsBySubCategoryId')->name('subcategory.products');
+
 Route::post('products/search', 'ProductController@search');
 Route::post('carts/store', 'CartController@store');
 Route::get('collections/{id}/products', 'CollectionController@productsByCollectionId');
