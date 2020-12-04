@@ -36,6 +36,7 @@ Route::get('/admin/collections', function () {
 Route::get('/', 'HomeController@index')->name('index');
 Route::post('collections/active/{id}', 'CollectionController@active');
 Route::post('categories/active/{id}', 'CategoryController@active');
+Route::post('products/active/{id}', 'ProductController@active');
 Route::post('subcategories/active/{id}', 'SubCategoryController@active');
 Route::resource('collections', 'CollectionController');
 Route::resource('products', 'ProductController');

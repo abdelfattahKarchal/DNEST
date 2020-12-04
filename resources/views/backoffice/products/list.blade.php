@@ -9,7 +9,7 @@
 
 @section('content')
     <!-- Exportable Table -->
-    <div class="row clearfix" id="category-table">
+    <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
@@ -18,7 +18,7 @@
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <a href="{{ route('products.create') }}" title="add new product" type="button"
-                            class="btn btn-success waves-effect">new sub product</a>
+                            class="btn btn-success waves-effect">new product</a>
                     </ul>
                     <x-back.success type="margin-top: 15px;"></x-back.success>
                     
@@ -35,50 +35,69 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Image 1</th>
+                                    <th>Image 2</th>
+                                    <th>Unit price</th>
+                                    <th>New Price</th>
+                                    <th>Quantity</th>
+                                    <th>Sub Category</th>
                                     <th>Category</th>
-                                    <th>Description</th>
-                                    <th>CreatedAt</th>
+                                    <th>Collection</th>
                                     <th>Action</th>
                                     <th>Active</th>
+                                   
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Image 1</th>
+                                    <th>Image 2</th>
+                                    <th>Unit price</th>
+                                    <th>New Price</th>
+                                    <th>Quantity</th>
+                                    <th>Sub Category</th>
                                     <th>Category</th>
-                                    <th>Description</th>
-                                    <th>CreatedAt</th>
+                                    <th>Collection</th>
                                     <th>Action</th>
                                     <th>Active</th>
+                             
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($subcategories as $subcategory)
+                                @foreach ($products as $product)
                                     <tr>
-                                        <td>{{ $subcategory->name }}</td>
-                                        <td>{{ $subcategory->category->name }}</td>
-                                        <td>{{ $subcategory->description }}</td>
-                                        <td>{{ $subcategory->created_at }}</td>
-                                        <td width="90px">
-                                            <a title="delete" type="button"
-                                                onclick="deleteSubCategory({{ $subcategory->id }})"
+                                        <td>{{ $product->name }}</td>
+                                        <td> <img src="{{ $product->path_small_1 }}" width="90px" alt=""> </td>
+                                        <td> <img src="{{ $product->path_small_2 }}" width="90px" alt=""> </td>
+                                        <td>{{ $product->unit_price }}</td>
+                                        <td>{{ $product->new_price }}</td>
+                                        <td>{{ $product->quantity }}</td>
+                                        <td nowrap="nowrap">{{ $product->subCategory->name ?? 'n/d' }}</td>
+                                        <td nowrap="nowrap">{{ $product->subCategory->category->name ?? 'n/d' }}</td>
+                                        <td nowrap="nowrap">{{ $product->subCategory->category->collection->name ?? 'n/d'}}</td>
+                                        <td nowrap="nowrap">
+                                            <a title="delete" 
+                                                onclick="deleteProduct({{ $product->id }})"
                                                 class="btn btn-danger btn-circle waves-effect waves-circle waves-float">
                                                 <i class="material-icons">delete</i>
                                             </a>
+                                           
 
-                                            <a href="{{ route('subcategories.edit', ['subcategory' => $subcategory->id]) }}"
+                                            <a href="{{ route('products.edit', ['product' => $product->id]) }}"
                                                 title="edit" type="button"
                                                 class="btn btn-warning btn-circle waves-effect waves-circle waves-float">
                                                 <i class="material-icons">edit</i>
                                             </a>
                                         </td>
+                                        
                                         <td>
                                             <div class="switch">
-                                                <label><input id="active-{{ $subcategory->id }}" onchange="changeActive({{ $subcategory->id }})" type="checkbox" {{ $subcategory->active ? 'checked' : null }} ><span
+                                                <label><input id="active-{{ $product->id }}" onchange="changeActive({{ $product->id }})" type="checkbox" {{ $product->active ? 'checked' : null }} ><span
                                                         class="lever switch-col-green"></span></label>
                                             </div>
                                         </td>
-
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -94,9 +113,9 @@
 
 @section('js')
     <script>
-        function deleteSubCategory(id) {
+        function deleteProduct(id) {
             Swal.fire({
-                title: 'do you really want to  delete sub category ?',
+                title: 'do you really want to  delete product ?',
                 showCancelButton: true,
                 confirmButtonText: `Delete`,
                 confirmButtonColor: '#fb483a',
@@ -108,7 +127,7 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: 'DELETE',
-                        url: "/subcategories/" + id,
+                        url: "/products/" + id,
                         success: function(data) {
                             location.reload();
                             //$("#category-table").load(location.href + " #category-table");
@@ -125,7 +144,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: "/subcategories/active/" + id,
+                url: "/products/active/" + id,
                 data:{
                     'active' : $('#active-'+id).is(":checked")
                 },

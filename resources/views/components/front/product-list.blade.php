@@ -47,6 +47,7 @@
                     });
                     // looping products
                     products.forEach(product => {
+                    if(product.active == 1){
                         // check if product has a new product
                         if (product.new_price){
                             status_price = 'old-price';
@@ -97,6 +98,7 @@
                         }
 
                          productContent += `
+
                                       <div class="col-lg-4">
                                           <div class="slide-item">
                                               <div class="single_product">
@@ -161,7 +163,10 @@
                                             </div>
                                         </div>
                                     </div>`;
-
+              
+                    }
+              
+              
               });
             return productContent;
                 

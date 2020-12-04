@@ -63,11 +63,11 @@
                                 @foreach ($collections as $collection)
                                     <tr>
                                         <td>{{ $collection->name }}</td>
-                                        <td>{{ $collection->image1 }}</td>
-                                        <td>{{ $collection->image2 }}</td>
+                                        <td>  <img src="{{ $collection->image1 }}" width="90px" alt="">   </td>
+                                        <td>  <img src="{{ $collection->image2 }}" width="90px" alt="">  </td>
                                         <td>{{ $collection->description }}</td>
                                         <td>{{ $collection->created_at }}</td>
-                                        <td width="90px">
+                                        <td  nowrap="nowrap">
                                             <a title="delete" type="button"
                                                 onclick="deleteCollection({{ $collection->id }})"
                                                 class="btn btn-danger btn-circle waves-effect waves-circle waves-float">

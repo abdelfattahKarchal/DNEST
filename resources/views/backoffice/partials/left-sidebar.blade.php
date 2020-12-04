@@ -7,7 +7,7 @@
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
             <div class="email">john.doe@example.com</div>
-            <div class="btn-group user-helper-dropdown">
+           {{--  <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
                     <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
@@ -18,7 +18,7 @@
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- #User Info -->
@@ -98,8 +98,8 @@
                 </ul>
             </li> --}}
             <li class="header">Products</li>
-            <li>
-                <a href="javascript:void(0);">
+            <li class="{{ request()->is('products') ? 'active' : '' }}">
+                <a href="{{ route('products.index') }}">
                     <i class="material-icons col-red">donut_large</i>
                     <span>products list</span>
                 </a>

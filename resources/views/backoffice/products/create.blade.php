@@ -18,15 +18,15 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Add new sub category</h2>
+                <h2>Add new product</h2>
             </div>
             <div class="body">
             
-                <form id="form_validation" action="{{route('subcategories.store')}}" method="POST">
+                <form id="form_validation" action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @include('backoffice.subcategories.form')
+                    @include('backoffice.products.form')
 
-                    <button class="btn btn-primary waves-effect" type="submit">Add sub category</button>
+                    <button class="btn btn-primary waves-effect" type="submit">Add product</button>
                 </form>
             </div>
         </div>
@@ -47,5 +47,11 @@
 
  <!-- Bootstrap Datepicker Plugin Js -->
  <script src="{{ asset('backoffice/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+
+  <!-- Ckeditor -->
+  <script src="{{ asset('backoffice/plugins/ckeditor/ckeditor.js') }}"></script>
+  <!-- TinyMCE -->
+  <script src="{{ asset('backoffice/plugins/tinymce/tinymce.js') }}"></script>
+  <script src="{{ asset('backoffice/js/pages/forms/editors.js') }}"></script>
     
 @endsection

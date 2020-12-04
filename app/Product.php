@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
+    use SoftDeletes;
+    protected $fillable =['name','sub_category_id','unit_price','new_price','quantity','path_small_1','path_small_2','description'];
 
     public function subCategory()
     {

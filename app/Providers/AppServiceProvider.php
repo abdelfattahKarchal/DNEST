@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         'front.shop-left-sidebar',
         'backoffice.collections.list',
         'backoffice.categories.form',
+        'backoffice.products.form',
         ]
         , CollectionComposer::class);
     }

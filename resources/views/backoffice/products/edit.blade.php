@@ -18,13 +18,13 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
-                    <h2>Edit sub category</h2>
+                    <h2>Edit Product</h2>
                 </div>
                 <div class="body">
-                    <form id="form_validation" action="{{route('subcategories.update',['subcategory'=>$subcategory->id])}}" method="POST">
+                    <form id="form_validation" action="{{route('products.update',['product'=>$product->id])}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        @include('backoffice.subcategories.form')
+                        @include('backoffice.products.form')
 
                         <button class="btn btn-primary waves-effect" type="submit">Edit</button>
                     </form>
@@ -34,6 +34,9 @@
     </div>
 @endsection
 @section('js')
+
+
+
 
 <script src="{{ asset('backoffice/js/pages/forms/basic-form-elements.js') }}"></script>
  <!-- Autosize Plugin Js -->
@@ -46,5 +49,16 @@
 
  <!-- Bootstrap Datepicker Plugin Js -->
  <script src="{{ asset('backoffice/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+
+
+
+ <!-- Ckeditor -->
+   <script src="{{ asset('backoffice/plugins/ckeditor/ckeditor.js') }}"></script>
+ <!-- TinyMCE -->
+ <script src="{{ asset('backoffice/plugins/tinymce/tinymce.js') }}"></script>
+ <script src="{{ asset('backoffice/js/pages/forms/editors.js') }}"></script>
+ 
+  
+   
     
 @endsection

@@ -1,4 +1,5 @@
-<div class="single_product">
+@if ($product->active == 1)
+   <div class="single_product">
     <div class="product-img">
         <a href="{{ route('products.show', ['product' => $product->id]) }}">
             <!--   size of image is 438*438   -->
@@ -83,4 +84,6 @@
 
         </div>
     </div>
-</div>
+</div> 
+@endif
+

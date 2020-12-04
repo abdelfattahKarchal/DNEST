@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
     <!-- Begin Single Product Area -->
@@ -10,8 +9,8 @@
                         <div class="sp-img_area">
                             <div class="zoompro-border">
                                 <!--<img class="zoompro" src="assets/images/single-product/large-size/1.jpg"
-                                                                                    data-zoom-image="assets/images/single-product/large-size/1.jpg"
-                                                                                     alt="Hiraola's Product Image" />-->
+                                                                                        data-zoom-image="assets/images/single-product/large-size/1.jpg"
+                                                                                         alt="Hiraola's Product Image" />-->
                                 @if (count($product->images))
                                     <img class="zoompro" src="{{ $product->images[0]->path_small ?? null }}"
                                         data-zoom-image="{{ $product->images[0]->path_large ?? null }}"
@@ -45,18 +44,19 @@
                             <div class="sp-essential_stuff">
                                 <ul>
                                     <li>Price: <a href="javascript:void(0)">
-                                        @if ($product->new_price)
-                                            <span class="new-price">${{ $product->new_price }}</span>
-                                            <del> <span class="new-price" style="color: #bababa;text-decoration: line-through;font-size: 14px;margin-left: 10px;">${{ $product->unit_price }}</span></del> 
-                                        @else
-                                        <span class="new-price">${{ $product->unit_price }}</span>
-                                        @endif
-                                        
+                                            @if ($product->new_price)
+                                                <span class="new-price">${{ $product->new_price }}</span>
+                                                <del> <span class="new-price"
+                                                        style="color: #bababa;text-decoration: line-through;font-size: 14px;margin-left: 10px;">${{ $product->unit_price }}</span></del>
+                                            @else
+                                                <span class="new-price">${{ $product->unit_price }}</span>
+                                            @endif
 
 
 
 
-                                        
+
+
                                     </li>
                                     <li>Brands <a href="javascript:void(0)">Buxton</a></li>
                                     <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
@@ -65,20 +65,18 @@
                                             {{ $product->quantity > 0 ? 'In Stock' : 'rupture' }} </a></li>
                                 </ul>
                             </div>
-                            @if (count($product->sizes))
+                            {{-- @if (count($product->sizes))
                                 <div class="product-size_box">
                                     <span>Size</span>
                                     <select class="myniceselect nice-select" id="selected_size">
                                         @foreach ($product->sizes as $size)
                                             <option value="{{ $size->id }}">{{ $size->size }}</option>
-                                            {{-- <option value="2">24</option>
-                                            <option value="3">30</option>
-                                            <option value="4">40</option> --}}
+
 
                                         @endforeach ($collection as $item)
                                     </select>
                                 </div>
-                            @endif
+                            @endif --}}
                             @if ($product->quantity > 0)
                                 <div class="quantity">
                                     <label>Quantity</label>
@@ -90,7 +88,7 @@
                                     </div>
                                 </div>
                             @endif
-                            
+
                             <div class="qty-btn_area" id="block-addTocart">
                                 <ul>
                                     @if (Session::has('productsCardSession'))
@@ -119,7 +117,7 @@
                                     @endif
 
                                 </ul>
-                                
+
                             </div>
                             <x-front.media></x-front.media>
                         </div>
@@ -238,17 +236,17 @@
                         var date_review = jQuery.format.date(data.review.created_at, longDateFormat)
                         var reviewContent = '';
                         reviewContent = `
-                                                <tr>
-                                                    <td style="width: 50%;">
-                                                        <strong>` + data.user.name + `</strong></td>
-                                                    <td class="text-right">` + date_review + `</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <p>` + data.review.description + `</p>
-                                                    </td>
-                                                </tr>
-                                                `;
+                                                    <tr>
+                                                        <td style="width: 50%;">
+                                                            <strong>` + data.user.name + `</strong></td>
+                                                        <td class="text-right">` + date_review + `</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <p>` + data.review.description + `</p>
+                                                        </td>
+                                                    </tr>
+                                                    `;
                         $('#reviews-content').append(reviewContent);
                         $('#reviews-count').text(reviewsCount + 1);
                         $('#con_message').val('');

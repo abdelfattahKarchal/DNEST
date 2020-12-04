@@ -116,7 +116,7 @@
     @yield('js')
      <!-- Custom Js -->
      <script src="{{ asset('backoffice/js/admin.js') }}"></script>
-     
+     {{-- <script src="{{ asset('backoffice/js/pages/forms/editors.js') }}"></script> --}}
  
      <!-- Demo Js -->
      <script src="{{ asset('backoffice/js/demo.js') }}"></script>

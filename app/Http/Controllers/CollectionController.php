@@ -51,7 +51,7 @@ class CollectionController extends Controller
         }
        
         if ($hasFile2) {
-            $file2 = $request->file('image1');
+            $file2 = $request->file('image2');
             $file2_name = $file2->store('collections');
             //dump($file2->store('collections'));
         }
@@ -74,7 +74,8 @@ class CollectionController extends Controller
      */
     public function show($id)
     {
-        //
+        $collection = Collection::with('categories','categories.subCategories')->findOrFail($id);
+       return $collection;
     }
 
     /**

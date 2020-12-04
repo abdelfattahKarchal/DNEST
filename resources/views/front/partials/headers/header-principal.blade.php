@@ -17,9 +17,13 @@
                             <li class="dropdown-holder"><a href="javascript:void(0)">Collection</a>
                                 <ul class="hm-dropdown">
                                     @foreach ($collections as $collection)
-                                        <li><a
-                                                href="{{ url('collections/' . $collection->id . '/products') }}">{{ $collection->name }}</a>
-                                        </li>
+                                    @if ($collection->active == 1)
+                                    <li>
+                                        <a
+                                        href="{{ url('collections/' . $collection->id . '/products') }}">{{ $collection->name }}</a>
+                                    </li>
+                                    @endif
+                                        
                                     @endforeach($collections as $collection)
 
                                 </ul>
