@@ -38,6 +38,6 @@ class Product extends Model
     //scope local last product
     public function scopeLastProducts(Builder $query)
     {
-        return $query->orderBy(static::CREATED_AT,'desc');
+        return $query->where('active','=',1)->orderBy(static::CREATED_AT,'desc');
     }
 }
