@@ -104,8 +104,8 @@
                                               <div class="single_product">
                                                   <div class="product-img">
                                                       <a href="{{ url('products/` + product.id + `') }}">
-                                                          <img class="primary-img" src="` + product.path_small_1 +`" alt="` +product.name + `">
-                                                          <img class="secondary-img" src="` + product.path_small_2 +`" alt="` +product.name +`">
+                                                          <img class="primary-img" src="` +window.location.origin+`/storage/`+ product.path_small_1 +`" alt="` +product.name + `">
+                                                          <img class="secondary-img" src="`+ window.location.origin+`/storage/`+product.path_small_2 +`" alt="` +product.name +`">
                                                       </a>
                                                       <div class="add-actions">
                                                           <ul>
@@ -133,9 +133,9 @@
                                             <div class="single_product">
                                                 <div class="product-img">
                                                     <a href="{{ url('products/` + product.id + `') }}">
-                                                        <img class="primary-img" src="` + product.path_small_1 + `"
+                                                        <img class="primary-img" src="` +window.location.origin+`/storage/`+ product.path_small_1 + `"
                                                             alt="` + product.name + `">
-                                                        <img class="secondary-img" src="` + product.path_small_2 + `"
+                                                        <img class="secondary-img" src="`+window.location.origin+`/storage/`+ product.path_small_2 + `"
                                                             alt="` + product.name +`">
                                                     </a>
                                                 </div>
