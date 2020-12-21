@@ -40,7 +40,7 @@
                                                                 title="Remove"></i></a></td>
                                                     <td class="hiraola-product-thumbnail"><a href="javascript:void(0)"><img
                                                                 width="90px" height="115px"
-                                                                src="{{ $product->path_small_1 }}"
+                                                                src="{{ $product->url_1() }}"
                                                                 alt="{{ $product->name }}"></a></td>
                                                     <td class="hiraola-product-name"><a
                                                             href="javascript:void(0)">{{ $product->name }}</a>

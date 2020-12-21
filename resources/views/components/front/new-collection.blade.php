@@ -24,11 +24,11 @@
                                         <a href="{{ url('collections/' . $newCollection->id . '/products') }}">
                                             <img class="primary-img" style="height: 287px;"
                                                 {{-- src="{{ asset('front/assets/images/product/collections/sahara.jpg') }}" --}}
-                                                src="{{$newCollection->image1 }}"
+                                                src="{{$newCollection->url_1() }}"
                                                 alt="Collection image">
                                             <img class="secondary-img"
                                                 {{-- src="{{ asset('front/assets/images/product/medium-size/1-8.jpg') }}" --}}
-                                                src="{{$newCollection->image2 }}"
+                                                src="{{$newCollection->url_2() }}"
                                                 alt="Collection image">
                                         </a>
 

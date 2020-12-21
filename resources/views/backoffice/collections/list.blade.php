@@ -63,8 +63,8 @@
                                 @foreach ($collections as $collection)
                                     <tr>
                                         <td>{{ $collection->name }}</td>
-                                        <td>  <img src="{{ $collection->image1 }}" width="90px" alt="">   </td>
-                                        <td>  <img src="{{ $collection->image2 }}" width="90px" alt="">  </td>
+                                        <td>  <img src="{{ $collection->url_1() }}" width="90px" alt="">   </td>
+                                        <td>  <img src="{{ $collection->url_2() }}" width="90px" alt="">  </td>
                                         <td>{{ $collection->description }}</td>
                                         <td>{{ $collection->created_at }}</td>
                                         <td  nowrap="nowrap">

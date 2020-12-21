@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Collection;
 use App\Http\Requests\StoreCollection;
+use App\Http\Requests\UpdateCollectionRequest;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
-         return view('backoffice.collections.create');
+        return view('backoffice.collections.create');
     }
 
     /**
@@ -46,24 +47,24 @@ class CollectionController extends Controller
         $hasFile2 = $request->hasFile('image2');
         if ($hasFile1) {
             $file1 = $request->file('image1');
-           $file1_name= $file1->store('collections');
-           // dump($file1->store('collections'));
+            $file1_name = $file1->store('collections');
+            // dump($file1->store('collections'));
         }
-       
+
         if ($hasFile2) {
             $file2 = $request->file('image2');
             $file2_name = $file2->store('collections');
             //dump($file2->store('collections'));
         }
-       Collection::create([
-           'name'=> $request->name,
-           'image1'=> $file1_name,
-           'image2'=> $file2_name ?? null,
-           'description'=> $request->description,
-       ]);
+        Collection::create([
+            'name' => $request->name,
+            'image1' => $file1_name,
+            'image2' => $file2_name ?? null,
+            'description' => $request->description,
+        ]);
 
-       session()->flash('status','collection add successfully');
-       return redirect()->back();
+        session()->flash('status', 'collection add successfully');
+        return redirect()->back();
     }
 
     /**
@@ -74,8 +75,8 @@ class CollectionController extends Controller
      */
     public function show($id)
     {
-        $collection = Collection::with('categories','categories.subCategories')->findOrFail($id);
-       return $collection;
+        $collection = Collection::with('categories', 'categories.subCategories')->findOrFail($id);
+        return $collection;
     }
 
     /**
@@ -99,14 +100,31 @@ class CollectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCollection $request, $id)
+    public function update(UpdateCollectionRequest $request, $id)
     {
         $collection = Collection::findOrFail($id);
         $collection->name = $request->name;
-        $collection->image1 = $request->image1;
-        $collection->image2 = $request->image2;
-        $collection->description = $request->description;
 
+        $collection->description = $request->description;
+        $hasFile1 = $request->hasFile('image1');
+        $hasFile2 = $request->hasFile('image2');
+        if ($hasFile1) {
+            if ($collection->image1) {
+                Storage::delete($collection->image1);
+            }
+            $file1 = $request->file('image1');
+            $file1_name = $file1->store('collections');
+            $collection->image1 = $file1_name;
+        }
+
+        if ($hasFile2) {
+            if ($collection->image2) {
+                Storage::delete($collection->image2);
+            }
+            $file2 = $request->file('image2');
+            $file2_name = $file2->store('collections');
+            $collection->image2 = $file2_name;
+        }
         $collection->save();
 
         session()->flash('status', 'collection updated successfully');
@@ -121,9 +139,9 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {
-        
+
         $collection = Collection::findOrFail($id);
-       
+
         $collection->delete();
         session()->flash('status', 'collection was deleted !');
         return true;
@@ -137,7 +155,7 @@ class CollectionController extends Controller
             'front.shop-left-sidebar',
             [
                 'products' => $collection->categories[0]->subCategories[0]->products,
-               // 'collections' => Collection::all()
+                // 'collections' => Collection::all()
             ]
         );
     }
@@ -145,7 +163,7 @@ class CollectionController extends Controller
     public function active(Request $request, $id)
     {
         $collection = Collection::findOrFail($id);
-        $collection->active = $request->active== 'true' ? 1 : 0;
+        $collection->active = $request->active == 'true' ? 1 : 0;
         $collection->save();
     }
 }

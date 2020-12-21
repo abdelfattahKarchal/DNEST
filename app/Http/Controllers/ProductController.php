@@ -211,4 +211,12 @@ class ProductController extends Controller
         $product->active = $request->active== 'true' ? 1 : 0;
         $product->save();
     }
+
+    public function imagesByProductId($id)
+    {
+        $product = Product::with('images')->findOrFail($id);
+        return view('backoffice.products.images.list',[
+            'product' => $product
+        ]);
+    }
 }

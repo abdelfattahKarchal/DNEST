@@ -7,8 +7,8 @@
                 alt="Hiraola's Product Image">
             <img class="secondary-img" src="{{ asset('front/assets/images/product/small/1-2.jpg') }}"
                 alt="Hiraola's Product Image"> --}}
-            <img class="primary-img" src="{{ $product->path_small_1 }}" alt="{{ $product->name }}">
-            <img class="secondary-img" src="{{ $product->path_small_2 }}" alt="{{ $product->name }}">
+            <img class="primary-img" src="{{ $product->url_1() }}" alt="{{ $product->name }}">
+            <img class="secondary-img" src="{{ $product->url_2() }}" alt="{{ $product->name }}">
         </a>
     </div>
     <div class="hiraola-product_content">

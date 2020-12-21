@@ -12,8 +12,8 @@
                                                                                         data-zoom-image="assets/images/single-product/large-size/1.jpg"
                                                                                          alt="Hiraola's Product Image" />-->
                                 @if (count($product->images))
-                                    <img class="zoompro" src="{{ $product->images[0]->path_small ?? null }}"
-                                        data-zoom-image="{{ $product->images[0]->path_large ?? null }}"
+                                    <img class="zoompro" src="{{ $product->images[0]->urlLarge() ?? null }}"
+                                        data-zoom-image="{{ $product->images[0]->urlLarge() ?? null }}"
                                         alt="{{ $product->name }}" />
                                 @endif
 
@@ -21,10 +21,12 @@
                             <div id="gallery" class="sp-img_slider">
                                 @forelse ($product->images as $image)
                                     <!--<a class="active" data-image="assets/images/single-product/large-size/1.jpg" data-zoom-image="assets/images/single-product/large-size/1.jpg">-->
-                                    <a class="{{ $product->images[0]->id == $image->id ? 'active' : '' }}"
-                                        data-image="{{ $image->path_large }}" data-zoom-image="{{ $image->path_large }}">
+                                    {{-- <a class="{{ $product->images[0]->id == $image->id ? 'active' : '' }}"
+                                        data-image="{{ $image->path_large }}" data-zoom-image="{{ $image->path_large }}"> --}}
+                                        <a class="{{ $product->images[0]->id == $image->id ? 'active' : '' }}"
+                                            data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
                                         <!--<img src="assets/images/single-product/small-size/1.jpg" alt="Hiraola's Product Image">-->
-                                        <img src="{{ $image->path_small }}" alt="{{ $product->name }}">
+                                        <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
                                     </a>
                                 @empty
                                     No images for this product
@@ -51,18 +53,11 @@
                                             @else
                                                 <span class="new-price">${{ $product->unit_price }}</span>
                                             @endif
-
-
-
-
-
-
                                     </li>
-                                    <li>Brands <a href="javascript:void(0)">Buxton</a></li>
+                                    <li>Brands :<a href="javascript:void(0)">THE D-NEST</a></li>
                                     <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
-                                    <li>Reward Points: <a href="javascript:void(0)">600</a></li>
-                                    <li>Availability: <a href="javascript:void(0)">
-                                            {{ $product->quantity > 0 ? 'In Stock' : 'rupture' }} </a></li>
+                                    <li>Availability: <a href="javascript:void(0)"> In Stock
+                                            {{-- {{ $product->quantity > 0 ? 'In Stock' : 'rupture' }} --}} </a></li>
                                 </ul>
                             </div>
                             {{-- @if (count($product->sizes))
