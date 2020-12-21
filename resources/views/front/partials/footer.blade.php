@@ -32,7 +32,10 @@
                                 <div class="footer-widgets">
                                     <ul>
                                         @foreach ($collections as $collection)
+                                        @if ($collection->active == 1)
                                         <li><a href="{{ url('collections/' . $collection->id . '/products') }}">{{ $collection->name }}</a></li>
+                                        @endif
+                                        
                                         @endforeach
                                         
                                     </ul>

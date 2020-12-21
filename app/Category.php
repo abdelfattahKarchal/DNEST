@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    protected $fillable = ['name','description'];
+    use SoftDeletes;
+    protected $fillable = ['name','description', 'active', 'collection_id'];
 
     public function collection(){
         return $this->belongsTo(Collection::class);

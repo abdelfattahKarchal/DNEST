@@ -20,7 +20,7 @@ class HomeController extends Controller
         }
 
         $newProducts = Product::lastProducts()->take(10)->get();
-        $newCollections = Collection::orderBy('created_at','desc')->get()->take(5);
+        $newCollections = Collection::where('active',1)->orderBy('created_at','desc')->get()->take(5);
         $latestBlogs = Blog::lastBlogs()->take(10)->get();
         return view('front.index',[
             'newCollections' => $newCollections,

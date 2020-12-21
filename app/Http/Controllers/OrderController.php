@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
 use App\Order;
 use App\Product;
 use App\Size;
@@ -63,6 +64,43 @@ class OrderController extends Controller
         //
     }
 
+    public function listNotConfirmed()
+    {
+        $orders = Order::whereHas('status', function($q){
+            $q->where('label','not confirmed');
+        })->get();
+        return view('backoffice.orders.notconfirmed.list',[
+            'orders' => $orders
+        ]);
+    }
+    public function listConfirmed()
+    {
+        $orders = Order::whereHas('status', function($q){
+            $q->where('label','confirmed');
+        })->get();
+        return view('backoffice.orders.confirmed.list',[
+            'orders' => $orders
+        ]);
+    }
+    public function listInprogress()
+    {
+        $orders = Order::whereHas('status', function($q){
+            $q->where('label','in progress');
+        })->get();
+        return view('backoffice.orders.inprogress.list',[
+            'orders' => $orders
+        ]);
+    }
+    public function listCanceled()
+    {
+        $orders = Order::whereHas('status', function($q){
+            $q->where('label','canceled');
+        })->get();
+        return view('backoffice.orders.canceled.list',[
+            'orders' => $orders
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -104,7 +142,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::with('products')->findOrFail($id);
+        //dd($order->products);
+        return view('backoffice.orders.partials.show',[
+            'order' => $order
+        ]);
     }
 
     /**
@@ -115,7 +157,10 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        return view('backoffice.orders.partials.edit', [
+            'order' => $order,
+        ]);
     }
 
     /**
@@ -125,9 +170,16 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreOrderRequest $request, $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->shipping_address = $request->shipping_address;
+        $order->total_price = $request->total_price;
+
+        $order->save();
+
+        session()->flash('status', 'Order was updated successfully');
+        return redirect()->back();
     }
 
     /**
@@ -138,6 +190,20 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+       
+        $order->delete();
+        session()->flash('status', 'Order was deleted !');
+        return true;
+    }
+
+    public function updateStatut(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $status = Status::where('label',$request->status)->firstOrFail();
+        
+        $order->status_id = $status->id;
+        $order->save();
+        session()->flash('status','Order was updated to '. $status->label);
     }
 }

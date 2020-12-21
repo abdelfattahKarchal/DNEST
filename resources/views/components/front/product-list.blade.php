@@ -47,6 +47,7 @@
                     });
                     // looping products
                     products.forEach(product => {
+                    if(product.active == 1){
                         // check if product has a new product
                         if (product.new_price){
                             status_price = 'old-price';
@@ -97,6 +98,7 @@
                         }
 
                          productContent += `
+
                                       <div class="col-lg-4">
                                           <div class="slide-item">
                                               <div class="single_product">
@@ -108,9 +110,7 @@
                                                       <div class="add-actions">
                                                           <ul>
                                                             `+addDiv+`
-                                                              <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
-                                                                      href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
-                                                                      title="Quick View"><i class="ion-eye"></i></a></li>
+                                                              
                                                           </ul>
                                                       </div>
                                                   </div>
@@ -156,16 +156,17 @@
                                                     <div class="add-actions">
                                                         <ul>
                                                             `+addDiv2+`
-                                                            <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
-                                                                    href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
-                                                                    title="Quick View"><i class="ion-eye"></i></a></li>
+                                                            
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>`;
-
+              
+                    }
+              
+              
               });
             return productContent;
                 

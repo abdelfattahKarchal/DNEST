@@ -1,4 +1,5 @@
-<div class="single_product">
+@if ($product->active == 1)
+   <div class="single_product">
     <div class="product-img">
         <a href="{{ route('products.show', ['product' => $product->id]) }}">
             <!--   size of image is 438*438   -->
@@ -44,9 +45,9 @@
                     </li>
                 @endif
 
-                <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
+                {{-- <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter"><a
                         href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Quick View"><i
-                            class="ion-eye"></i></a></li>
+                            class="ion-eye"></i></a></li> --}}
             </ul>
         </div>
     </div>
@@ -83,4 +84,6 @@
 
         </div>
     </div>
-</div>
+</div> 
+@endif
+

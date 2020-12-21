@@ -15,11 +15,13 @@
                         </a>
                         <ul class="sub-menu">
                             @foreach ($collections as $collection)
-                                <li>
-                                    <a href="{{ url('collections/' . $collection->id . '/products') }}">
-                                        <span class="mm-text">{{ $collection->name }}</span>
-                                    </a>
-                                </li>
+                                @if ($collection->active == 1)
+                                    <li>
+                                        <a href="{{ url('collections/' . $collection->id . '/products') }}">
+                                            <span class="mm-text">{{ $collection->name }}</span>
+                                        </a>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     </li>
