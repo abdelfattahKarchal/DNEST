@@ -15,7 +15,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(2);
         return view('front.blog.list',[
             'blogs' => $blogs
         ]);

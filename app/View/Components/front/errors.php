@@ -4,17 +4,16 @@ namespace App\View\Components\front;
 
 use Illuminate\View\Component;
 
-class productList extends Component
+class errors extends Component
 {
-    public $products;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($products)
+    public function __construct()
     {
-        $this->products = $products;
+        //
     }
 
     /**
@@ -24,6 +23,6 @@ class productList extends Component
      */
     public function render()
     {
-        return view('components.front.product-list');
+        return view('components.front.errors');
     }
 }

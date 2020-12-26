@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Collection;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Product;
@@ -11,6 +12,7 @@ use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\ServerBag;
 
 class ProductController extends Controller
 {
@@ -170,9 +172,8 @@ class ProductController extends Controller
         return true;
     }
 
-    public function productsBySubCategoryId($id)
+    /* public function productsBySubCategoryId($id)
     {
-
 
         $subCategory = SubCategory::findOrFail($id);
         // dd($subCategory);
@@ -186,22 +187,31 @@ class ProductController extends Controller
             //'collections'=>$collections,
         ];
 
-        /* return view('front.shop-left-sidebar',[
-            'products' => $subCategory->products()->paginate(4),
-            'collections'=> $collections
-        ]); */
+        
+    } */
+
+    public function productsBySubCategoryId($id)
+    {
+
+
+        $subCategory = SubCategory::findOrFail($id);
+        
+
+        return view('front.shop-left-sidebar',[
+            'products' => $subCategory->products()->paginate(1),
+            'sessionProducts' => session()->get('productsCardSession')
+        ]);
     }
 
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
-        $products = DB::table('products')
-            ->where('name', 'like', '%' . $request->name . '%')
+        $products = Product::where('name', 'like', '%' . $request->product_name . '%')
             ->where('active',1)
             ->get();
-        return [
-            'products' => $products,
-            'sessionProducts' => session()->get('productsCardSession')
-        ];
+            return view('front.shop-left-sidebar',[
+                'products' => $products,
+                'sessionProducts' => session()->get('productsCardSession')
+            ]);
     }
 
     public function active(Request $request, $id)

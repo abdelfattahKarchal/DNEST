@@ -154,7 +154,7 @@ class CollectionController extends Controller
         return view(
             'front.shop-left-sidebar',
             [
-                'products' => $collection->categories[0]->subCategories[0]->products,
+                'products' => $collection->categories[0]->subCategories[0]->products()->paginate(1),
                 // 'collections' => Collection::all()
             ]
         );

@@ -57,7 +57,10 @@ Route::resource('orders', 'OrderController');
 
 Route::get('subcategory/{subcategory}/products', 'ProductController@productsBySubCategoryId')->name('subcategory.products');
 
-Route::post('products/search', 'ProductController@search');
+Route::get('search/product', 'ProductController@search');
+//Route::get('products/search', 'ProductController@search');
+//Route::post('products/search', 'ProductController@search');
+//Route::match(['get', 'post'],'products/search', 'ProductController@search');
 Route::post('carts/store', 'CartController@store');
 Route::get('collections/{id}/products', 'CollectionController@productsByCollectionId');
 Route::get('carts/{id}/delete', 'CartController@delete');

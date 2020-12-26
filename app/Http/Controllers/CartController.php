@@ -11,9 +11,6 @@ class CartController extends Controller
    
     public function store(Request $request)
     {
-        /* if (!$request->session()->has('productsCardSession')) {
-            $request->session()->put('productsCardSession', []);
-        } */
         $product = Product::with('sizes')->findOrFail($request->product_id);
         if (isset($request->size)) {
             $size = Size::findOrFail($request->size);
