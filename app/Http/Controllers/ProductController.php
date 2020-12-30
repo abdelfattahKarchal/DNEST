@@ -10,12 +10,19 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\ServerBag;
 
 class ProductController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['show', 'productsBySubCategoryId', 'search']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +30,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', new Product());
         $products = Product::with('subCategory', 'subCategory.category', 'subCategory.category.collection')->get();
         /*  foreach ($products as $product) {
             if($product->subCategory->category ==null)
@@ -42,6 +50,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', new Product());
         $subcategories = SubCategory::all();
         return view('backoffice.products.create',[
             'subcategories' => $subcategories
@@ -56,6 +65,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        $this->authorize('create', new Product());
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');
         if ($hasFile1) {
@@ -105,6 +115,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Product());
         $product = Product::with('subCategory', 'subCategory.category', 'subCategory.category.collection')->findOrFail($id);
         
         $subcategories = SubCategory::all();
@@ -123,6 +134,7 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
+        $this->authorize('update', new Product());
         $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->unit_price = $request->unit_price;
@@ -165,6 +177,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new Product());
         $product = Product::findOrFail($id);
        
         $product->delete();
@@ -172,33 +185,12 @@ class ProductController extends Controller
         return true;
     }
 
-    /* public function productsBySubCategoryId($id)
-    {
-
-        $subCategory = SubCategory::findOrFail($id);
-        // dd($subCategory);
-        // dd($subCategory->products()->paginate(2));
-        // a extarnaliser vers view composer
-        $collections = Collection::with(['categories', 'categories.subCategories', 'categories.subCategories.products'])->get();
-
-        return [
-            'products' => $subCategory->products,
-            'sessionProducts' => session()->get('productsCardSession')
-            //'collections'=>$collections,
-        ];
-
-        
-    } */
-
     public function productsBySubCategoryId($id)
     {
-
-
         $subCategory = SubCategory::findOrFail($id);
         
-
         return view('front.shop-left-sidebar',[
-            'products' => $subCategory->products()->paginate(1),
+            'products' => $subCategory->products()->paginate(Config::get('constants.options.option_product_pagination', 10)),
             'sessionProducts' => session()->get('productsCardSession')
         ]);
     }
@@ -216,6 +208,7 @@ class ProductController extends Controller
 
     public function active(Request $request, $id)
     { 
+        $this->authorize('active', new Product());
         $product = Product::findOrFail($id);
         
         $product->active = $request->active== 'true' ? 1 : 0;
@@ -224,6 +217,7 @@ class ProductController extends Controller
 
     public function imagesByProductId($id)
     {
+        $this->authorize('imagesByProductId', new Product());
         $product = Product::with('images')->findOrFail($id);
         return view('backoffice.products.images.list',[
             'product' => $product

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,18 +21,17 @@ Route::get('/clear', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/admin', function () {
+/* Route::get('/admin', function () {
     return view('backoffice.index');
-});
+})->middleware('auth'); */
 
+Route::get('admin', 'DashboardController@index')->name('admin.index')->middleware('auth');
 
-Route::get('/categories', function () {
+/* Route::get('/categories', function () {
     return view('backoffice.categories.list');
-});
+}); */
 /** admisitration routes */
-Route::get('/admin/collections', function () {
-    return view('backoffice.collections.list');
-});
+Route::get('/admin/collections', 'CollectionController@adminCollections');
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::post('collections/active/{id}', 'CollectionController@active');
@@ -100,3 +100,7 @@ Route::get('/404', function () {
 })->name('404');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

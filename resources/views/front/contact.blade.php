@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
     <!-- Begin Contact Main Page Area -->
     <div class="contact-main-page">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
     <!-- Begin Hiraola's Blog Column Three Area -->
     <div class="hiraola-blog_area hiraola-blog_area-2 grid-view_area blog-column-three_area">

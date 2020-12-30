@@ -13,34 +13,10 @@ use Illuminate\Support\Facades\Cache;
 class OrderController extends Controller
 {
 
-    public $productList;
-
     public function __construct()
     {
-        /* $this->productList =  Cache::remember('productsCardCache', now()->addSeconds(5), function () {
-            return [];
-        }); */
+       $this->middleware('auth')->only(['listNotConfirmed', 'listConfirmed', 'listInprogress', 'listCanceled', 'show', 'edit', 'update', 'destroy', 'updateStatut']);
     }
-
-
-
-
-
-  /*   public function cache(Request $request)
-    {
-        if (!$request->session()->has('productsCardSession')) {
-            $request->session()->put('productsCardSession', []);
-        }
-        $product = Product::with('sizes')->findOrFail($request->product_id);
-        if (isset($request->size)) {
-            $size = Size::findOrFail($request->size);
-            $product->setRelation('sizes', $size);
-        }
-
-        $product->quantity = $request->quantity;
-
-        $request->session()->push('productsCardSession', $product);
-    } */
 
 
 
@@ -66,6 +42,7 @@ class OrderController extends Controller
 
     public function listNotConfirmed()
     {
+        $this->authorize('listNotConfirmed', new Order());
         $orders = Order::whereHas('status', function($q){
             $q->where('label','not confirmed');
         })->get();
@@ -75,6 +52,7 @@ class OrderController extends Controller
     }
     public function listConfirmed()
     {
+        $this->authorize('listConfirmed', new Order());
         $orders = Order::whereHas('status', function($q){
             $q->where('label','confirmed');
         })->get();
@@ -84,6 +62,7 @@ class OrderController extends Controller
     }
     public function listInprogress()
     {
+        $this->authorize('listInprogress', new Order());
         $orders = Order::whereHas('status', function($q){
             $q->where('label','in progress');
         })->get();
@@ -93,6 +72,7 @@ class OrderController extends Controller
     }
     public function listCanceled()
     {
+        $this->authorize('listCanceled', new Order());
         $orders = Order::whereHas('status', function($q){
             $q->where('label','canceled');
         })->get();
@@ -142,6 +122,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('create', new Order());
         $order = Order::with('products')->findOrFail($id);
         //dd($order->products);
         return view('backoffice.orders.partials.show',[
@@ -157,6 +138,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Order());
         $order = Order::findOrFail($id);
         return view('backoffice.orders.partials.edit', [
             'order' => $order,
@@ -172,6 +154,7 @@ class OrderController extends Controller
      */
     public function update(StoreOrderRequest $request, $id)
     {
+        $this->authorize('update', new Order());
         $order = Order::findOrFail($id);
         $order->shipping_address = $request->shipping_address;
         $order->total_price = $request->total_price;
@@ -190,6 +173,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new Order());
         $order = Order::findOrFail($id);
        
         $order->delete();
@@ -199,6 +183,7 @@ class OrderController extends Controller
 
     public function updateStatut(Request $request, $id)
     {
+        $this->authorize('updateStatut', new Order());
         $order = Order::findOrFail($id);
         $status = Status::where('label',$request->status)->firstOrFail();
         

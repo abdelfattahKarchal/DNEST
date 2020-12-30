@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
     <!-- Begin Hiraola's About Us Area -->
     <div class="about-us-area">

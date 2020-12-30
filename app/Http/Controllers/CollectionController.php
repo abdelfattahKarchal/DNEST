@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\Storage;
 
 class CollectionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['adminCollections', 'create', 'store','edit', 'update', 'destroy', 'active']);
+    }
+
+    public function adminCollections()
+    {
+        $this->authorize('adminCollections', new Collection());
+        return view('backoffice.collections.list');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -32,6 +45,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', new Collection());
         return view('backoffice.collections.create');
     }
 
@@ -43,6 +57,8 @@ class CollectionController extends Controller
      */
     public function store(StoreCollection $request)
     {
+        $this->authorize('create', new Collection());
+        
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');
         if ($hasFile1) {
@@ -87,6 +103,7 @@ class CollectionController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Collection());
         $collection = Collection::findOrFail($id);
         return view('backoffice.collections.edit', [
             'collection' => $collection
@@ -102,6 +119,7 @@ class CollectionController extends Controller
      */
     public function update(UpdateCollectionRequest $request, $id)
     {
+        $this->authorize('update', new Collection());
         $collection = Collection::findOrFail($id);
         $collection->name = $request->name;
 
@@ -139,7 +157,7 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {
-
+        $this->authorize('delete', new Collection());
         $collection = Collection::findOrFail($id);
 
         $collection->delete();
@@ -162,6 +180,7 @@ class CollectionController extends Controller
 
     public function active(Request $request, $id)
     {
+        $this->authorize('active', new Collection());
         $collection = Collection::findOrFail($id);
         $collection->active = $request->active == 'true' ? 1 : 0;
         $collection->save();

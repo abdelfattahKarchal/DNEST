@@ -13,7 +13,11 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Collection' => 'App\Policies\CollectionPolicy',
+        'App\Category' => 'App\Policies\CategoryPolicy',
+        'App\SubCategory' => 'App\Policies\SubCategoryPolicy',
+        'App\Product' => 'App\Policies\ProductPolicy',
+        'App\Order' => 'App\Policies\OrderPolicy',
     ];
 
     /**
@@ -25,6 +29,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+         Gate::define('admin.dashboard',function($user){
+            return  in_array($user->role->label, ['admin','supadmin']);
+         });
+
+       /*  Gate::before(function ($user, $ability) {
+            if ($user->role->label == 'admin') {
+                return true;
+            }
+        }); */
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layout.admin')
 
 @section('style')
     <!-- -------------JQuery DataTable Css not in index -->

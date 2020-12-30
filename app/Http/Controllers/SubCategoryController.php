@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +22,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', new SubCategory());
         $subcategories  = SubCategory::with('category')->has('category')->get();
 
         /* if (Category::all()->contains('id', 1)){
@@ -36,6 +43,7 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', new SubCategory());
         $categories = Category::all();
         return view('backoffice.subcategories.create',[
             'categories' => $categories
@@ -50,6 +58,7 @@ class SubCategoryController extends Controller
      */
     public function store(StoreSubCategoryRequest $request)
     {
+        $this->authorize('create', new SubCategory());
         $category = Category::findOrFail($request->category);
        
        $subcategory = SubCategory::create([
@@ -81,6 +90,7 @@ class SubCategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new SubCategory());
         $categories = Category::all();
         $subcategory = SubCategory::findOrFail($id);
         return view('backoffice.subcategories.edit', [
@@ -98,6 +108,7 @@ class SubCategoryController extends Controller
      */
     public function update(StoreSubCategoryRequest $request, $id)
     {
+        $this->authorize('update', new SubCategory());
         $subcategory = SubCategory::findOrFail($id);
         $subcategory->name = $request->name;
         $subcategory->category_id = $request->category;
@@ -117,6 +128,7 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new SubCategory());
         $subcategory = SubCategory::findOrFail($id);
        
         $subcategory->delete();
@@ -126,6 +138,7 @@ class SubCategoryController extends Controller
 
     public function active(Request $request, $id)
     {
+        $this->authorize('active', new SubCategory());
         $subcategory = SubCategory::findOrFail($id);
         $subcategory->active = $request->active== 'true' ? 1 : 0;
         $subcategory->save();

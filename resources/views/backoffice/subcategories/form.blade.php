@@ -21,7 +21,7 @@
                         selected="selected"
                     @endif
                  @endisset
-                    >{{ $category->name }}</option>
+                    >{{ $category->name }} -> {{ $category->collection->name }}</option>
             @endforeach
         </select>
     </div>
