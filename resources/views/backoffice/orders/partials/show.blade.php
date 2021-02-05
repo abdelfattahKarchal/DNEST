@@ -77,7 +77,7 @@
                                 Email
                             </div>
                             <div class="content">
-                                abdelfattah59@gmail.com
+                                {{ $order->user->email }}
                             </div>
                         </li>
                         <li>
@@ -86,7 +86,12 @@
                                 Address
                             </div>
                             <div class="content">
-                                Malibu, California
+                                User Address : {{ $order->user->address }}
+                                @if ($order->shipping_address)
+                                    <br>
+                                    Shipping Address : {{ $order->shipping_address}}
+                                @endif
+                                
                             </div>
                         </li>
                     </ul>

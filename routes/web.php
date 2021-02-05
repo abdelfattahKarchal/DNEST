@@ -21,6 +21,9 @@ Route::get('/clear', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+/* login form for customer*/
+Route::get('/loginForm','LoginController@loginForm')->name('login.form');
+Route::get('/registerForm','LoginController@registerForm')->name('register.form');
 /* Route::get('/admin', function () {
     return view('backoffice.index');
 })->middleware('auth'); */
@@ -58,30 +61,17 @@ Route::resource('orders', 'OrderController');
 Route::get('subcategory/{subcategory}/products', 'ProductController@productsBySubCategoryId')->name('subcategory.products');
 
 Route::get('search/product', 'ProductController@search');
-//Route::get('products/search', 'ProductController@search');
-//Route::post('products/search', 'ProductController@search');
-//Route::match(['get', 'post'],'products/search', 'ProductController@search');
+
 Route::post('carts/store', 'CartController@store');
 Route::get('collections/{id}/products', 'CollectionController@productsByCollectionId');
 Route::get('carts/{id}/delete', 'CartController@delete');
 Route::post('carts/quantity/update', 'CartController@updateQuantity');
 Route::resource('newsletters','NewsLetterController')->only('store');
-/* Route::get('/leftSidebar', function () {
-    return view('front.shop-left-sidebar');
-})->name('leftSidebar'); */
 
-/* Route::get('/singleProduct', function () {
-    return view('front.single-product');
-})->name('singleProduct'); */
 
 Route::resource('blogs','BlogController');
 Route::resource('comments','CommentController');
-//Route::get('/blogs', 'BlogController@index')->name('blogs');
 
-
-/* Route::get('/blog/details', function () {
-    return view('front.blog-details');
-})->name('blog.details'); */
 
 Route::get('/aboutUs', function () {
     return view('front.about-us');

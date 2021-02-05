@@ -9,8 +9,8 @@
                         <div class="sp-img_area">
                             <div class="zoompro-border">
                                 <!--<img class="zoompro" src="assets/images/single-product/large-size/1.jpg"
-                                                                                        data-zoom-image="assets/images/single-product/large-size/1.jpg"
-                                                                                         alt="Hiraola's Product Image" />-->
+                                                                                            data-zoom-image="assets/images/single-product/large-size/1.jpg"
+                                                                                             alt="Hiraola's Product Image" />-->
                                 @if (count($product->images))
                                     <img class="zoompro" src="{{ $product->images[0]->urlLarge() ?? null }}"
                                         data-zoom-image="{{ $product->images[0]->urlLarge() ?? null }}"
@@ -21,16 +21,18 @@
                             <div id="gallery" class="sp-img_slider">
                                 @forelse ($product->images as $image)
                                     <!--<a class="active" data-image="assets/images/single-product/large-size/1.jpg" data-zoom-image="assets/images/single-product/large-size/1.jpg">-->
-                                    {{-- <a class="{{ $product->images[0]->id == $image->id ? 'active' : '' }}"
-                                        data-image="{{ $image->path_large }}" data-zoom-image="{{ $image->path_large }}"> --}}
+                                    {{-- <a
+                                        class="{{ $product->images[0]->id == $image->id ? 'active' : '' }}"
+                                        data-image="{{ $image->path_large }}" data-zoom-image="{{ $image->path_large }}">
+                                        --}}
                                         <a class="{{ $product->images[0]->id == $image->id ? 'active' : '' }}"
                                             data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
-                                        <!--<img src="assets/images/single-product/small-size/1.jpg" alt="Hiraola's Product Image">-->
-                                        <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
-                                    </a>
-                                @empty
-                                    No images for this product
-                                @endforelse
+                                            <!--<img src="assets/images/single-product/small-size/1.jpg" alt="Hiraola's Product Image">-->
+                                            <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
+                                        </a>
+                                    @empty
+                                        No images for this product
+                                    @endforelse
 
 
                             </div>
@@ -57,7 +59,9 @@
                                     <li>Brands :<a href="javascript:void(0)">THE D-NEST</a></li>
                                     <li>Product Code: <a href="javascript:void(0)">Product 16</a></li>
                                     <li>Availability: <a href="javascript:void(0)"> In Stock
-                                            {{-- {{ $product->quantity > 0 ? 'In Stock' : 'rupture' }} --}} </a></li>
+                                            {{--
+                                            {{ $product->quantity > 0 ? 'In Stock' : 'rupture' }}
+                                            --}} </a></li>
                                 </ul>
                             </div>
                             {{-- @if (count($product->sizes))
@@ -226,32 +230,37 @@
                         description: description
                     },
                     success: function(data) {
-                        var reviewsCount = parseInt($.trim($('#reviews-count').text()));
-                        var longDateFormat = 'dd/MM/yyyy HH:mm:ss';
-                        var date_review = jQuery.format.date(data.review.created_at, longDateFormat)
-                        var reviewContent = '';
-                        reviewContent = `
-                                                    <tr>
-                                                        <td style="width: 50%;">
-                                                            <strong>` + data.user.name + `</strong></td>
-                                                        <td class="text-right">` + date_review + `</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <p>` + data.review.description + `</p>
-                                                        </td>
-                                                    </tr>
-                                                    `;
-                        $('#reviews-content').append(reviewContent);
-                        $('#reviews-count').text(reviewsCount + 1);
-                        $('#con_message').val('');
-                        Swal.fire({
-                            // position: 'top-end',
-                            icon: 'success',
-                            title: 'Your review has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
+                        if (data) {
+                            var reviewsCount = parseInt($.trim($('#reviews-count').text()));
+                            var longDateFormat = 'dd-MM-yyyy HH:mm:ss';
+                            var date_review = jQuery.format.date(data.review.created_at, longDateFormat)
+                            var reviewContent = '';
+                            reviewContent = `
+                                                        <tr>
+                                                            <td style="width: 50%;">
+                                                                <strong>` + data.user.name + `</strong></td>
+                                                            <td class="text-right">` + date_review + `</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <p>` + data.review.description + `</p>
+                                                            </td>
+                                                        </tr>
+                                                        `;
+                            $('#reviews-content').append(reviewContent);
+                            $('#reviews-count').text(reviewsCount + 1);
+                            $('#con_message').val('');
+                            Swal.fire({
+                                // position: 'top-end',
+                                icon: 'success',
+                                title: 'Your review has been saved',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }else{
+                            window.location.href = "/loginForm";
+                        }
+
                     }
                 });
             }

@@ -20,7 +20,7 @@ class AddFieldsToUsersTable extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->softDeletes();
         });
     }

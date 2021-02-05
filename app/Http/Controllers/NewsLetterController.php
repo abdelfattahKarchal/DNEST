@@ -39,6 +39,11 @@ class NewsLetterController extends Controller
             'email' => 'email',
         ]);
         //dd($request->email);
+        $email = NewsLetter::where('email', $request->email)->get();
+        if ($email) {
+            return $email;
+        }
+        dd('fff');
         $newsLetter = NewsLetter::create(['email'=>$request->email]);
         if($newsLetter){
             session()->flush('newsletter');

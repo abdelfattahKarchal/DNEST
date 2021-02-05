@@ -52,7 +52,6 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::findOrFail($id);
-        $collections = Collection::all();
         return view('front.blog.show',[
             'blog'=>$blog,
             ]);

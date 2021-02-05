@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Collection extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['name','image1','image2','description'];
+    protected $fillable = ['name','image1','image2','description','active'];
 
     public function categories(){
         return $this->hasMany(Category::class);
@@ -19,6 +19,6 @@ class Collection extends Model
         return Storage::url($this->image1);
     }
     public function url_2(){
-        return Storage::url($this->image2);
+        return  $this->image2 ? Storage::url($this->image2) : null;
     }
 }

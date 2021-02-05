@@ -80,7 +80,7 @@
         <!-- Begin Hiraola's Newsletter Popup Area -->
 
         <!-- DNEST Offer -->
-        <x-front.header-offer></x-front.header-offer>
+        {{-- <x-front.header-offer></x-front.header-offer> --}}
         <!-- Begin Hiraola's Header Main Area Three -->
         @include('front.partials.headers.header')
         {{-- <x-front.header></x-front.header> --}}
@@ -161,7 +161,6 @@
                         email: email,
                     },
                     success: function(data) {
-                        console.log('shgshsgshg');
                         $('#newsletter').hide();
                         Swal.fire({
                             // position: 'top-end',
@@ -172,7 +171,6 @@
                         })
                     },
                     error: function(data) {
-                    console.log(data.responseJSON.errors)
                     $('.errorsMessage').empty();
                     $.each(data.responseJSON.errors, function(key, value) {
                         console.log(key + ": " + value);

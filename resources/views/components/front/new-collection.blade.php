@@ -18,30 +18,35 @@
                         <div class="hiraola-product-tab_slider-2">
                             <!-- Begin  Slide new collections -->
                             @foreach ($newCollections as $newCollection)
-                            <div class="slide-item">
-                                <div class="single_product">
-                                    <div class="product-img">
-                                        <a href="{{ url('collections/' . $newCollection->id . '/products') }}">
-                                            <img class="primary-img" style="height: 287px;"
-                                                {{-- src="{{ asset('front/assets/images/product/collections/sahara.jpg') }}" --}}
-                                                src="{{$newCollection->url_1() }}"
-                                                alt="Collection image">
-                                            <img class="secondary-img"
-                                                {{-- src="{{ asset('front/assets/images/product/medium-size/1-8.jpg') }}" --}}
-                                                src="{{$newCollection->url_2() }}"
-                                                alt="Collection image">
-                                        </a>
+                                <div class="slide-item">
+                                    <div class="single_product">
+                                        <div class="product-img">
+                                            <a href="{{ url('collections/' . $newCollection->id . '/products') }}">
+                                                <img class="primary-img" style="height: 287px;"
+                                                    {{--
+                                                    src="{{ asset('front/assets/images/product/collections/sahara.jpg') }}"
+                                                    --}} src="{{ $newCollection->url_1() }}"
+                                                    alt="Collection image">
+                                                @if ($newCollection->url_2())
+                                                    <img class="secondary-img" {{--
+                                                        src="{{ asset('front/assets/images/product/medium-size/1-8.jpg') }}"
+                                                        --}}
+                                                        src="{{ $newCollection->url_2() }}" alt="Collection image">
+                                                @endif
 
-                                    </div>
-                                    <div class="hiraola-product_content">
-                                        <div class="product-desc_info text-center">
-                                            <h6 class="mt-2"><a class="product-name"
-                                                    href="{{ url('collections/' . $newCollection->id . '/products') }}">{{$newCollection->name}}</a></h6>
+                                            </a>
 
+                                        </div>
+                                        <div class="hiraola-product_content">
+                                            <div class="product-desc_info text-center">
+                                                <h6 class="mt-2"><a class="product-name"
+                                                        href="{{ url('collections/' . $newCollection->id . '/products') }}">{{ $newCollection->name }}</a>
+                                                </h6>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                             <!-- End slide new collections -->
 

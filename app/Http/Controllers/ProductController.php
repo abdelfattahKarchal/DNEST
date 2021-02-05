@@ -101,7 +101,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        //$product = Product::findOrFail($id);
+        $product = Product::where('active',1)->with(['images'=> function($q){
+            $q->where('active', '=', 1);
+        }])->findOrFail($id);
         return view('front.single-product', [
             'product' => $product
         ]);
@@ -187,10 +190,10 @@ class ProductController extends Controller
 
     public function productsBySubCategoryId($id)
     {
-        $subCategory = SubCategory::findOrFail($id);
-        
+        $subCategory = SubCategory::with('products')->find($id);
+        $products = $subCategory->products()->where('active', 1);
         return view('front.shop-left-sidebar',[
-            'products' => $subCategory->products()->paginate(Config::get('constants.options.option_product_pagination', 10)),
+            'products' => $products->paginate(Config::get('constants.options.option_product_pagination', 10)),
             'sessionProducts' => session()->get('productsCardSession')
         ]);
     }

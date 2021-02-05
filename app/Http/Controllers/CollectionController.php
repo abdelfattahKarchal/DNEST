@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCollection;
 use App\Http\Requests\UpdateCollectionRequest;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 
 class CollectionController extends Controller
@@ -32,10 +33,10 @@ class CollectionController extends Controller
     public function index()
     {
         // a extarnaliser vers view composer
-        $collections = Collection::with(['categories', 'categories.subCategories', 'categories.subCategories.products'])->get();
+        /* $collections = Collection::with(['categories', 'categories.subCategories', 'categories.subCategories.products'])->get();
         return view('front.shop-left-sidebar', [
             //'collections' => $collections
-        ]);
+        ]); */
     }
 
     /**
@@ -77,6 +78,7 @@ class CollectionController extends Controller
             'image1' => $file1_name,
             'image2' => $file2_name ?? null,
             'description' => $request->description,
+            'active' => false
         ]);
 
         session()->flash('status', 'collection add successfully');
@@ -91,8 +93,8 @@ class CollectionController extends Controller
      */
     public function show($id)
     {
-        $collection = Collection::with('categories', 'categories.subCategories')->findOrFail($id);
-        return $collection;
+        /* $collection = Collection::with('categories', 'categories.subCategories')->findOrFail($id);
+        return $collection; */
     }
 
     /**
@@ -168,11 +170,25 @@ class CollectionController extends Controller
 
     public function productsByCollectionId($id)
     {
-        $collection = Collection::find($id);
+        $collection = Collection::with(['categories' => function($q){
+            $q->where('active', 1);
+        }
+        , 'categories.subCategories' => function($q){
+            $q->where('active', 1);
+        } 
+        , 'categories.subCategories.products' => function($q){
+            $q->where('active', 1);
+        }])->where('active',1)->findOrFail($id);
+        $categories = $collection->categories->filter(function($category){
+            return $category->active == 1;
+        });
+        $products = $collection->categories[0]->subCategories[0]->products()->where('active',1);
+       //dd($collection->categories[0]->subCategories);
         return view(
             'front.shop-left-sidebar',
             [
-                'products' => $collection->categories[0]->subCategories[0]->products()->paginate(1),
+                //'products' => $collection->categories[0]->subCategories[0]->products()->paginate(1),
+                'products' => $products->paginate(Config::get('constants.options.option_product_pagination', 10)),
                 // 'collections' => Collection::all()
             ]
         );

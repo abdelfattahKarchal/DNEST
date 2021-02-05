@@ -8,6 +8,7 @@ use App\Product;
 use App\Size;
 use App\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
@@ -89,6 +90,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return false;
+        }
         $statut = Status::where('label', 'not confirmed')->first();
         $products = session()->get('productsCardSession');
         $order = new Order();
@@ -97,8 +101,8 @@ class OrderController extends Controller
             $total_price += (($value->new_price ?? $value->unit_price) * $value->quantity);
         }
         $order->total_price = $total_price;
-        $order->user_id = 1;
-        $order->shipping_address = "Meknes";
+        $order->user_id = Auth::user()->id;
+        $order->shipping_address = Auth::user()->address;
         $order->status_id = $statut->id;
         $order->save();
         //$productsIds_array  = [];

@@ -1,7 +1,7 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu_wrapper" id="mobileMenu">
     <div class="offcanvas-menu-inner">
-        <div class="container">
+        <div class="container navScroll">
             <a href="#" class="btn-close"><i class="ion-android-close"></i></a>
 
             <nav class="offcanvas-navigation">
@@ -39,6 +39,35 @@
                         <a href="{{ route('contact') }}">
                             <span class="mm-text">Contact</span>
                         </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="offcanvas-navigation user-setting_area">
+                <ul class="mobile-menu">
+                    <li class="menu-item-has-children active">
+                        <a href="#">
+                            <span class="mm-text">{{ Auth::check() ? Auth::user()->name : 'My Account' }}</span>
+                        </a>
+                        <ul class="sub-menu">
+                            @if (!Auth::check())
+                                <li><a href="{{ route('register.form') }}">Register</a></li>
+                                <li><a href="{{ route('login.form') }}">Login</a></li>
+                            @else
+                                <li><a href="{{ route('login.form') }}">My Profile</a></li>
+
+
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                        Sign Out</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            @endif
+
+                        </ul>
                     </li>
                 </ul>
             </nav>

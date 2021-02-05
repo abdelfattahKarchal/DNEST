@@ -14,7 +14,7 @@ class AddActiveToCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
         });
     }
 

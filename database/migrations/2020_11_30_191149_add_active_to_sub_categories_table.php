@@ -14,7 +14,7 @@ class AddActiveToSubCategoriesTable extends Migration
     public function up()
     {
         Schema::table('sub_categories', function (Blueprint $table) {
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
         });
     }
 

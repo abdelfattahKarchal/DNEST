@@ -174,6 +174,8 @@ function commandNow () {
                             if (data) {
                                 $('.card-counter').text(0);
                                 $("#cartDiv").load(location.href + " #cartDiv");
+                            }else{
+                                window.location.href = "/loginForm";
                             }
                         }
                     });
