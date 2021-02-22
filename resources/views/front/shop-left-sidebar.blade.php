@@ -15,8 +15,8 @@
                         <div class="product-view-mode">
                             <a class="active grid-3" data-target="gridview-3" data-toggle="tooltip" data-placement="top"
                                 title="Grid View"><i class="fa fa-th"></i></a>
-                            <a class="list" data-target="listview" data-toggle="tooltip" data-placement="top"
-                                title="List View"><i class="fa fa-th-list"></i></a>
+                           {{--  <a class="list" data-target="listview" data-toggle="tooltip" data-placement="top"
+                                title="List View"><i class="fa fa-th-list"></i></a> --}}
                         </div>
                         
                         <div class="product-item-selection_area">
@@ -27,7 +27,7 @@
                                     <label for="product_name" class="select-label">Search:</label>
                                     <input class="form-control" type="text" name="product_name" id="product_name"
                                         placeholder="Search your product...">
-                                    <button class="btn" style="background-color: #9b82bd" type="submit"> <i
+                                    <button class="btn" style="background-color: #EBB805" type="submit"> <i
                                             class="ion-ios-search-strong text-white"></i></button>
                                 </form>
 
