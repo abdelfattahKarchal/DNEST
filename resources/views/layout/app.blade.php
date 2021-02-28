@@ -5,14 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{--
-    <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon size 16*16 logo -->
-    {{--
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico"> --}}
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('front/assets/images/favicon.ico') }}">
 
     <title>THE D-NEST JEWELRY</title>
 
@@ -60,7 +59,10 @@
 <body>
     <div class="main-wrapper">
         <!-- Begin Loading Area -->
-       {{--  <div class="loading">
+        <div class="loading">
+            <div class="text-center">
+                <img src="{{ asset('front/assets/images/logo/logo1_1.png') }}" alt="The DNest jewelery">
+            </div>
             <div class="text-center middle">
                 <div class="lds-ellipsis">
                     <div></div>
@@ -69,7 +71,7 @@
                     <div></div>
                 </div>
             </div>
-        </div> --}}
+        </div>
         <!-- Loading Area End Here -->
         @if (Session()->has('newsletter') && !Session()->has('isSaved'))
             <x-front.newsletter></x-front.newsletter>
@@ -146,12 +148,12 @@
     <script src="{{ asset('front/assets/js/main.js') }}"></script>
 
     <script>
-        $(document).ready(function(){
-    
-            $('#newsletter-subscribe').click(function (e) { 
-            e.preventDefault();
-            var email = $('#newsletter_mail').val();
-            $.ajax({
+        $(document).ready(function() {
+
+            $('#newsletter-subscribe').click(function(e) {
+                e.preventDefault();
+                var email = $('#newsletter_mail').val();
+                $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -171,18 +173,19 @@
                         })
                     },
                     error: function(data) {
-                    $('.errorsMessage').empty();
-                    $.each(data.responseJSON.errors, function(key, value) {
-                        console.log(key + ": " + value);
-                        $('<span>' + value + '</span> <br>').appendTo('.errorsMessage');
-                    });
-                    $('.errorsMessage').show();
-                }
+                        $('.errorsMessage').empty();
+                        $.each(data.responseJSON.errors, function(key, value) {
+                            console.log(key + ": " + value);
+                            $('<span>' + value + '</span> <br>').appendTo(
+                                '.errorsMessage');
+                        });
+                        $('.errorsMessage').show();
+                    }
                 });
+            });
+
         });
-    
-    });
-        
+
     </script>
 
     @yield('js')
