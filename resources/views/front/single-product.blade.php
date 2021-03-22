@@ -178,26 +178,16 @@
                                             </table>
                                         </div>
                                         <h2>Write a review</h2>
-                                        <div class="form-group required">
-                                            {{-- <div class="col-sm-12 p-0">
-                                                <label>Your Email <span class="required">*</span></label>
-                                                <input class="review-input" type="email" name="con_email" id="con_email"
-                                                    required>
-                                            </div> --}}
-                                        </div>
                                         <div class="form-group required second-child">
                                             <div class="col-sm-12 p-0">
                                                 <label class="control-label">Share your opinion</label>
                                                 <textarea class="review-textarea" name="con_message"
                                                     id="con_message"></textarea>
-                                                <div class="help-block"><span class="text-danger">Note:</span> HTML is not
-                                                    translated!</div>
                                             </div>
                                         </div>
                                         <div class="form-group last-child required">
-                                            <div class="hiraola-btn-ps_right">
-                                                <a onclick="addReview({{ $product->id }})" id="add_review"
-                                                    href="javascript:void(0)" class="hiraola-btn hiraola-btn_dark">Send</a>
+                                            <div class="hiraola-btn-ps_right cart-page">
+                                                <a onclick="addReview({{ $product->id }})" id="add_review" href="javascript:void(0)">Send</a>
                                             </div>
                                         </div>
                                     </form>

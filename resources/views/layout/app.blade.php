@@ -59,7 +59,7 @@
 <body>
     <div class="main-wrapper">
         <!-- Begin Loading Area -->
-        <div class="loading">
+        {{-- <div class="loading">
             <div class="text-center">
                 <img src="{{ asset('front/assets/images/logo/logo1_1.png') }}" alt="The DNest jewelery">
             </div>
@@ -71,11 +71,11 @@
                     <div></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Loading Area End Here -->
-        @if (Session()->has('newsletter') && !Session()->has('isSaved'))
+        {{-- @if (Session()->has('newsletter') && !Session()->has('isSaved'))
             <x-front.newsletter></x-front.newsletter>
-        @endif
+        @endif --}}
         {{-- @if (Route::currentRouteName() == 'index')
             <x-front.newsletter></x-front.newsletter>
         @endif --}}
