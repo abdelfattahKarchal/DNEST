@@ -73,9 +73,9 @@
             </div>
         </div> --}}
         <!-- Loading Area End Here -->
-        {{-- @if (Session()->has('newsletter') && !Session()->has('isSaved'))
+        @if (Session()->has('showNewsletter') && Session()->get('showNewsletter'))
             <x-front.newsletter></x-front.newsletter>
-        @endif --}}
+        @endif
         {{-- @if (Route::currentRouteName() == 'index')
             <x-front.newsletter></x-front.newsletter>
         @endif --}}
@@ -180,6 +180,24 @@
                                 '.errorsMessage');
                         });
                         $('.errorsMessage').show();
+                    }
+                });
+            });
+
+            $('#newsletter-close').click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: "{{ url('newsletters/stop') }}",
+                    data: {
+                    },
+                    success: function(data) {
+                        $('#newsletter').hide();
+                    },
+                    error: function(data) {
                     }
                 });
             });

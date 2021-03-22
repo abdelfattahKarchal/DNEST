@@ -33,8 +33,8 @@ class HomeController extends Controller
             session()->put('productsCardSession', []);
         }
 
-        if (!session()->has('newsletter')) {
-            session()->put('newsletter', 'newsletter');
+        if (!session()->has('showNewsletter')) {
+            session()->put('showNewsletter', true);
         }
 
         $newProducts = Product::lastProducts()->take(10)->get();

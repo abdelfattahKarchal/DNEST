@@ -67,6 +67,7 @@ Route::get('collections/{id}/products', 'CollectionController@productsByCollecti
 Route::get('carts/{id}/delete', 'CartController@delete');
 Route::post('carts/quantity/update', 'CartController@updateQuantity');
 Route::resource('newsletters','NewsLetterController')->only('store');
+Route::post('newsletters/stop', 'NewsLetterController@stop');
 
 
 Route::resource('blogs','BlogController');

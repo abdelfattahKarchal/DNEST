@@ -38,16 +38,14 @@ class NewsLetterController extends Controller
         $validation = $request->validate([
             'email' => 'email',
         ]);
-        //dd($request->email);
         $email = NewsLetter::where('email', $request->email)->get();
         if ($email) {
+            session()->put('showNewsletter', false);
             return $email;
         }
-        dd('fff');
         $newsLetter = NewsLetter::create(['email'=>$request->email]);
         if($newsLetter){
-            session()->flush('newsletter');
-            session()->put('isSaved','isSaved');
+            session()->put('showNewsletter', false);
         }
         return $newsLetter;
     }
@@ -96,4 +94,15 @@ class NewsLetterController extends Controller
     {
         //
     }
+
+    /**
+     * Stop newsletter from showing.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+     public function stop(Request $request)
+     {
+        session()->put('showNewsletter', false);
+     }
 }
