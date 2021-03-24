@@ -40,7 +40,9 @@
                  <div class="main-menu_area header-right_area">
                      <nav>
                          <ul>
-                             <li class="dropdown-holder"><a href="javascript:void(0)"><i class="ion-person"></i></a>
+                             <li class="dropdown-holder"><a href="javascript:void(0)"><i class="ion-person"></i>
+                                    {{ Auth::user()->name ?? null}}
+                            </a>
                                 <ul class="hm-dropdown">
                                     @if (!Auth::check())
                                         <li><a href="{{ route('register.form') }}">Register</a></li>
