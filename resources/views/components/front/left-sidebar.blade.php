@@ -14,7 +14,7 @@
                                     --}} <a href="#pageSubmenu-{{ $collection->id }}"
                                         data-toggle="collapse" aria-expanded="false"
                                         class="dropdown-toggle text-uppercase font-weight-bold target">
-                                        {{ $collection->name }} 
+                                        {{ $collection->name }}
                                     </a>
                                     <ul class="collapse list-unstyled module-sub-list_item"
                                         id="pageSubmenu-{{ $collection->id }}">
@@ -23,7 +23,7 @@
                                                 @if ($category->active == 1)
                                                     <a href="javascript:void(0)"
                                                         class="text-capitalize font-weight-bold active">
-                                                        {{ $category->name }} 
+                                                        {{ $category->name }}
                                                     </a>
                                                     <ul class="module-sub-list_item">
                                                         <li>
@@ -33,15 +33,11 @@
                                                                     $url = route('subcategory.products',
                                                                     $subCategory->id);
                                                                     @endphp
-                                                                    <a onclick='findProductsBySubCategory("{{ $url }}",{{ $subCategory->id }})'
-                                                                        class="subCategoryClick"
-                                                                        {{--
-                                                                        data-subCategory="{{ $subCategory->id }}"
-                                                                        --}}
+                                                                    <a class="subCategoryClick"
                                                                         data-subCategory="{{ route('subcategory.products', $subCategory->id) }}"
-                                                                        href="javascript:void(0)">
+                                                                        href="{{ route('subcategory.products',$subCategory->id) }}">
                                                                         {{ $subCategory->name }}
-                                                                        </a>
+                                                                    </a>
                                                                 @endif
                                                             @endforeach
                                                         </li>

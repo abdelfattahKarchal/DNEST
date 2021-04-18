@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -34,11 +35,14 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
+        if (!Auth::check()) {
+            return false;
+        }
         $review = Review::create([
             'product_id' => $request->product_id,
             'description' => htmlspecialchars($request->description),
-            'user_id' => 1
+            'user_id' => Auth::user()->id
         ]);
         if ($review->save()) {
             return [

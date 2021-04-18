@@ -5,10 +5,10 @@
                 <div class="col-lg-4">
                     <div class="footer-widgets_info">
 
-                        <div class="footer-widgets_logo text-center">
+                        <div class="footer-widgets_logo text-center p-2">
                             <a href="#">
-                                <img style="width: 140px; height: 76px;"
-                                    src="{{ asset('front/assets/images/footer/logo/logo1.png') }}"
+                                <img
+                                    src="{{ asset('front/assets/images/logo/logo1_1.png') }}"
                                     alt="THE NEST Footer Logo">
                             </a>
                         </div>

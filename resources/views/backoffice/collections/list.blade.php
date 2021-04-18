@@ -1,14 +1,15 @@
-@extends('layouts.admin')
+@extends('layout.admin')
 
 @section('style')
     <!-- -------------JQuery DataTable Css not in index -->
     <link href="{{ asset('backoffice/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}"
         rel="stylesheet">
     <!-- ------------- end JQuery DataTable Css not in index -->
-    <style> 
-        .dt-buttons{
+    <style>
+        .dt-buttons {
             display: none !important;
         }
+
     </style>
 @endsection
 
@@ -26,17 +27,17 @@
                             class="btn btn-success waves-effect">new collection</a>
                     </ul>
                     <x-back.success type="margin-top: 15px;"></x-back.success>
-                    
-                </div>
-               
 
-                <div class="body" >
-                   
+                </div>
+
+
+                <div class="body">
+
                     <div class="table-responsive">
-                       
-                        
+
+
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
-                            
+
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -63,11 +64,17 @@
                                 @foreach ($collections as $collection)
                                     <tr>
                                         <td>{{ $collection->name }}</td>
-                                        <td>  <img src="{{ $collection->url_1() }}" width="90px" alt="">   </td>
-                                        <td>  <img src="{{ $collection->url_2() }}" width="90px" alt="">  </td>
+                                        <td> <img src="{{ $collection->url_1() }}" width="90px" alt=""> </td>
+                                        <td>
+                                            @if ($collection->url_2())
+                                                <img src="{{ $collection->url_2() }}" width="90px" alt="">
+                                            @else
+                                                n/d
+                                            @endif
+                                        </td>
                                         <td>{{ $collection->description }}</td>
                                         <td>{{ $collection->created_at }}</td>
-                                        <td  nowrap="nowrap">
+                                        <td nowrap="nowrap">
                                             <a title="delete" type="button"
                                                 onclick="deleteCollection({{ $collection->id }})"
                                                 class="btn btn-danger btn-circle waves-effect waves-circle waves-float">
@@ -82,7 +89,9 @@
                                         </td>
                                         <td>
                                             <div class="switch">
-                                                <label><input id="active-{{ $collection->id }}" onchange="changeActive({{ $collection->id }})" type="checkbox" {{ $collection->active ? 'checked' : null }} ><span
+                                                <label><input id="active-{{ $collection->id }}"
+                                                        onchange="changeActive({{ $collection->id }})" type="checkbox"
+                                                        {{ $collection->active ? 'checked' : null }}><span
                                                         class="lever switch-col-green"></span></label>
                                             </div>
                                         </td>
@@ -127,22 +136,22 @@
             });
         }
 
-        function changeActive(id){
-           console.log($('#active-'+id).is(":checked"));
-           $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: 'POST',
-                        url: "/collections/active/" + id,
-                        data:{
-                            'active' : $('#active-'+id).is(":checked")
-                        },
-                        success: function(data) {
-                            //$("#collection-table").load(location.href + " #collection-table");
-                            //location.replace("/admin/collections")
-                        }
-                    });
+        function changeActive(id) {
+            console.log($('#active-' + id).is(":checked"));
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: "/collections/active/" + id,
+                data: {
+                    'active': $('#active-' + id).is(":checked")
+                },
+                success: function(data) {
+                    //$("#collection-table").load(location.href + " #collection-table");
+                    //location.replace("/admin/collections")
+                }
+            });
         }
 
     </script>

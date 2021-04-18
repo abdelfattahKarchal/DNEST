@@ -15,15 +15,15 @@
         <select id="select-subcategory" class="form-control show-tick" name="subcategory" required>
             <option value="">-- Please select --</option>
             @foreach ($subcategories as $subcategory)
-                @if ($subcategory->active == 1)
+                
                     <option value="{{ $subcategory->id }}"
                     @isset($product->subCategory->category->id)
                         @if ($subcategory->id == $product->subCategory->id)
                             selected="selected"
                         @endif
                     @endisset
-                        >{{ $subcategory->name }} -> {{ $subcategory->category->name }} -> {{ $subcategory->category->collection->name }}</option>
-                @endif
+                        >{{ $subcategory->category->collection->name }} -> {{ $subcategory->category->name }} -> {{ $subcategory->name }}</option>
+               
             @endforeach
         </select>
     </div>

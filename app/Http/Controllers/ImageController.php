@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +43,7 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', new Image());
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');
         if ($hasFile1) {
@@ -82,6 +88,7 @@ class ImageController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Image());
         $image = Image::findOrFail($id);
 
         return view('backoffice.products.images.edit',[
@@ -98,6 +105,7 @@ class ImageController extends Controller
      */
     public function update(UpdateImageRequest $request, $id)
     {
+        $this->authorize('update', new Image());
         $image = Image::findOrFail($id);
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');
@@ -130,6 +138,7 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new Image());
         $image = Image::findOrFail($id);
        
         $image->delete();
@@ -139,6 +148,7 @@ class ImageController extends Controller
 
     public function formImageToProduct($id)
     {
+        $this->authorize('formImageToProduct', new Image());
         $product = Product::findOrFail($id);
         return view('backoffice.products.images.create',[
             'product_id' => $product->id
@@ -146,6 +156,7 @@ class ImageController extends Controller
     }
     public function active(Request $request, $id)
     { 
+        $this->authorize('active', new Image());
         $image = Image::findOrFail($id);
         
         $image->active = $request->active== 'true' ? 1 : 0;

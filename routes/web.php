@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,18 +21,20 @@ Route::get('/clear', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/admin', function () {
+/* login form for customer*/
+Route::get('/loginForm','LoginController@loginForm')->name('login.form');
+Route::get('/registerForm','LoginController@registerForm')->name('register.form');
+/* Route::get('/admin', function () {
     return view('backoffice.index');
-});
+})->middleware('auth'); */
 
+Route::get('admin', 'DashboardController@index')->name('admin.index')->middleware('auth');
 
-Route::get('/categories', function () {
+/* Route::get('/categories', function () {
     return view('backoffice.categories.list');
-});
+}); */
 /** admisitration routes */
-Route::get('/admin/collections', function () {
-    return view('backoffice.collections.list');
-});
+Route::get('/admin/collections', 'CollectionController@adminCollections');
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::post('collections/active/{id}', 'CollectionController@active');
@@ -57,28 +60,19 @@ Route::resource('orders', 'OrderController');
 
 Route::get('subcategory/{subcategory}/products', 'ProductController@productsBySubCategoryId')->name('subcategory.products');
 
-Route::post('products/search', 'ProductController@search');
+Route::get('search/product', 'ProductController@search');
+
 Route::post('carts/store', 'CartController@store');
 Route::get('collections/{id}/products', 'CollectionController@productsByCollectionId');
 Route::get('carts/{id}/delete', 'CartController@delete');
 Route::post('carts/quantity/update', 'CartController@updateQuantity');
 Route::resource('newsletters','NewsLetterController')->only('store');
-/* Route::get('/leftSidebar', function () {
-    return view('front.shop-left-sidebar');
-})->name('leftSidebar'); */
+Route::post('newsletters/stop', 'NewsLetterController@stop');
 
-/* Route::get('/singleProduct', function () {
-    return view('front.single-product');
-})->name('singleProduct'); */
 
 Route::resource('blogs','BlogController');
 Route::resource('comments','CommentController');
-//Route::get('/blogs', 'BlogController@index')->name('blogs');
 
-
-/* Route::get('/blog/details', function () {
-    return view('front.blog-details');
-})->name('blog.details'); */
 
 Route::get('/aboutUs', function () {
     return view('front.about-us');
@@ -97,3 +91,7 @@ Route::get('/404', function () {
 })->name('404');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

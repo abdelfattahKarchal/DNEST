@@ -27,7 +27,7 @@
     /*  Hiraola's Sticky Menu Activation
 /*----------------------------------------*/
     $(window).on('scroll', function () {
-        if ($(this).scrollTop() > 300) {
+        if ($(this).scrollTop() > $(window).height()) {
             $('.header-sticky').addClass('sticky');
         } else {
             $('.header-sticky').removeClass('sticky');

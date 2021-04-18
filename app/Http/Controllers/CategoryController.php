@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        
+        $this->authorize('index', new Category());
         $categories = Category::all();
-
         return view('backoffice.categories.list',[
             'categories' => $categories
         ]);
@@ -30,6 +37,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', new Category());
         return view('backoffice.categories.create');
     }
 
@@ -41,6 +49,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        $this->authorize('create', new Category());
         $collection = Collection::findOrFail($request->collection);
        
        $category = Category::create([
@@ -72,6 +81,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', new Category());
         $category = Category::findOrFail($id);
         return view('backoffice.categories.edit', [
             'category' => $category
@@ -87,6 +97,7 @@ class CategoryController extends Controller
      */
     public function update(StoreCategoryRequest $request, $id)
     {
+        $this->authorize('update', new Category());
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->collection_id = $request->collection;
@@ -106,6 +117,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', new Category());
         $category = Category::findOrFail($id);
        
         $category->delete();
@@ -115,6 +127,7 @@ class CategoryController extends Controller
 
     public function active(Request $request, $id)
     {
+        $this->authorize('active', new Collection());
         $category = Category::findOrFail($id);
         $category->active = $request->active== 'true' ? 1 : 0;
         $category->save();

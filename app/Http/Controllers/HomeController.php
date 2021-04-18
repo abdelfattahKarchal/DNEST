@@ -9,14 +9,32 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    /* public function index()
+    {
+        return view('home');
+    } */
     public function index()
     {
         if (!session()->has('productsCardSession')) {
             session()->put('productsCardSession', []);
         }
 
-        if (!session()->has('newsletter')) {
-            session()->put('newsletter', 'newsletter');
+        if (!session()->has('showNewsletter')) {
+            session()->put('showNewsletter', true);
         }
 
         $newProducts = Product::lastProducts()->take(10)->get();

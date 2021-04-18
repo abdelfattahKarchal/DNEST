@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layout.admin')
 
 @section('style')
     <!-- -------------JQuery DataTable Css not in index -->
@@ -61,7 +61,7 @@
                                 @foreach ($subcategories as $subcategory)
                                     <tr>
                                         <td>{{ $subcategory->name }}</td>
-                                        <td>{{ $subcategory->category->name }}</td>
+                                        <td>{{ $subcategory->category->collection->name }}->{{ $subcategory->category->name }}</td>
                                         <td>{{ $subcategory->description }}</td>
                                         <td>{{ $subcategory->created_at }}</td>
                                         <td width="90px">

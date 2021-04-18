@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use App\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class BlogController extends Controller
 {
@@ -15,7 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(Config::get('constants.options.option_blog_pagination', 10));
         return view('front.blog.list',[
             'blogs' => $blogs
         ]);
@@ -51,7 +52,6 @@ class BlogController extends Controller
     public function show($id)
     {
         $blog = Blog::findOrFail($id);
-        $collections = Collection::all();
         return view('front.blog.show',[
             'blog'=>$blog,
             ]);

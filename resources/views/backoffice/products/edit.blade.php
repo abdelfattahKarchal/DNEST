@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layout.admin')
 @section('style')
         <!-- Bootstrap Select Css -->
         <!-- Bootstrap Material Datetime Picker Css -->

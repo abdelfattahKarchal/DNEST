@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('content')
     <!-- Begin Hiraola's Blog Column Three Area -->
     <div class="hiraola-blog_area hiraola-blog_area-2 grid-view_area blog-column-three_area">
@@ -83,37 +83,11 @@
                         
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="hiraola-paginatoin-area">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6">
-                                        <ul class="hiraola-pagination-box">
-                                            <li class="active"><a href="javascript:void(0)">1</a></li>
-                                            <li><a href="javascript:void(0)">2</a></li>
-                                            <li><a href="javascript:void(0)">3</a></li>
-                                            <li><a class="Next" href="javascript:void(0)"><i
-                                                        class="ion-ios-arrow-right"></i></a>
-                                            </li>
-                                            <li><a class="Next" href="javascript:void(0)">>|</a></li>
-                                        </ul>
-                                    </div>
-                                    <!--<div class="col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="product-select-box">
-                                                        <div class="product-short">
-                                                            <p>Show</p>
-                                                            <select class="myniceselect nice-select">
-                                                                <option value="5">5</option>
-                                                                <option value="10">10</option>
-                                                                <option value="15">15</option>
-                                                                <option value="20">20</option>
-                                                                <option value="25">25</option>
-                                                            </select>
-                                                            <span>Per Page</span>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-                                </div>
-                            </div>
+                        <div class="col-12 mb-2 d-flex flex-row-reverse">
+                            @if ($blogs instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                {{ $blogs->links() }}
+                            @endif
+
                         </div>
                     </div>
                 </div>
