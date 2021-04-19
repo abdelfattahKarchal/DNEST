@@ -40,16 +40,21 @@
                     <nav>
                         <ul>
                             <li class="dropdown-holder">
-                                <a href="javascript:void(0)" class="wishlist-btn">
+                                @if (!Auth::check() )
+                                    <a href="javascript:void(0)" class="wishlist-btn">
                                     <i class="ion-person" style="font-size: 1.5rem;"></i>
-                                    {{ Auth::user()->name ?? null }}
+                                    {{-- {{ Auth::user()->name ?? null }} --}}
                                 </a>
+                                @else
+                                <u style="color: #fff"> {{  Auth::user()->name  }}</u>
+                                @endif
+                                
                                 <ul class="hm-dropdown">
                                     @if (!Auth::check())
                                         <li><a href="{{ route('register.form') }}">Register</a></li>
                                         <li><a href="{{ route('login.form') }}">Login</a></li>
                                     @else
-                                        <li><a href="{{ route('login.form') }}">My Profile</a></li>
+                                        <li><a href="{{ route('myaccount.index') }}">My Profile</a></li>
                                         <li>
                                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
