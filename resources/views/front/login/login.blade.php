@@ -47,9 +47,10 @@
                         </div>
                         
                         <div class="col-12 mt-4 mb-4 form-group">
-                            <button type="submit" class="btn btn-primary form-control">
+                            <button type="submit" class="hiraola-login_btn">{{ __('Login') }}</button>
+                            {{-- <button type="submit" class="btn btn-primary form-control">
                                {{ __('Login') }}
-                           </button>
+                           </button> --}}
                        </div>
                     </div>
                 </div>

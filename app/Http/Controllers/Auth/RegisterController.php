@@ -52,10 +52,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'lname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string'],
             'address' => ['required', 'string'],
+            'shipping_address' => ['required', 'string'],
         ]);
     }
 
@@ -71,11 +73,13 @@ class RegisterController extends Controller
        if (!$role) {
            abort(500);
        }
-       //dd($role->id);
+       
         return User::create([
             'name' => $data['name'],
+            'lname' => $data['lname'],
             'email' => $data['email'],
             'address' => $data['address'],
+            'shipping_address' => $data['shipping_address'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'role_id' => $role->id,

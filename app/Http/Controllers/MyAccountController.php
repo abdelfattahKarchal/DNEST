@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class MyAccountController extends Controller
 {
     public function __construct()
     {
-       //$this->middleware('auth')->only(['index']);
+        //$this->middleware('auth')->only(['index']);
     }
     /**
      * Display a listing of the resource.
@@ -22,9 +25,11 @@ class MyAccountController extends Controller
         if (!Auth::check()) {
             return view('front.login.login');
         }
-        $my_orders = Order::where('user_id', Auth::user()->id)->with('products')->get();
-        //$my_orders = Order::where('user_id', 20)->with('products', 'status')->get();
-        return view('front.myaccount',[
+        $my_orders = Order::where('user_id', Auth::user()->id)
+        ->with('products')
+        ->orderBy('id', 'desc')
+        ->get();
+        return view('front.myaccount', [
             'my_orders' => $my_orders
         ]);
     }
@@ -81,7 +86,33 @@ class MyAccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'old_password' => 'nullable',
+            'new_password' => 'bail|nullable|min:8|different:old_password',
+            'confirmation_password' => 'nullable|same:new_password',
+        ]);
+        
+        $user = User::findOrFail($id);
+        if ($request->old_password) {
+            if (!Hash::check($request->old_password, Auth::user()->password)) {
+                return response()->json(array(
+                    'code'      =>  401,
+                    'message'   =>  'current password is incorrect'
+                ), 401);
+            }else{
+                $user->password = Hash::make($request->new_password);
+            }
+        }
+
+        $user->name = $request->fname;
+        $user->lname = $request->lname;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        return $user->save();
     }
 
     /**
@@ -93,5 +124,25 @@ class MyAccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Change address.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function address(Request $request, $id)
+    {
+        $request->validate([
+            'address' => 'required'
+        ]);
+        $user = User::findOrFail($id);
+        $user->address = $request->address;
+        if ($request->shipping_address) {
+            $user->shipping_address = $request->shipping_address;
+        }
+
+        return $user->save();
     }
 }

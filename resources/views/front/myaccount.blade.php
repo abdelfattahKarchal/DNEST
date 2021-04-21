@@ -1,7 +1,10 @@
 @extends('layout.app')
+@section('style')
+    <link rel="stylesheet" href="{{ asset('front/assets/plugins/datatables/dataTables.bootstrap4.min.css') }}">
+@endsection
 @section('content')
     <main class="page-content">
-        <!-- Begin Hiraola's Account Page Area -->
+        <!-- Begin Account Page -->
         <div class="account-page-area">
             <div class="container">
                 <div class="row">
@@ -24,10 +27,7 @@
                                 <a class="nav-link" id="account-details-tab" data-toggle="tab" href="#account-details"
                                     role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="account-logout-tab" href="login-register.html" role="tab"
-                                    aria-selected="false">Logout</a>
-                            </li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-9">
@@ -35,10 +35,10 @@
                             <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                                 aria-labelledby="account-dashboard-tab">
                                 <div class="myaccount-dashboard">
-                                    <p>Hello <b>{{ Auth::user()->name }}</b> </p>
+                                    <p>Hello <b>{{ Auth::user()->name }} {{ Auth::user()->lname }}</b> </p>
                                     <p>From your account dashboard you can view your recent orders, manage your shipping and
-                                        billing addresses and edit your password and account
-                                            details.</p>
+                                        personal addresses and edit your password and account
+                                        details.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
@@ -46,21 +46,25 @@
                                 <div class="myaccount-orders">
                                     <h4 class="small-title">MY ORDERS</h4>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-hover">
-                                            <tbody>
+                                        <table id="orders-table" class="table table-striped table-bordered">
+                                            <thead>
                                                 <tr>
                                                     <th>ORDER</th>
                                                     <th>DATE</th>
                                                     <th>STATUS</th>
                                                     <th>TOTAL</th>
-                                                    <th></th>
                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                               
                                                 @forelse ($my_orders as $order)
+                                                
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                 href="javascript:void(0)">{{ $order->id }}</a></td>
                                                         <td>{{ $order->created_at }}</td>
-                                                        <td>{{ ($order->status->label == 'not confirmed' || $order->status->label == 'in progress' ) ? 'in progress' : $order->status->label}}</td>
+                                                        <td>{{ $order->status->label == 'not confirmed' || $order->status->label == 'in progress' ? 'in progress' : $order->status->label }}
+                                                        </td>
                                                         @php
                                                             $quantity_total = 0;
                                                         @endphp
@@ -70,22 +74,31 @@
                                                                 $quantity_total += $product->pivot->quantity;
                                                             @endphp
                                                         @endforeach
-                                                        <td>${{ $order->total_price }} for {{ $quantity_total }} item(s)</td>
-                                                        <td><a href="javascript:void(0)"
-                                                                class="hiraola-btn hiraola-btn_dark hiraola-btn_sm"><span>View</span></a>
+                                                        <td>${{ $order->total_price }} for {{ $quantity_total }} item(s)
                                                         </td>
+                                                        {{-- <td><a href="javascript:void(0)"
+                                                                class="hiraola-btn hiraola-btn_dark hiraola-btn_sm"><span>View</span></a>
+                                                        </td> --}}
                                                     </tr>
                                                 @empty
-                                                <tr>
-                                                    <td colspan="4">
-                                                        <span> No orders yet !</span>
-                                                    </td>
-                                                </tr>
-                                                    
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <span> No orders yet !</span>
+                                                        </td>
+                                                    </tr>
+
                                                 @endforelse
 
-
+                                                    
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ORDER</th>
+                                                    <th>DATE</th>
+                                                    <th>STATUS</th>
+                                                    <th>TOTAL</th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -94,56 +107,107 @@
                                 aria-labelledby="account-address-tab">
                                 <div class="myaccount-address">
                                     <p>The following addresses will be used on the checkout page by default.</p>
-                                    <div class="row">
-                                        <div class="col">
-                                            <h4 class="small-title">BILLING ADDRESS</h4>
-                                            <address>
-                                                1234 Heaven Stress, Beverly Hill OldYork UnitedState of Lorem
-                                            </address>
+                                    <div class="alert alert-success" id="success-alert"></div>
+                                    <div id="alert-error-address" class="alert alert-danger"></div>
+                                    @php
+                                        $idUser = Auth::user()->id;
+                                    @endphp
+                                    <form id="form_address" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4 class="small-title">Personal ADDRESS</h4>
+
+                                                <address>
+                                                    <textarea name="address" id="" cols="30"
+                                                        rows="5">{{ Auth::user()->address }}</textarea>
+                                                </address>
+
+                                            </div>
+                                            <div class="col">
+                                                <h4 class="small-title">SHIPPING ADDRESS</h4>
+                                                <address>
+                                                    <textarea name="shipping_address" id="" cols="30"
+                                                        rows="5">{{ Auth::user()->shipping_address ?? Auth::user()->address }}</textarea>
+                                                </address>
+                                                @if ($errors->any())
+                                                    <div class="alert alert-danger">
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <h4 class="small-title">SHIPPING ADDRESS</h4>
-                                            <address>
-                                                1234 Heaven Stress, Beverly Hill OldYork UnitedState of Lorem
-                                            </address>
+                                        <div class="row">
+                                            <div class="col-10 text-center">
+                                                <div class="form-group last-child required">
+                                                    <div class="hiraola-btn-ps_right cart-page">
+                                                        <a onclick="saveAddress({{ Auth::user()->id }})"
+                                                            id="save_address" href="javascript:void(0)">Save</a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-details" role="tabpanel"
                                 aria-labelledby="account-details-tab">
                                 <div class="myaccount-details">
-                                    <form action="#" class="hiraola-form">
+                                    <form id="form-myaccount-details" action="#" class="hiraola-form">
+                                        @csrf
+                                        <div class="alert alert-success" id="success-alert-account"></div>
+                                        <div id="alert-error-account" class="alert alert-danger"></div>
                                         <div class="hiraola-form-inner">
                                             <div class="single-input single-input-half">
-                                                <label for="account-details-firstname">First Name*</label>
-                                                <input type="text" id="account-details-firstname">
+                                                <label for="fname">First Name*</label>
+                                                <input type="text" name="fname" id="fname"
+                                                    value="{{ Auth::user()->name }}">
                                             </div>
                                             <div class="single-input single-input-half">
-                                                <label for="account-details-lastname">Last Name*</label>
-                                                <input type="text" id="account-details-lastname">
+                                                <label for="lname">Last Name*</label>
+                                                <input type="text" name="lname" id="lname"
+                                                    value="{{ Auth::user()->lname }}">
+                                            </div>
+                                            <div class="single-input single-input-half">
+                                                <label for="phone">Phone*</label>
+                                                <input type="phone" name="phone" id="phone"
+                                                    value="{{ Auth::user()->phone }}">
+                                            </div>
+                                            <div class="single-input single-input-half">
+                                                <label for="email">Email*</label>
+                                                <input type="email" name="email" id="email"
+                                                    value="{{ Auth::user()->email }}">
                                             </div>
                                             <div class="single-input">
-                                                <label for="account-details-email">Email*</label>
-                                                <input type="email" id="account-details-email">
-                                            </div>
-                                            <div class="single-input">
-                                                <label for="account-details-oldpass">Current Password(leave blank to leave
+                                                <label for="old_password">Current Password(leave blank to leave
                                                     unchanged)</label>
-                                                <input type="password" id="account-details-oldpass">
+                                                <input type="password" name="old_password" id="old_password">
                                             </div>
                                             <div class="single-input">
-                                                <label for="account-details-newpass">New Password (leave blank to leave
+                                                <label for="new_password">New Password (leave blank to leave
                                                     unchanged)</label>
-                                                <input type="password" id="account-details-newpass">
+                                                <input type="password" name="new_password" id="new_password">
                                             </div>
                                             <div class="single-input">
-                                                <label for="account-details-confpass">Confirm New Password</label>
-                                                <input type="password" id="account-details-confpass">
+                                                <label for="confirmation_password">Confirm New Password</label>
+                                                <input type="password" name="confirmation_password"
+                                                    id="confirmation_password">
                                             </div>
                                             <div class="single-input">
-                                                <button class="hiraola-btn hiraola-btn_dark" type="submit"><span>SAVE
-                                                        CHANGES</span></button>
+
+                                                <div class="form-group last-child required">
+                                                    <div class="hiraola-btn-ps_right cart-page">
+                                                        <a onclick="updateInformationAccount({{ Auth::user()->id }})"
+                                                            href="javascript:void(0)"> Save changes</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -154,6 +218,95 @@
                 </div>
             </div>
         </div>
-        <!-- Hiraola's Account Page Area End Here -->
+        <!-- Account Page End Here -->
     </main>
+@endsection
+@section('js')
+<script>
+
+
+    closeAlertMessage();
+
+    function saveAddress(client_id) {
+        $.ajax({
+            url: 'myaccount/' + client_id + '/address',
+            type: 'put',
+            dataType: 'json',
+            data: $('form#form_address').serialize(),
+            success: function(data) {
+                if (data) {
+                    $('#alert-error-address').hide();
+                    $('#success-alert').empty();
+                    var text =
+                        '<button onclick = "closeAlertMessage()" type="button" class="close">&times;</button>';
+                    $("#success-alert").append(text, '<strong>Success! </strong> Adress have added.');
+                    $('#success-alert').show();
+                }
+            },
+            error: function(data) {
+                $('#success-alert').hide();
+                $('#alert-error-address').empty();
+                var text =
+                    '<button onclick = "closeAlertMessage()" type="button" class="close">&times;</button>';
+                $("#alert-error-address").append(text, jQuery.parseJSON(data.responseText).errors.address[
+                    0]);
+                $('#alert-error-address').show();
+            }
+        });
+    }
+
+    function closeAlertMessage() {
+        $('#alert-error-address').hide();
+        $('#success-alert').hide();
+        $('#success-alert-account').hide();
+        $('#alert-error-account').hide();
+    }
+
+    function updateInformationAccount(client_id) {
+        $.ajax({
+            url: 'myaccount/' + client_id,
+            type: 'put',
+            dataType: 'json',
+            data: $('form#form-myaccount-details').serialize(),
+            success: function(data) {
+                console.log(data);
+                if (data) {
+                    $('#alert-error-account').hide();
+                    $('#success-alert-account').empty();
+                    var text =
+                        '<button onclick = "closeAlertMessage()" type="button" class="close">&times;</button>';
+                    $("#success-alert-account").append(text, '<strong>Success! </strong> Informations have changed.');
+                    $('#success-alert-account').show();
+                }
+            },
+            error: function(data) {
+                console.log(data);
+                $('#success-alert-account').hide();
+                $('#alert-error-account').empty();
+                if (data.responseJSON.code) {
+                    $("#alert-error-account").append(data.responseJSON.message);
+                }
+                var text =
+                    '<button onclick = "closeAlertMessage()" type="button" class="close">&times;</button> <ul>';
+                    $("#alert-error-account").append(text);
+                $.each(jQuery.parseJSON(data.responseText).errors, function(index, value) {
+                    console.log(index + ": " + value);
+                    $("#alert-error-account").append('<li>'+ value + '</li>');
+                });
+                $("#alert-error-account").append('</ul>');
+                
+                $('#alert-error-account').show();
+            }
+        });
+    }
+    $(document).ready(function() {
+    $('#orders-table').DataTable({
+        "order": []
+    });
+} );
+
+</script>
+<script src="{{ asset('front/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('front/assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    
 @endsection
