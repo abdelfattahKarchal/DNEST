@@ -89,15 +89,27 @@ class MyAccountController extends Controller
         $request->validate([
             'fname' => 'required',
             'lname' => 'required',
-            'email' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => 'required',
             'old_password' => 'nullable',
             'new_password' => 'bail|nullable|min:8|different:old_password',
             'confirmation_password' => 'nullable|same:new_password',
         ]);
-        
+        // check email if exist
         $user = User::findOrFail($id);
-        if ($request->old_password) {
+        if ($user->email != $request->email) {
+            $user_email = User::where('email',$request->email)->first();
+
+            if ($user_email) {
+                return response()->json(array(
+                    'code'      =>  401,
+                    'message'   =>  'email already existy'
+                ), 401);
+            }else{
+                $user->email = $request->email;
+            }
+        }
+        if ($request->old_password || $request->new_password) {
             if (!Hash::check($request->old_password, Auth::user()->password)) {
                 return response()->json(array(
                     'code'      =>  401,
@@ -110,7 +122,6 @@ class MyAccountController extends Controller
 
         $user->name = $request->fname;
         $user->lname = $request->lname;
-        $user->email = $request->email;
         $user->phone = $request->phone;
         return $user->save();
     }
