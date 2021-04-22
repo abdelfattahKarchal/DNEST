@@ -90,6 +90,7 @@ class MyAccountController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'email' => ['required', 'string', 'email', 'max:255'],
+            'address' => 'required',
             'phone' => 'required',
             'old_password' => 'nullable',
             'new_password' => 'bail|nullable|min:8|different:old_password',
@@ -103,7 +104,7 @@ class MyAccountController extends Controller
             if ($user_email) {
                 return response()->json(array(
                     'code'      =>  401,
-                    'message'   =>  'email already existy'
+                    'message'   =>  'email already exist'
                 ), 401);
             }else{
                 $user->email = $request->email;
@@ -119,7 +120,11 @@ class MyAccountController extends Controller
                 $user->password = Hash::make($request->new_password);
             }
         }
-
+        
+        if ($request->shipping_address) {
+            $user->shipping_address = $request->shipping_address;
+        }
+        $user->address = $request->address;
         $user->name = $request->fname;
         $user->lname = $request->lname;
         $user->phone = $request->phone;

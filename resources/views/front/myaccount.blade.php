@@ -11,28 +11,27 @@
                     <div class="col-lg-3">
                         <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
                             <li class="nav-item">
+                                <a class="nav-link active" id="account-details-tab" data-toggle="tab" href="#account-details"
+                                    role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
+                            </li>
+                           {{--  <li class="nav-item">
                                 <a class="nav-link active" id="account-dashboard-tab" data-toggle="tab"
                                     href="#account-dashboard" role="tab" aria-controls="account-dashboard"
                                     aria-selected="true">Dashboard</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-orders"
                                     role="tab" aria-controls="account-orders" aria-selected="false">Orders</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
+                            {{--     <a class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
                                     role="tab" aria-controls="account-address" aria-selected="false">Addresses</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="account-details-tab" data-toggle="tab" href="#account-details"
-                                    role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
-                            </li>
-                           
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="col-lg-9">
                         <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
-                            <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
+                            {{-- <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
                                 aria-labelledby="account-dashboard-tab">
                                 <div class="myaccount-dashboard">
                                     <p>Hello <b>{{ Auth::user()->name }} {{ Auth::user()->lname }}</b> </p>
@@ -40,11 +39,11 @@
                                         personal addresses and edit your password and account
                                         details.</p>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
                                 aria-labelledby="account-orders-tab">
                                 <div class="myaccount-orders">
-                                    <h4 class="small-title">MY ORDERS</h4>
+                                    <h4 class="small-title mb-5">MY ORDERS</h4>
                                     <div class="table-responsive">
                                         <table id="orders-table" class="table table-striped table-bordered">
                                             <thead>
@@ -91,19 +90,12 @@
 
                                                     
                                             </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>ORDER</th>
-                                                    <th>DATE</th>
-                                                    <th>STATUS</th>
-                                                    <th>TOTAL</th>
-                                                </tr>
-                                            </tfoot>
+                                           
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="account-address" role="tabpanel"
+                            {{-- <div class="tab-pane fade" id="account-address" role="tabpanel"
                                 aria-labelledby="account-address-tab">
                                 <div class="myaccount-address">
                                     <p>The following addresses will be used on the checkout page by default.</p>
@@ -156,14 +148,15 @@
 
 
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="account-details" role="tabpanel"
+                            </div> --}}
+                            <div class="tab-pane fade show active" id="account-details" role="tabpanel"
                                 aria-labelledby="account-details-tab">
                                 <div class="myaccount-details">
-                                    <form id="form-myaccount-details" action="#" class="hiraola-form">
+                                    <h4 class="small-title mb-5">MY ACCOUNT DETAILS</h4>
+                                    <form id="form-myaccount-details" action="#" class="hiraola-form" style="border: none; padding:0;">
                                         @csrf
-                                        <div class="alert alert-success" id="success-alert-account"></div>
-                                        <div id="alert-error-account" class="alert alert-danger"></div>
+                                        <div class="alert alert-success" id="success-alert-account" style="display: none"></div>
+                                        <div id="alert-error-account" class="alert alert-danger" style="display: none"></div>
                                         <div class="hiraola-form-inner">
                                             <div class="single-input single-input-half">
                                                 <label for="fname">First Name*</label>
@@ -185,6 +178,15 @@
                                                 <input type="email" name="email" id="email"
                                                     value="{{ Auth::user()->email }}">
                                             </div>
+                                            <div class="single-input">
+                                                <label for="address">Personal address*</label>
+                                                <input type="text" name="address" id="address" value="{{ Auth::user()->address }}">
+                                            </div>
+                                            <div class="single-input">
+                                                <label for="shipping_address">Shipping address*</label>
+                                                <input type="shipping_address" name="shipping_address" id="shipping_address" value="{{ Auth::user()->shipping_address ?? Auth::user()->address }}">
+                                            </div>
+
                                             <div class="single-input">
                                                 <label for="old_password">Current Password(leave blank to leave
                                                     unchanged)</label>

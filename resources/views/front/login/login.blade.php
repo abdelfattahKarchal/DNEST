@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row d-flex justify-content-center mb-lg-1">
-        <div class=" mt-2 col-sm-12 col-md-12 col-xs-12 col-lg-6">
+        <div class=" mt-2 col-sm-12 col-md-10 col-xs-12 col-lg-4">
             <!-- Login Form s-->
             <form  method="POST" action="{{ route('login') }}">
                 @csrf
@@ -33,14 +33,14 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <div class="check-box">
                                 <div class="forgotton-password_info">
                                 <a href="{{ route('register.form') }}"> Register</a>
                             </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5 text-md-right">
                             <div class="forgotton-password_info">
                                 <a href="#"> Forgotten password?</a>
                             </div>
