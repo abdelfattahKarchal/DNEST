@@ -148,7 +148,7 @@ class MyAccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function address(Request $request, $id)
+   /*  public function address(Request $request, $id)
     {
         $request->validate([
             'address' => 'required'
@@ -160,5 +160,5 @@ class MyAccountController extends Controller
         }
 
         return $user->save();
-    }
+    } */
 }

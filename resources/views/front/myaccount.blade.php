@@ -229,7 +229,7 @@
 
     closeAlertMessage();
 
-    function saveAddress(client_id) {
+    /* function saveAddress(client_id) {
         $.ajax({
             url: 'myaccount/' + client_id + '/address',
             type: 'put',
@@ -255,11 +255,11 @@
                 $('#alert-error-address').show();
             }
         });
-    }
+    } */
 
     function closeAlertMessage() {
-        $('#alert-error-address').hide();
-        $('#success-alert').hide();
+        //$('#alert-error-address').hide();
+        //$('#success-alert').hide();
         $('#success-alert-account').hide();
         $('#alert-error-account').hide();
     }
