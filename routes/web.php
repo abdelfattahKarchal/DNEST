@@ -21,6 +21,9 @@ Route::get('/clear', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+//Route::put('/myaccount/{myaccount}/address', 'MyAccountController@address')->name('myaccount.address');
+Route::resource('myaccount', 'MyAccountController');
+
 /* login form for customer*/
 Route::get('/loginForm','LoginController@loginForm')->name('login.form');
 Route::get('/registerForm','LoginController@registerForm')->name('register.form');

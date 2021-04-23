@@ -49,7 +49,7 @@
     <script src="assets/js/vendor/vendor.min.js"></script>
     <script src="assets/js/plugins/plugins.min.js"></script>
     -->
-
+    @yield('style')
     <!-- Main Style CSS (Please use minify version for better website load performance) -->
     <link rel="stylesheet" href="{{ asset('front/assets/css/style.css') }}">
     <!--<link rel="stylesheet" href="assets/css/style.min.css">-->

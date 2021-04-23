@@ -102,7 +102,7 @@ class OrderController extends Controller
         }
         $order->total_price = $total_price;
         $order->user_id = Auth::user()->id;
-        $order->shipping_address = Auth::user()->address;
+        $order->shipping_address = Auth::user()->shipping_address ?? Auth::user()->address;
         $order->status_id = $statut->id;
         $order->save();
         //$productsIds_array  = [];

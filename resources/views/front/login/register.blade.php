@@ -22,7 +22,20 @@
                             @enderror
 
                         </div>
+
                         <div class="col-md-6 col-12 mb--20 form-group">
+                            <label for="lname">Last name</label>
+                            <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
+                            name="lname" value="{{ old('lname') }}" placeholder="Last name" required autocomplete="lname" autofocus>
+
+                        @error('lname')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        </div>
+
+                        <div class="col-md-12 col-12 mb--20 form-group">
                             <label for="phone">Phone</label>
                             <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror"
                             name="phone" value="{{ old('phone') }}" placeholder="Phone Number" required autocomplete="phone" autofocus>
@@ -53,6 +66,18 @@
                                     </span>
                                 @enderror
                         </div>
+
+                        <div class="col-md-12 form-group">
+                            <label for="shipping_address">Shipping Address</label>
+                            <input id="shipping_address" type="shipping_address" placeholder="Shipping Address" class="form-control @error('shipping_address') is-invalid @enderror" name="shipping_address" value="{{ old('shipping_address') }}"  autocomplete="shipping_address">
+
+                                @error('shipping_address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+
                         <div class="col-md-6 form-group">
                             <label for="password">Password</label>
                             <input id="password" type="password" placeholder="Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
