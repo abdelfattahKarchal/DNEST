@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Mail\OrderConfirmationMail;
 use App\Order;
 use App\Product;
 use App\Size;
@@ -10,6 +11,7 @@ use App\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -111,6 +113,8 @@ class OrderController extends Controller
             $order->products()->attach($value->id, ['price' => $value->new_price ?? $value->unit_price, 'quantity' => $value->quantity]);
             //array_push($productsIds_array, $value->id);
         }
+
+        Mail::to('abdelfattah59@gmail.com')->send(new OrderConfirmationMail($order));
 
         // $order->products()->attach($productsIds_array);
         session()->forget('productsCardSession');

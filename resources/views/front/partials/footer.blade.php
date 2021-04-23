@@ -105,7 +105,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright">
-                            <span>Copyright &copy; 2020 <a href="#">THE NEST.</a> All rights reserved.</span>
+                            <span>Copyright &copy; 2021 <a href="#">THE DNEST.</a> All rights reserved.</span>
                         </div>
                     </div>
                 </div>
