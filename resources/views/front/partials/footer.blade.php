@@ -35,9 +35,9 @@
                                         @if ($collection->active == 1)
                                         <li><a href="{{ url('collections/' . $collection->id . '/products') }}">{{ $collection->name }}</a></li>
                                         @endif
-                                        
+
                                         @endforeach
-                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
             <div class="footer-bottom_nav">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="copyright">
+                        <div class="copyright align-middle">
                             <span>Copyright &copy; 2021 <a href="#">THE DNEST.</a> All rights reserved.</span>
                         </div>
                     </div>

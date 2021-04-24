@@ -2,7 +2,7 @@
 
         <div class="category-module hiraola-sidebar_categories">
             <div class="category-module_heading">
-                <h5>Collections</h5>
+                <h5 class="mt-2 mb-2" style="padding-top: 2px; padding-bottom: 2px;">Collections</h5>
             </div>
             <div class="module-body">
                 <ul class="module-list_item">

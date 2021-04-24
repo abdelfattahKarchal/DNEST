@@ -1,5 +1,4 @@
 
-{{-- @dd($newProducts) --}}
 <div class="hiraola-product_area">
     <div class="container">
         <div class="row">
@@ -13,7 +12,7 @@
                     <!-- Begin new products Slide Item -->
                     @foreach ($newProducts as $newProduct)
                     <div class="slide-item">
-                        <x-front.product-item :product="$newProduct"> </x-front.product-item> 
+                        <x-front.product-item :product="$newProduct"> </x-front.product-item>
                     </div>
                     @endforeach
                     <!-- End new products Slide Item -->
@@ -41,8 +40,8 @@
 
                    },
                    success: function(data) {
-                       
-                         // $("#listOfNewProduct").load(location.href + "#listOfNewProduct"); 
+
+                         // $("#listOfNewProduct").load(location.href + "#listOfNewProduct");
                         location.reload();
                         Swal.fire({
                            // position: 'top-end',
@@ -57,6 +56,6 @@
            $('.card-counter').text(cardCount + 1);
 
        }
-</script> 
+</script>
 <script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>
 @endsection

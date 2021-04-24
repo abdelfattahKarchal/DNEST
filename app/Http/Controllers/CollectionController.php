@@ -59,7 +59,7 @@ class CollectionController extends Controller
     public function store(StoreCollection $request)
     {
         $this->authorize('create', new Collection());
-        
+
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');
         if ($hasFile1) {
@@ -175,7 +175,7 @@ class CollectionController extends Controller
         }
         , 'categories.subCategories' => function($q){
             $q->where('active', 1);
-        } 
+        }
         , 'categories.subCategories.products' => function($q){
             $q->where('active', 1);
         }])->where('active',1)->findOrFail($id);
@@ -189,7 +189,8 @@ class CollectionController extends Controller
             [
                 //'products' => $collection->categories[0]->subCategories[0]->products()->paginate(1),
                 'products' => $products->paginate(Config::get('constants.options.option_product_pagination', 10)),
-                // 'collections' => Collection::all()
+                // 'collections' => Collection::all(),
+                'collection_name' => $collection->name
             ]
         );
     }

@@ -12,27 +12,20 @@
 
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="shop-toolbar">
-                        <div class="product-view-mode">
-                            <a class="active grid-3" data-target="gridview-3" data-toggle="tooltip" data-placement="top"
-                                title="Grid View"><i class="fa fa-th"></i></a>
-                           {{--  <a class="list" data-target="listview" data-toggle="tooltip" data-placement="top"
-                                title="List View"><i class="fa fa-th-list"></i></a> --}}
+                        <div class="text-center align-middle">
+                            <h5 class="mt-2 mb-2">{{ $collection_name ?? '' }}</h5>
                         </div>
-                        
+
                         <div class="product-item-selection_area">
                             <div class="product-short">
                                 <x-front.errors></x-front.errors>
                                 <form action="{{ url('search/product') }}" method="GET" class="form-inline">
-                
-                                    <label for="product_name" class="select-label">Search:</label>
                                     <input class="form-control" type="text" name="product_name" id="product_name"
-                                        placeholder="Search your product...">
-                                    <button class="btn" style="background-color: #EBB805" type="submit"> <i
+                                        placeholder="Product name">
+                                    <button style="margin-top:0; width: auto; padding-left: 15px; padding-right: 15px;" class="hiraola-login_btn" type="submit"> <i
                                             class="ion-ios-search-strong text-white"></i></button>
                                 </form>
-
                             </div>
-                            
                         </div>
                     </div>
                     {{-- begin list of product --}}
@@ -81,7 +74,7 @@
 
 @section('js')
 <script>
-   
+
 
     /* add to card method */
     function addToCard(product_id) {

@@ -100,7 +100,7 @@
     @include('front.partials.lastblog')
     <!-- end Latest Blog Area -->
 
-
+    <div style="margin: 100px;"></div>
 
     <!-- Begin  Modal show product -->
     <x-front.modal-show-product></x-front.modal-show-product>

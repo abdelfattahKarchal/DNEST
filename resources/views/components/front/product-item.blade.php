@@ -74,7 +74,7 @@
                             </div>
                         @endif
                         @if ($product->unit_price)
-                            <div class="col-6">
+                            <div class="col-6 text-right">
                                 <span class="{{ $status_price }}">${{ $product->unit_price }}
                                 </span>
                             </div>
@@ -86,6 +86,6 @@
 
         </div>
     </div>
-</div> 
+</div>
 @endif
 

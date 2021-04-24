@@ -11,9 +11,9 @@
                         role="alert">The email must be a valid email address.</div>
             <div class="subscribe-form-group">
                 <form class="form-inline" action="javascript:void(0)">
-                    <input class="form-control mr-2" autocomplete="on" type="email" name="newsletter_mail"
-                        id="newsletter_mail" placeholder="Enter your email address">
-                    <button id="newsletter-subscribe" class="btn btn-primary bg-primary" type="submit">subscribe</button>
+                    <input class="form-control" autocomplete="on" type="email" name="newsletter_mail"
+                        id="newsletter_mail" placeholder="Enter your email">
+                    <button id="newsletter-subscribe" style="margin-top:0;" class="hiraola-login_btn" type="submit">subscribe</button>
                 </form>
             </div>
             {{-- <div class="subscribe-bottom">

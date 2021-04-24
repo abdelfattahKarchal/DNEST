@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\ServerBag;
 
 class ProductController extends Controller
 {
-    
+
     public function __construct()
     {
         $this->middleware('auth')->except(['show', 'productsBySubCategoryId', 'search']);
@@ -73,7 +73,7 @@ class ProductController extends Controller
            $file1_name= $file1->store('products');
            // dump($file1->store('collections'));
         }
-       
+
         if ($hasFile2) {
             $file2 = $request->file('image2');
             $file2_name = $file2->store('products');
@@ -120,7 +120,7 @@ class ProductController extends Controller
     {
         $this->authorize('update', new Product());
         $product = Product::with('subCategory', 'subCategory.category', 'subCategory.category.collection')->findOrFail($id);
-        
+
         $subcategories = SubCategory::all();
         return view('backoffice.products.edit', [
             'product' => $product,
@@ -161,7 +161,7 @@ class ProductController extends Controller
 
         if ($hasFile2) {
             $file2 = $request->file('image2');
-            
+
             if ($product->path_small_2) {
                 Storage::delete($product->path_small_2);
             }
@@ -182,7 +182,7 @@ class ProductController extends Controller
     {
         $this->authorize('delete', new Product());
         $product = Product::findOrFail($id);
-       
+
         $product->delete();
         session()->flash('status', 'Product was deleted !');
         return true;
@@ -194,7 +194,8 @@ class ProductController extends Controller
         $products = $subCategory->products()->where('active', 1);
         return view('front.shop-left-sidebar',[
             'products' => $products->paginate(Config::get('constants.options.option_product_pagination', 10)),
-            'sessionProducts' => session()->get('productsCardSession')
+            'sessionProducts' => session()->get('productsCardSession'),
+            'collection_name' => $subCategory->category->collection->name
         ]);
     }
 
@@ -210,10 +211,10 @@ class ProductController extends Controller
     }
 
     public function active(Request $request, $id)
-    { 
+    {
         $this->authorize('active', new Product());
         $product = Product::findOrFail($id);
-        
+
         $product->active = $request->active== 'true' ? 1 : 0;
         $product->save();
     }
