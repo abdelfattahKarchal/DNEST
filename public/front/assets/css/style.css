@@ -281,6 +281,26 @@ button {
   }
 }
 
+
+
+.page-link{
+    color: #595959 !important;
+}
+
+.page-item.active .page-link{
+    color: #fff !important;
+}
+
+.page-item:first-child .page-link {
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
 .grid-half {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 18.6%;
@@ -939,8 +959,6 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .popup_wrapper
 
 /* ---Color List Area--- */
 .color-list_area {
-  border: 1px solid #e5e5e5;
-  padding: 25px;
 }
 
 @media (max-width: 575px) {
@@ -994,6 +1012,16 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .popup_wrapper
 .color-list_area .color-list .single-color span.bg-red_color {
   background-color: #ff0000;
   display: block;
+}
+
+.color-list_area .color-list .single-color span.bg-gold_color {
+    background-color: #DAA520;
+    display: block;
+}
+
+.color-list_area .color-list .single-color span.bg-silver_color {
+    background-color: #C0C0C0;
+    display: block;
 }
 
 .color-list_area .color-list .single-color span.burnt-orange_color {

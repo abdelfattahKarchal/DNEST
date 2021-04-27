@@ -206,7 +206,9 @@ class ProductController extends Controller
             ->get();
             return view('front.shop-left-sidebar',[
                 'products' => $products,
-                'sessionProducts' => session()->get('productsCardSession')
+                'sessionProducts' => session()->get('productsCardSession'),
+                'productName' => $request->product_name,
+                'collection_name' => $request->collection_name
             ]);
     }
 

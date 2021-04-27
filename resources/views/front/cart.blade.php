@@ -4,6 +4,17 @@
     @php
     $sum = 0;
     @endphp
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <h2>Single Product Style</h2>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Single Product Tab Style Left</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <!-- Begin DENEST Cart Area -->
     <div class="hiraola-cart-area" id="cartDiv">
         <div class="container">
@@ -106,8 +117,15 @@
                                 </div>
                             </form>
                         @else
-                            <div class="text-center">
-                                <h1 class="text-muted"> Add products in your cart</h1>
+                            <div class="col-lg-12 text-center">
+                                <img style="margin-top: 50px;" src="{{asset("front/assets/images/test.png")}}" />
+                                <h5 class="text-muted">Your cart is empty.</h5>
+                                <ul class="mt-3">
+                                    <li>Explorez nos catégories et découvrez nos meilleures offres!</li>
+                                </ul>
+                                <div class="mt-5 hiraola-btn-ps_center">
+                                    <a class="hiraola-btn" href="{{ url('/') }}">Commencez vos achats</a>
+                                </div>
                             </div>
                         @endif
                     @endif
@@ -154,8 +172,8 @@
 
         }
 
-        // add command 
-function commandNow () { 
+        // add command
+function commandNow () {
     Swal.fire({
                 title: 'do you really want to place this order ?',
                 showCancelButton: true,
@@ -183,7 +201,7 @@ function commandNow () {
                 }
             });
  }
-        
+
 
     </script>
     <script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>

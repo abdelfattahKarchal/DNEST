@@ -1,5 +1,16 @@
 @extends('layout.app')
 @section('content')
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <h2>Single Product Style</h2>
+                <ul>
+                    <li><a href="{{url('/')}}">Home</a></li>
+                    <li class="active">{{ $collection_name ?? '' }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <!-- Begin Content Wrapper Area -->
     <div class="hiraola-content_wrapper">
         <div class="container">
@@ -20,8 +31,9 @@
                             <div class="product-short">
                                 <x-front.errors></x-front.errors>
                                 <form action="{{ url('search/product') }}" method="GET" class="form-inline">
+                                    <input type="hidden" name="collection_name" value="{{$collection_name}}" />
                                     <input class="form-control" type="text" name="product_name" id="product_name"
-                                        placeholder="Product name">
+                                        placeholder="Cherchez un produit">
                                     <button style="margin-top:0; width: auto; padding-left: 15px; padding-right: 15px;" class="hiraola-login_btn" type="submit"> <i
                                             class="ion-ios-search-strong text-white"></i></button>
                                 </form>
@@ -29,10 +41,10 @@
                         </div>
                     </div>
                     {{-- begin list of product --}}
-                    <div class="shop-product-wrap grid gridview-3 row" id="listoFproduct">
 
-                        @isset($products)
-                            @forelse($products as $product)
+                        @if($products && !$products->isEmpty())
+                            <div class="shop-product-wrap grid gridview-3 row" id="listoFproduct">
+                            @foreach($products as $product)
                                 <div class="col-lg-4">
                                     <div class="slide-item">
                                         <x-front.product-item :product=" $product">
@@ -43,13 +55,22 @@
                                         </x-front.product-item-list>
                                     </div>
                                 </div>
-                            @empty
-                                <h2  class="text-center text-muted mt-4">No products with this name. try again !</h2>
-                            @endforelse ($products as $product)
-                        @endisset
-
-                    </div>
-
+                            @endforeach
+                            </div>
+                        @else
+                            <div class="col-lg-12 text-center">
+                                <img style="margin-top: 50px;" src="{{asset("front/assets/images/nothing-found.png")}}" />
+                                <h5 class="text-muted">No result for "{{$productName}}".</h5>
+                                <ul class="mt-3">
+                                    <li>- Vérifiez que vous n'avez pas fait de faute de frappe : "Lirves" au lieu de "Livres"</li>
+                                    <li>- Essayez avec un autre mot clé ou synonyme</li>
+                                    <li>- Essayez d'effectuer une recherche plus générale, vous pourrez ensuite filtrer les résultats obtenus</li>
+                                </ul>
+                                <div class="mt-5 hiraola-btn-ps_center">
+                                    <a class="hiraola-btn" href="{{ URL::previous() }}">Retour en arrière</a>
+                                </div>
+                            </div>
+                        @endif
 
                     <div class="row">
                         <div class="col-12 mb-2 d-flex flex-row-reverse">
