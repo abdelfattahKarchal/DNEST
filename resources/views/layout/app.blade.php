@@ -164,13 +164,13 @@
                     },
                     success: function(data) {
                         $('#newsletter').hide();
-                        Swal.fire({
+                       /*  Swal.fire({
                             // position: 'top-end',
                             icon: 'success',
                             title: 'Your response has been saved',
                             showConfirmButton: false,
                             timer: 1500
-                        })
+                        }) */
                     },
                     error: function(data) {
                         $('.errorsMessage').empty();

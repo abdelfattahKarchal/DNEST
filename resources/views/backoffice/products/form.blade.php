@@ -30,9 +30,9 @@
 </div> 
 <div class="form-group form-float">
     <div class="form-line">
-        <label for="unit_price">Price <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="unit_price" name="unit_price"
-            value="{{ old('unit_price', $product->unit_price ?? null) }}" required>
+        <label for="price">Price <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="price" name="price"
+            value="{{ old('price', $product->price ?? null) }}" required>
     </div>
 </div>
 <div class="form-group form-float">

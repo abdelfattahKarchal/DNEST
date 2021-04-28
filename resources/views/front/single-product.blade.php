@@ -18,6 +18,12 @@
     <!-- Begin Single Product Area -->
     <div class="sp-area sp-tab-style_left">
         <div class="container">
+            <div id="message-error" class="alert alert-danger" role="alert" style="display: none;">
+                Error in adding product !
+              </div>
+              <div id="message-success" class="alert alert-success" role="alert" style="display: none;">
+                The product added succefully check your cart for more details !
+              </div>
             <div class="sp-nav">
                 {{--                <nav aria-label="breadcrumb">--}}
                 {{--                    <ol class="breadcrumb" style="border-radius: 0px !important;">--}}
@@ -30,23 +36,48 @@
                 {{--                </nav>--}}
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="sp-img_area">
+                        <div class="sp-img_area" id="img-gold">
                             <div class="zoompro-border sp-large_img">
-                                    <img class="zoompro" src="{{ count($product->images) ? $product->images[0]->urlLarge() : $product->url_1() }}"
-                                         data-zoom-image="{{ count($product->images) ? $product->images[0]->urlLarge() : $product->url_1() }}"
-                                         alt="{{ $product->name }}"/>
+                                @foreach ($product->images as $image)
+                                    @if ($image->material == 'gold')
+                                        <img class="zoompro" src="{{ $image->urlLarge() }}"
+                                        data-zoom-image="{{ $image->urlLarge() }}"
+                                        alt="{{ $product->name }}"/>
+                                        @break
+                                    @endif
+                                @endforeach
+                                   
                             </div>
                             <div id="gallery" class="sp-img_slider-3">
-                                    <a data-image="{{ $product->url_1() }}" data-zoom-image="{{ $product->url_1() }}">
-                                        <img src="{{ $product->url_1() }}" alt="{{ $product->name }}">
-                                    </a>
-                                    <a data-image="{{ $product->url_2() }}" data-zoom-image="{{ $product->url_2() }}">
-                                        <img src="{{ $product->url_2() }}" alt="{{ $product->name }}">
-                                    </a>
                                 @foreach($product->images as $image)
-                                    <a data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
-                                        <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
-                                    </a>
+                                    @if($image->material == 'gold')
+                                        <a data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
+                                            <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="sp-img_area" id="img-silver" style="display: none;">
+                            <div class="zoompro-border sp-large_img">
+                                @foreach ($product->images as $image)
+                                    @if ($image->material == 'silver')
+                                        <img class="zoompro" src="{{ $image->urlLarge() }}"
+                                        data-zoom-image="{{ $image->urlLarge() }}"
+                                        alt="{{ $product->name }}"/>
+                                        @break
+                                    @endif
+                                @endforeach
+                                   
+                            </div>
+                            <div id="gallery" class="sp-img_slider-3">
+                                @foreach($product->images as $image)
+                                    @if($image->material == 'silver')
+                                        <a data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
+                                            <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
+                                        </a>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -80,8 +111,8 @@
                                 </div>
                                 <div class="mt-2 align-middle">
                                     <span class="new-price align-middle"
-                                          style="color: #bababa;text-decoration: line-through;font-size: 1.3rem;">{{ $product->unit_price }} MAD</span>
-                                    <span class="ml-2 badge badge-info align-middle">-{{ (int) ((($product->unit_price - $product->new_price) * 100) / $product->unit_price) }}%</span>
+                                          style="color: #bababa;text-decoration: line-through;font-size: 1.3rem;">{{ $product->price }} MAD</span>
+                                    <span class="ml-2 badge badge-info align-middle">-{{ (int) ((($product->price - $product->new_price) * 100) / $product->price) }}%</span>
                                 </div>
 
                                 <hr/>
@@ -91,13 +122,13 @@
                             <div class="mt-4 sp-essential_stuff color-list_area">
                                 <h6>Matière</h6>
                                 <div class="color-list">
-                                    <a href="javascript:void(0)" class="single-color active text-left" data-swatch-color="red">
+                                    <a id="gold" href="javascript:void(0)" class="single-color active text-left" data-swatch-color="red">
                                         <span class="bg-gold_color"></span>
                                         <span class="color-text">Gold&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
-                                    <a href="javascript:void(0)" class="single-color text-left" data-swatch-color="orange">
+                                    <a id="silver" href="javascript:void(0)" class="single-color text-left" data-swatch-color="orange">
                                         <span class="bg-silver_color"></span>
-                                        <span class="color-text">Silver (-50 MAD)</span>
+                                        <span class="color-text">Silver (-50 MAD) </span>
                                     </a>
                                 </div>
                             </div>
@@ -542,7 +573,12 @@
 
             var cardCount = parseInt($('.card-counter').text()[0]);
             var selectedSize = $('#selected_size').find(":selected").val();
-            var selectedQantity = $('#quantity').val()
+            var selectedQantity = $('#quantity').val();
+            var selectedMatiere = 'gold';
+            if ($('#silver').hasClass('active')) {
+                selectedMatiere = "silver";
+            }
+
             if (product_id) {
                 $.ajax({
                     headers: {
@@ -554,15 +590,37 @@
                         product_id: product_id,
                         size: selectedSize,
                         quantity: selectedQantity,
+                        material: selectedMatiere
                     },
                     success: function (data) {
+                        $('.card-counter').text(data.length);
                         $("#block-addTocart").load(location.href + " #block-addTocart");
+                        $('#message-success').show();
+                        setTimeout(function() { 
+                            $('#message-success').hide();
+                        }, 5000);
+                    },
+                    error: function (params) {
+                        $('#message-error').show();
                     }
                 });
             }
-            $('.card-counter').text(cardCount + 1);
-
         }
+
+$('#gold').click(function (e) { 
+    
+    $('#img-silver').hide();
+    $('#img-gold').show();
+    
+});
+
+$('#silver').click(function (e) { 
+  
+    $('#img-gold').hide();
+    $('#img-silver').show();
+    
+});
+
 
     </script>
 

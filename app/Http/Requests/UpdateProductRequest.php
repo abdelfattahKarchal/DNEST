@@ -26,7 +26,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'confirm' => 'bail|required',
             'name' => 'required',
-            'unit_price' => 'required|numeric|min:1',
+            'price' => 'required|numeric|min:1',
             'new_price' => 'nullable|numeric|min:1',
             'subcategory' => 'required',
             'image1' => 'nullable|image|mimes:jpeg,jpg,png|dimensions:width=438,height=438',

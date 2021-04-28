@@ -82,7 +82,7 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $request->name,
             'sub_category_id' => $request->subcategory,
-            'unit_price' => $request->unit_price,
+            'price' => $request->price,
             'new_price' => $request->new_price,
             'quantity' => $request->quantity,
             'path_small_1' => $file1_name,
@@ -140,7 +140,7 @@ class ProductController extends Controller
         $this->authorize('update', new Product());
         $product = Product::findOrFail($id);
         $product->name = $request->name;
-        $product->unit_price = $request->unit_price;
+        $product->price = $request->price;
         $product->new_price = $request->new_price;
         $product->quantity = $request->quantity;
 

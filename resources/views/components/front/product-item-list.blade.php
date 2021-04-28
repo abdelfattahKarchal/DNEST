@@ -25,10 +25,10 @@
                             <div class="col-6"><span class="new-price">${{ $product->new_price }}</span>
                             </div>
                             <div class="col-6"><span
-                                class="old-price" style="color: #bababa;text-decoration: line-through;font-size: 14px;margin-left: 10px;">${{ $product->unit_price }}</span></div>
+                                class="old-price" style="color: #bababa;text-decoration: line-through;font-size: 14px;margin-left: 10px;">${{ $product->price }}</span></div>
                            @else
                            <div class="col-6"><span
-                            class="new-price">${{ $product->unit_price }}</span></div>
+                            class="new-price">${{ $product->price }}</span></div>
                         @endif
                         
                     </div>

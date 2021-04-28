@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderProduct;
 use App\Product;
 use App\Size;
 use Illuminate\Http\Request;
@@ -11,29 +12,50 @@ class CartController extends Controller
    
     public function store(Request $request)
     {
-        $product = Product::with('sizes')->findOrFail($request->product_id);
-        if (isset($request->size)) {
-            $size = Size::findOrFail($request->size);
-            $product->setRelation('sizes', $size);
-        }
-        $price = $product->new_price == 0 ? null : $product->new_price;
-        $product->new_price = $price ?? $product->unit_price;
-        
-        $product->quantity = $request->quantity ?? 1;
+        $orderProductList = [];
+        $orderProduct = new OrderProduct();
 
-        $request->session()->push('productsCardSession', $product);
-        return $request->session()->get('productsCardSession');
-    }
-    public function delete($id)
-    {
-        $products = session()->pull('productsCardSession');
-        foreach ($products as $productkey => $value) {
-            if ($value->id == $id) {
-                unset($products[$productkey]);
+        $orderProduct->product = Product::with('sizes')->findOrFail($request->product_id);
+        $orderProduct->material = $request->material;
+        
+        if ($request->material == 'gold') {
+            $orderProduct->price = $orderProduct->product->new_price;
+        }else {
+            $orderProduct->price = $orderProduct->product->new_price_silver;
+        }
+
+        $orderProductList = $request->session()->get('productsCardSession');
+        $isExist = false;
+        if ($orderProductList) {
+            foreach ($orderProductList as &$item) {
+                if ($orderProduct->product->id == $item->product->id && $orderProduct->material == $item->material ) {
+                    $item->quantity += 1;
+                    $isExist = true;
+                    break;
+                }
             }
         }
-        //session()->forget('productsCardSession');
-        session()->put('productsCardSession', $products);
+        if (!$isExist) {
+            $orderProduct->quantity = 1;
+            $orderProductList[] = $orderProduct;
+        }
+
+         $request->session()->put('productsCardSession',$orderProductList);
+
+        return $orderProductList;
+    }
+    
+    public function delete($id, $material)
+    {
+        $order_products = session()->pull('productsCardSession');
+        
+        foreach ($order_products as $key=>$item) {
+            if ($item->product->id == $id && $item->material == $material) {
+                unset($order_products[$key]);
+            break;
+            }
+        }
+        session()->put('productsCardSession', $order_products);
     }
 
     public function updateQuantity(Request $request)

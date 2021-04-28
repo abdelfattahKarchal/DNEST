@@ -100,7 +100,7 @@ class OrderController extends Controller
         $order = new Order();
         $total_price = 0;
         foreach ($products as $key => $value) {
-            $total_price += (($value->new_price ?? $value->unit_price) * $value->quantity);
+            $total_price += (($value->new_price ?? $value->price) * $value->quantity);
         }
         $order->total_price = $total_price;
         $order->user_id = Auth::user()->id;
@@ -110,7 +110,7 @@ class OrderController extends Controller
         //$productsIds_array  = [];
 
         foreach ($products as $key => $value) {
-            $order->products()->attach($value->id, ['price' => $value->new_price ?? $value->unit_price, 'quantity' => $value->quantity]);
+            $order->products()->attach($value->id, ['price' => $value->new_price ?? $value->price, 'quantity' => $value->quantity]);
             //array_push($productsIds_array, $value->id);
         }
 

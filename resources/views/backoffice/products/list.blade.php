@@ -71,7 +71,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td> <img src="{{ $product->url_1() }}" width="90px" alt=""> </td>
                                         <td> <img src="{{ $product->url_2() }}" width="90px" alt=""> </td>
-                                        <td>{{ $product->unit_price }}</td>
+                                        <td>{{ $product->price }}</td>
                                         <td>{{ $product->new_price }}</td>
                                         <td>{{ $product->quantity }}</td>
                                         <td nowrap="nowrap">{{ $product->subCategory->name ?? 'n/d' }}</td>

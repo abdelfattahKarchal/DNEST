@@ -25,6 +25,7 @@
                             <strong>Info : </strong> {{ session()->get('status') }}
                         </div>
                     @else
+                    {{-- {{ dd(Session::get('productsCardSession')) }} --}}
                         @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
                             <form action="javascript:void(0)">
                                 @csrf
@@ -32,40 +33,45 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="hiraola-product-remove">remove</th>
-                                                <th class="hiraola-product-thumbnail">images</th>
+                                                <th class="hiraola-product-remove">Remove</th>
+                                                <th class="hiraola-product-thumbnail">Images</th>
                                                 <th class="cart-product-name">Product</th>
-                                                <th class="hiraola-product-price">Unit Price</th>
+                                                <th class="hiraola-product-price">Price</th>
                                                 <th class="hiraola-product-quantity">Quantity</th>
+                                                <th class="hiraola-product-quantity">Material</th>
                                                 <th class="hiraola-product-subtotal">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Session::get('productsCardSession') as $product)
+                                            
+                                            @foreach (Session::get('productsCardSession') as $order_product)
                                                 <tr>
                                                     {{-- javascript:void(0)
                                                     --}}
                                                     <td class="hiraola-product-remove"><a
-                                                            onclick="deleteProductCart({{ $product->id }})"
+                                                            onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')"
                                                             href="javascript:void(0)"><i class="fa fa-trash"
                                                                 title="Remove"></i></a></td>
                                                     <td class="hiraola-product-thumbnail"><a href="javascript:void(0)"><img
                                                                 width="90px" height="115px"
-                                                                src="{{ $product->url_1() }}"
-                                                                alt="{{ $product->name }}"></a></td>
+                                                                src="{{ $order_product->product->url_1() }}"
+                                                                alt="{{ $order_product->product->name }}"></a></td>
                                                     <td class="hiraola-product-name"><a
-                                                            href="javascript:void(0)">{{ $product->name }}</a>
+                                                            href="javascript:void(0)">{{ $order_product->product->name }}</a>
                                                     </td>
                                                     <td class="hiraola-product-price"><span
-                                                            class="amount">${{ $product->new_price ?? $product->unit_price }}</span>
+                                                            class="amount">{{ $order_product->price }} MAD</span>
                                                     </td>
+                                                    <td class="hiraola-product-price"><span
+                                                        class="amount">{{ $order_product->material }}</span>
+                                                </td>
                                                     <td class="quantity">
                                                         <div class="form-group row d-flex justify-content-center">
                                                             <div class="col-sm-6">
-                                                                <input onchange="updateQuantity({{ $product->id }}, this)"
+                                                                <input onchange="updateQuantity({{ $order_product->product->id }}, this)"
                                                                     class="form-control quantite"
-                                                                    data-id="{{ $product->id }}" type="number" min="1"
-                                                                    value="{{ $product->quantity }}">
+                                                                    data-id="{{ $order_product->product->id }}" type="number" min="1"
+                                                                    value="{{ $order_product->quantity }}">
                                                             </div>
                                                         </div>
 
@@ -80,10 +86,10 @@
                                                         </div> --}}
                                                     </td>
                                                     <td class="product-subtotal"><span
-                                                            class="amount">${{ $product->quantity * ($product->new_price ?? $product->unit_price) }}</span>
+                                                            class="amount">${{ $order_product->quantity * $order_product->price }}</span>
                                                     </td>
                                                     @php
-                                                    $sum += ($product->quantity * ($product->new_price ??$product->unit_price))
+                                                    $sum += ($order_product->quantity * $order_product->price)
                                                     @endphp
 
                                                 </tr>
@@ -137,11 +143,11 @@
 @endsection
 @section('js')
     <script>
-        function deleteProductCart(idProduct) {
+        function deleteProductCart(idProduct, material) {
             var cardCount = parseInt($('.card-counter').text()[0]);
             $.ajax({
                 type: 'GET',
-                url: 'carts/' + idProduct + '/delete',
+                url: 'carts/' + idProduct + '/'+ material +'/delete',
                 success: function(data) {
                     $("#cartDiv").load(location.href + " #cartDiv");
                     $('.card-counter').text(cardCount -1);
