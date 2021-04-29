@@ -104,9 +104,11 @@ class ProductController extends Controller
         //$product = Product::findOrFail($id);
         $product = Product::where('active',1)->with(['images'=> function($q){
             $q->where('active', '=', 1);
+            $q->where('material', '=', 'gold');
         }])->findOrFail($id);
         return view('front.single-product', [
-            'product' => $product
+            'product' => $product,
+            'material' => 'gold'
         ]);
     }
 

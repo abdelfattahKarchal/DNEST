@@ -13,7 +13,7 @@ class ImageController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('getproductsImagesByMaterial');
     }
     /**
      * Display a listing of the resource.
@@ -161,5 +161,18 @@ class ImageController extends Controller
         
         $image->active = $request->active== 'true' ? 1 : 0;
         $image->save();
+    }
+
+    public function getproductsImagesByMaterial($id, $material){
+        
+        $product = Product::where('active',1)->with(['images'=> function($q) use ($material){
+            $q->where('active', '=', 1);
+            $q->where('material', '=', $material);
+        }])->findOrFail($id);
+
+        return view('front.single-product', [
+            'product' => $product,
+            'material' => $material
+        ]);
     }
 }

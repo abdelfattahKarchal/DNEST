@@ -39,48 +39,24 @@
                         <div class="sp-img_area" id="img-gold">
                             <div class="zoompro-border sp-large_img">
                                 @foreach ($product->images as $image)
-                                    @if ($image->material == 'gold')
+                                    
                                         <img class="zoompro" src="{{ $image->urlLarge() }}"
                                         data-zoom-image="{{ $image->urlLarge() }}"
                                         alt="{{ $product->name }}"/>
                                         @break
-                                    @endif
+                                    
                                 @endforeach
                                    
                             </div>
                             <div id="gallery" class="sp-img_slider-3">
                                 @foreach($product->images as $image)
-                                    @if($image->material == 'gold')
-                                        <a data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
-                                            <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
-                                        </a>
-                                    @endif
+                                    <a data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
+                                        <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
 
-                        <div class="sp-img_area" id="img-silver" style="display: none;">
-                            <div class="zoompro-border sp-large_img">
-                                @foreach ($product->images as $image)
-                                    @if ($image->material == 'silver')
-                                        <img class="zoompro" src="{{ $image->urlLarge() }}"
-                                        data-zoom-image="{{ $image->urlLarge() }}"
-                                        alt="{{ $product->name }}"/>
-                                        @break
-                                    @endif
-                                @endforeach
-                                   
-                            </div>
-                            <div id="gallery" class="sp-img_slider-3">
-                                @foreach($product->images as $image)
-                                    @if($image->material == 'silver')
-                                        <a data-image="{{ $image->urlLarge() }}" data-zoom-image="{{ $image->urlLarge() }}">
-                                            <img src="{{ $image->urlSmall() }}" alt="{{ $product->name }}">
-                                        </a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
                     </div>
                     <div class="col-lg-6 d-flex align-items-start flex-column">
                         <div class="sp-content">
@@ -106,13 +82,16 @@
                                 <h6>Disponibilité : IN STOCK</h6>
 
                                 <hr/>
-
-                                <div class="mt-4 new-price" style="font-size: 2rem">{{ $product->new_price }} MAD
+                                @php
+                                    $newPrice = $material == 'gold' ? $product->new_price : $product->new_price_silver;
+                                    $oldPrice = $material == 'gold' ? $product->price : $product->price_silver;
+                                @endphp
+                                <div class="mt-4 new-price" style="font-size: 2rem">{{ $newPrice }} MAD
                                 </div>
                                 <div class="mt-2 align-middle">
                                     <span class="new-price align-middle"
-                                          style="color: #bababa;text-decoration: line-through;font-size: 1.3rem;">{{ $product->price }} MAD</span>
-                                    <span class="ml-2 badge badge-info align-middle">-{{ (int) ((($product->price - $product->new_price) * 100) / $product->price) }}%</span>
+                                          style="color: #bababa;text-decoration: line-through;font-size: 1.3rem;">{{ $oldPrice }} MAD</span>
+                                    <span class="ml-2 badge badge-info align-middle">-{{ (int) ((($oldPrice - $newPrice) * 100) / $oldPrice) }}%</span>
                                 </div>
 
                                 <hr/>
@@ -120,13 +99,15 @@
                             </div>
 
                             <div class="mt-4 sp-essential_stuff color-list_area">
+                               
                                 <h6>Matière</h6>
+                                
                                 <div class="color-list">
-                                    <a id="gold" href="javascript:void(0)" class="single-color active text-left" data-swatch-color="red">
+                                    <a id="gold" href='javascript:void(0)' class="single-color text-left {{ $material =='gold' ? 'active' : '' }}" data-pid="{{ $product->id }}" data-swatch-color="red">
                                         <span class="bg-gold_color"></span>
                                         <span class="color-text">Gold&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
-                                    <a id="silver" href="javascript:void(0)" class="single-color text-left" data-swatch-color="orange">
+                                    <a id="silver" href="javascript:void(0)" class="single-color text-left {{ $material =='silver' ? 'active' : '' }}" data-pid="{{ $product->id }}" data-swatch-color="orange">
                                         <span class="bg-silver_color"></span>
                                         <span class="color-text">Silver (-50 MAD) </span>
                                     </a>
@@ -173,7 +154,9 @@
                             </div>
                             <div id="reviews" class="tab-pane" role="tabpanel">
                                 <div class="tab-pane active" id="tab-review">
-                                    <form class="form-horizontal" id="form-review">
+                                    <form action="{{ url('reviews') }}" method="POST" class="form-horizontal" id="form-review">
+                                       @csrf
+                                       <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <div id="review">
                                             <table class="table table-striped table-bordered">
                                                 <tbody id="reviews-content">
@@ -187,6 +170,16 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             <p>{{ $review->description }}</p>
+                                                            <div class="rating-box">
+                                                                <ul>
+                                                                    @for ($i=0; $i < $review->note; $i++)
+                                                                        <li><i class="fa fa-star"></i></li>
+                                                                    @endfor
+                                                                    @for ($i = $review->note; $i < 5; $i++)
+                                                                        <li class="silver-color"><i class="fa fa-star"></i></li>
+                                                                    @endfor
+                                                                </ul>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @empty
@@ -196,20 +189,39 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <h2>Write a review</h2>
-                                        <div class="form-group required second-child">
-                                            <div class="col-sm-12 p-0">
-                                                <label class="control-label">Share your opinion</label>
-                                                <textarea class="review-textarea" name="con_message"
-                                                          id="con_message"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group last-child required">
-                                            <div class="hiraola-btn-ps_right cart-page">
-                                                <a onclick="addReview({{ $product->id }})" id="add_review"
-                                                   href="javascript:void(0)">Send</a>
-                                            </div>
-                                        </div>
+                                     @if (Auth::check())
+                                     <h2>Write a review</h2>
+                                     <div class="form-group required second-child">
+                                         <div class="col-sm-12 p-0">
+                                             <label class="control-label">Share your opinion</label>
+                                             <textarea class="review-textarea" name="description"
+                                                       id="description" required></textarea>
+                                         </div>
+                                     </div>
+                                     <div class="form-group last-child required">
+                                         <div class="col-sm-12 p-0">
+                                             <div class="your-opinion">
+                                                 <label>Your Rating</label>
+                                                 <span>
+                                                 <select id="note" name="note" class="star-rating">
+                                                     <option value="1">1</option>
+                                                     <option value="2">2</option>
+                                                     <option value="3">3</option>
+                                                     <option value="4">4</option>
+                                                     <option value="5">5</option>
+                                                 </select>
+                                             </span>
+                                             </div>
+                                         </div>
+                                         <div class="hiraola-btn-ps_right cart-page">
+                                             <button id="add-to-cart" class="hiraola-login_btn" type="submit">
+                                                 Send
+                                             </button>
+                                            {{--  <a  id="add_review"
+                                                href="javascript:void(0)">Send</a> --}}
+                                         </div>
+                                     </div>
+                                     @endif
                                     </form>
                                 </div>
                             </div>
@@ -518,8 +530,9 @@
 
 @section('js')
     <script>
-        function addReview(product_id) {
+        /* function addReview(product_id) {
             var description = $('#con_message').val();
+            var note = $('#note').val();
             if (description) {
                 $.ajax({
                     headers: {
@@ -529,12 +542,13 @@
                     url: "{{ url('reviews') }}",
                     data: {
                         product_id: product_id,
-                        description: description
+                        description: description,
+                        note: note
                     },
                     success: function (data) {
                         if (data) {
                             var reviewsCount = parseInt($.trim($('#reviews-count').text()));
-                            var longDateFormat = 'dd-MM-yyyy HH:mm:ss';
+                            var longDateFormat = 'dd/MM/yyyy';
                             var date_review = jQuery.format.date(data.review.created_at, longDateFormat)
                             var reviewContent = '';
                             reviewContent = `
@@ -566,7 +580,7 @@
                     }
                 });
             }
-        };
+        }; */
 
         /* add to card method */
         function addToCard(product_id) {
@@ -607,19 +621,22 @@
             }
         }
 
+
+
 $('#gold').click(function (e) { 
-    
-    $('#img-silver').hide();
-    $('#img-gold').show();
+    e.preventDefault();
+    var product_id = $('#gold').data('pid');
+    window.location.href = "/products/"+ product_id +"/material/gold";
     
 });
 
 $('#silver').click(function (e) { 
-  
-    $('#img-gold').hide();
-    $('#img-silver').show();
+    e.preventDefault();
+    var product_id = $('#silver').data('pid');
+    window.location.href = "/products/"+ product_id +"/material/silver";
     
 });
+
 
 
     </script>

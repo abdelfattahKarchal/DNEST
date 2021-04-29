@@ -38,13 +38,14 @@ Route::get('admin', 'DashboardController@index')->name('admin.index')->middlewar
 }); */
 /** admisitration routes */
 Route::get('/admin/collections', 'CollectionController@adminCollections');
-
+Route::get('products/{id}/material/{material}', 'ImageController@getproductsImagesByMaterial');
 Route::get('/', 'HomeController@index')->name('index');
 Route::post('collections/active/{id}', 'CollectionController@active');
 Route::post('categories/active/{id}', 'CategoryController@active');
 Route::post('products/active/{id}', 'ProductController@active');
 Route::post('images/active/{id}', 'ImageController@active');
 Route::get('products/{id}/images', 'ProductController@imagesByProductId');
+
 Route::get('products/{id}/images/form', 'ImageController@formImageToProduct');
 Route::post('subcategories/active/{id}', 'SubCategoryController@active');
 Route::resource('collections', 'CollectionController');

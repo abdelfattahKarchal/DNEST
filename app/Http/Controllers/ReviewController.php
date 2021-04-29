@@ -42,15 +42,17 @@ class ReviewController extends Controller
         $review = Review::create([
             'product_id' => $request->product_id,
             'description' => htmlspecialchars($request->description),
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'note' => $request->note,
         ]);
-        if ($review->save()) {
+        return redirect()->back();
+        /* if ($review->save()) {
             return [
                 'review' => $review,
                 'user' => $review->user
             ];
         }
-        return false;
+        return false; */
     }
 
     /**
