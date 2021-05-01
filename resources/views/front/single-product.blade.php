@@ -63,19 +63,19 @@
                             <div class="sp-heading">
                                 <h4><a href="#"> {{ $product->name }} </a></h4>
                             </div>
-
                             <div class="rating-box">
                                 <ul>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li><i class="fa fa-star"></i></li>
-                                    <li class="silver-color"><i class="fa fa-star"></i></li>
-                                    <li class="ml-2">(0 Reviews)</li>
-                                    <li class="ml-2">(100 Orders)</li>
+                                    @for($i = 0; $i < $reviews_notes; $i++)
+                                        <li><i class="fa fa-star"></i></li>
+                                    @endfor
+                                    @for($i = $reviews_notes; $i < 5; $i++)
+                                        <li class="silver-color"><i class="fa fa-star"></i></li>
+                                    @endfor
+                                    
+                                    <li class="ml-2">({{ count($product->reviews)}} Reviews)</li>
+                                    <li class="ml-2">({{ $order_product_count }} Orders)</li>
                                 </ul>
                             </div>
-
                             <div class="sp-essential_stuff">
                                 <h6>Collection : {{ $product->subCategory->category->collection->name }}</h6>
 
@@ -109,7 +109,7 @@
                                     </a>
                                     <a id="silver" href="javascript:void(0)" class="single-color text-left {{ $material =='silver' ? 'active' : '' }}" data-pid="{{ $product->id }}" data-swatch-color="orange">
                                         <span class="bg-silver_color"></span>
-                                        <span class="color-text">Silver (-50 MAD) </span>
+                                        <span class="color-text">Silver&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                 </div>
                             </div>
@@ -170,16 +170,13 @@
                                                     <tr>
                                                         <td colspan="2">
                                                             <p>{{ $review->description }}</p>
-                                                            <div class="rating-box">
-                                                                <ul>
-                                                                    @for ($i=0; $i < $review->note; $i++)
-                                                                        <li><i class="fa fa-star"></i></li>
-                                                                    @endfor
-                                                                    @for ($i = $review->note; $i < 5; $i++)
-                                                                        <li class="silver-color"><i class="fa fa-star"></i></li>
-                                                                    @endfor
-                                                                </ul>
-                                                            </div>
+                                                            @for ($i=0; $i < $review->note; $i++)
+                                                                <i class="fa fa-star" style="color: #EBB805"></i>
+                                                            @endfor
+                                                            @for ($i = $review->note; $i < 5; $i++)
+                                                            <i class="fa fa-star" ></i>
+                                                            @endfor
+                                                            
                                                         </td>
                                                     </tr>
                                                 @empty

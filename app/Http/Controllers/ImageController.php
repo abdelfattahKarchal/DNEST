@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateImageRequest;
 use App\Image;
+use App\OrderProduct;
 use App\Product;
+use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -170,9 +172,16 @@ class ImageController extends Controller
             $q->where('material', '=', $material);
         }])->findOrFail($id);
 
+        $product_sum = Review::where('product_id',$id)->sum('note');
+        $reviews_notes = (int) ($product_sum / count($product->reviews));
+
+        $order_product_count = OrderProduct::where('product_id',$id)->count();
+
         return view('front.single-product', [
             'product' => $product,
-            'material' => $material
+            'material' => $material,
+            'reviews_notes' => $reviews_notes,
+            'order_product_count' => $order_product_count
         ]);
     }
 }

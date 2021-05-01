@@ -7,7 +7,9 @@ use App\Collection;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\OrderProduct;
 use App\Product;
+use App\Review;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -106,9 +108,17 @@ class ProductController extends Controller
             $q->where('active', '=', 1);
             $q->where('material', '=', 'gold');
         }])->findOrFail($id);
+
+        $product_sum = Review::where('product_id',$id)->sum('note');
+        $reviews_notes = (int) ($product_sum / count($product->reviews));
+
+        $order_product_count = OrderProduct::where('product_id',$id)->count();
+        
         return view('front.single-product', [
             'product' => $product,
-            'material' => 'gold'
+            'material' => 'gold',
+            'reviews_notes' => $reviews_notes,
+            'order_product_count' => $order_product_count
         ]);
     }
 
