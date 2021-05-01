@@ -110,7 +110,7 @@ class ProductController extends Controller
         }])->findOrFail($id);
 
         $product_sum = Review::where('product_id',$id)->sum('note');
-        $reviews_notes = (int) ($product_sum / count($product->reviews));
+        $reviews_notes = (int) (count($product->reviews) > 0 ? ($product_sum / count($product->reviews)) : 0);
 
         $order_product_count = OrderProduct::where('product_id',$id)->count();
         
