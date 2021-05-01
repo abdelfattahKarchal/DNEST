@@ -7,10 +7,14 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                <h2>Single Product Style</h2>
+                @if (session()->has('productsCardSession'))
+                    <h2>Shopping cart ({{count(Session::get('productsCardSession'))}} item(s))</h2>
+                @else
+                    <h2>Shopping cart (0 item(s))</h2>
+                @endif
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li class="active">Single Product Tab Style Left</li>
+                    <li class="active">Cart</li>
                 </ul>
             </div>
         </div>
@@ -29,95 +33,70 @@
                         @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
                             <form action="javascript:void(0)">
                                 @csrf
-                                <div class="table-content table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th class="hiraola-product-remove">Remove</th>
-                                                <th class="hiraola-product-thumbnail">Images</th>
-                                                <th class="cart-product-name">Product</th>
-                                                <th class="hiraola-product-price">Price</th>
-                                                <th class="hiraola-product-quantity">Quantity</th>
-                                                <th class="hiraola-product-quantity">Material</th>
-                                                <th class="hiraola-product-subtotal">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                            @foreach (Session::get('productsCardSession') as $order_product)
-                                                <tr>
-                                                    {{-- javascript:void(0)
-                                                    --}}
-                                                    <td class="hiraola-product-remove"><a
-                                                            onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')"
-                                                            href="javascript:void(0)"><i class="fa fa-trash"
-                                                                title="Remove"></i></a></td>
-                                                    <td class="hiraola-product-thumbnail"><a href="javascript:void(0)"><img
-                                                                width="90px" height="115px"
+                                <div style="border: 1px solid #e5e5e5; padding:30px;">
+                                    @foreach (Session::get('productsCardSession') as $order_product)
+                                        <div class="row">
+                                            <div class="col-4 my-auto">
+                                                <div class="row">
+                                                    <div class="col-3 my-auto">
+                                                        <a href="javascript:void(0)"><img class="img-fluid"
                                                                 src="{{ $order_product->product->url_1() }}"
-                                                                alt="{{ $order_product->product->name }}"></a></td>
-                                                    <td class="hiraola-product-name"><a
-                                                            href="javascript:void(0)">{{ $order_product->product->name }}</a>
-                                                    </td>
-                                                    <td class="hiraola-product-price"><span
-                                                            class="amount">{{ $order_product->price }} MAD</span>
-                                                    </td>
-                                                    <td class="hiraola-product-price"><span
-                                                        class="amount">{{ $order_product->material }}</span>
-                                                </td>
-                                                    <td class="quantity">
-                                                        <div class="form-group row d-flex justify-content-center">
-                                                            <div class="col-sm-6">
-                                                                <input onchange="updateQuantity({{ $order_product->product->id }}, this)"
-                                                                    class="form-control quantite"
-                                                                    data-id="{{ $order_product->product->id }}" type="number" min="1"
-                                                                    value="{{ $order_product->quantity }}">
-                                                            </div>
-                                                        </div>
-
-                                                        {{-- <div class="cart-plus-minus">
-                                                            <input class="cart-plus-minus-box" data-id="{{ $product->id }}"
-                                                                name="qte-{{ $product->id }}"
-                                                                value="{{ $product->quantity }}" type="number">
-                                                            <div class="dec qtybutton"><i class="fa fa-angle-down"></i>
-                                                            </div>
-                                                            <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-
-                                                        </div> --}}
-                                                    </td>
-                                                    <td class="product-subtotal"><span
-                                                            class="amount">${{ $order_product->quantity * $order_product->price }}</span>
-                                                    </td>
-                                                    @php
-                                                    $sum += ($order_product->quantity * $order_product->price)
-                                                    @endphp
-
-                                                </tr>
-                                            @endforeach (Session::get('productsCardSession') as $product)
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="coupon-all">
-                                            <div class="coupon">
-                                                <input id="coupon_code" class="input-text" name="coupon_code" value=""
-                                                    placeholder="Coupon code" type="text">
-                                                <input class="button" name="apply_coupon" value="Apply coupon"
-                                                    type="submit">
+                                                                alt="{{ $order_product->product->name }}"></a>
+                                                    </div>
+                                                    <div class="col-7 my-auto">
+                                                        <p>Name</p>
+                                                        <h6 class="mb-3">{{ $order_product->product->name }}</h6>
+                                                        <p class="text-danger">
+                                                            <i class="fa fa-trash"></i> Delete
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 my-auto">
+                                                <p>Material</p>
+                                                <h6>{{ $order_product->material }}</h6>
+                                            </div>
+                                            <div class="col-2 my-auto">
+                                                <p>Quantity</p>
+                                                <div>
+                                                    <select class="nice-select" style="border-radius: 0px !important;">
+                                                        @for($i=1; $i<=15; $i++)
+                                                            <option {{ $order_product->quantity == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
+                                                        @endfor
+                                                        @if($order_product->quantity > 15)
+                                                            <option value="{{ $order_product->quantity }}" selected>{{ $order_product->quantity }}</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2 my-auto">
+                                                <p>Price</p>
+                                                <h6>{{ $order_product->price }} MAD</h6>
+                                            </div>
+                                            <div class="col-2 my-auto">
+                                                <p>Total</p>
+                                                <h6>{{ $order_product->quantity * $order_product->price }} MAD</h6>
                                             </div>
                                         </div>
-                                    </div>
+                                        <hr/>
+                                        @php
+                                            $sum += ($order_product->quantity * $order_product->price)
+                                        @endphp
+                                    @endforeach
+                                        <div class="row" >
+                                            <div class="col-10">
+                                            </div>
+                                            <div class="col-2 my-auto">
+                                                <p>Total TTC</p>
+                                                <h6 class="mt-2">{{ $sum }} MAD</h6>
+                                            </div>
+                                        </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                            <h2>Cart totals</h2>
-                                            <ul>
 
-                                                <li>Total <span>${{ $sum }}</span></li>
-                                            </ul>
-                                            <a onclick="commandNow()" id="commadNow-btn" href="javascript:void(0)">Command now</a>
+                                <div class="row">
+                                    <div class="col-md-3 ml-auto text-right">
+                                        <div class="cart-page-total">
+                                            <a onclick="commandNow()" id="commadNow-btn" href="javascript:void(0)">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +109,7 @@
                                     <li>Explorez nos catégories et découvrez nos meilleures offres!</li>
                                 </ul>
                                 <div class="mt-5 hiraola-btn-ps_center">
-                                    <a class="hiraola-btn" href="{{ url('/') }}">Commencez vos achats</a>
+                                    <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
                                 </div>
                             </div>
                         @endif

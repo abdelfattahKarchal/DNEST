@@ -39,14 +39,14 @@
                         <div class="sp-img_area" id="img-gold">
                             <div class="zoompro-border sp-large_img">
                                 @foreach ($product->images as $image)
-                                    
+
                                         <img class="zoompro" src="{{ $image->urlLarge() }}"
                                         data-zoom-image="{{ $image->urlLarge() }}"
                                         alt="{{ $product->name }}"/>
                                         @break
-                                    
+
                                 @endforeach
-                                   
+
                             </div>
                             <div id="gallery" class="sp-img_slider-3">
                                 @foreach($product->images as $image)
@@ -71,8 +71,8 @@
                                     <li><i class="fa fa-star"></i></li>
                                     <li><i class="fa fa-star"></i></li>
                                     <li class="silver-color"><i class="fa fa-star"></i></li>
-                                    <li class="ml-2">(0 Reviews)</li>
-                                    <li class="ml-2">(100 Orders)</li>
+                                    <li class="ml-2">({{count($product->reviews)}} Reviews)</li>
+                                    <li class="ml-2">(0 Orders)</li>
                                 </ul>
                             </div>
 
@@ -99,9 +99,9 @@
                             </div>
 
                             <div class="mt-4 sp-essential_stuff color-list_area">
-                               
+
                                 <h6>Matière</h6>
-                                
+
                                 <div class="color-list">
                                     <a id="gold" href='javascript:void(0)' class="single-color text-left {{ $material =='gold' ? 'active' : '' }}" data-pid="{{ $product->id }}" data-swatch-color="red">
                                         <span class="bg-gold_color"></span>
@@ -158,34 +158,25 @@
                                        @csrf
                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <div id="review">
-                                            <table class="table table-striped table-bordered">
+                                            <table class="table table-striped">
                                                 <tbody id="reviews-content">
-                                                @forelse ($product->reviews as $review)
+                                                @foreach ($product->reviews as $key=>$review)
                                                     <tr>
-                                                        <td style="width: 50%;">
-                                                            <strong>{{ $review->user->name ?? '' }}</strong>
-                                                        </td>
-                                                        <td class="text-right">{{ $review->created_at->format('d/m/Y') }}</td>
+                                                        <h5 class="{{$key != 0 ? 'mt-4' : ''}}"><strong>{{ $review->user->name ?? '' }}</strong></h5>
+                                                        <p>{{ $review->created_at->format('d/m/Y') }} -
+                                                            <span>
+                                                                @for ($i=0; $i < $review->note; $i++)
+                                                                    <i class="fa fa-star" style="color: #EBB805"></i>
+                                                                @endfor
+                                                                @for ($i = $review->note; $i < 5; $i++)
+                                                                    <i class="fa fa-star" style="color: #bababa"></i>
+                                                                @endfor
+                                                            </span>
+                                                        </p>
+                                                        <p class="mt-1">{{ $review->description }}</p>
+                                                        <hr/>
                                                     </tr>
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <p>{{ $review->description }}</p>
-                                                            <div class="rating-box">
-                                                                <ul>
-                                                                    @for ($i=0; $i < $review->note; $i++)
-                                                                        <li><i class="fa fa-star"></i></li>
-                                                                    @endfor
-                                                                    @for ($i = $review->note; $i < 5; $i++)
-                                                                        <li class="silver-color"><i class="fa fa-star"></i></li>
-                                                                    @endfor
-                                                                </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @empty
-                                                    Be you first one commented this product
-                                                @endforelse
-
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -610,7 +601,7 @@
                         $('.card-counter').text(data.length);
                         $("#block-addTocart").load(location.href + " #block-addTocart");
                         $('#message-success').show();
-                        setTimeout(function() { 
+                        setTimeout(function() {
                             $('#message-success').hide();
                         }, 5000);
                     },
@@ -623,18 +614,18 @@
 
 
 
-$('#gold').click(function (e) { 
+$('#gold').click(function (e) {
     e.preventDefault();
     var product_id = $('#gold').data('pid');
     window.location.href = "/products/"+ product_id +"/material/gold";
-    
+
 });
 
-$('#silver').click(function (e) { 
+$('#silver').click(function (e) {
     e.preventDefault();
     var product_id = $('#silver').data('pid');
     window.location.href = "/products/"+ product_id +"/material/silver";
-    
+
 });
 
 
