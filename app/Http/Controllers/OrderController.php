@@ -93,6 +93,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         if (!Auth::check()) {
+            $request->session()->put('url.intended', url('/cart'));
             return redirect()->to('/loginForm');
         }
         $statut = Status::where('label', 'not confirmed')->first();
