@@ -60,13 +60,14 @@ class CartController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        $products = session()->pull('productsCardSession');
-        foreach ($products as $productkey => $value) {
-            if ($value->id == $request->productId) {
-                $value->quantity = $request->quantity;
+        $orders_products = session()->pull('productsCardSession');
+        foreach ($orders_products as &$item) {
+            if ($item->product->id == $request->productId && $request->material == $item->material) {
+                $item->quantity = $request->quantity;
+            break;
             }
         }
 
-        session()->put('productsCardSession', $products);
+        session()->put('productsCardSession', $orders_products);
     }
 }

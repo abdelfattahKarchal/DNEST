@@ -93,24 +93,23 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         if (!Auth::check()) {
-            return false;
+            return redirect()->to('/loginForm');
         }
         $statut = Status::where('label', 'not confirmed')->first();
-        $products = session()->get('productsCardSession');
+        $orders_products = session()->get('productsCardSession');
         $order = new Order();
-        $total_price = 0;
-        foreach ($products as $key => $value) {
-            $total_price += (($value->new_price ?? $value->price) * $value->quantity);
+        $order->total_price  = 0;
+        foreach ($orders_products as $key => $value) {
+            $order->total_price  += ($value->price * $value->quantity);
         }
-        $order->total_price = $total_price;
         $order->user_id = Auth::user()->id;
         $order->shipping_address = Auth::user()->shipping_address ?? Auth::user()->address;
         $order->status_id = $statut->id;
         $order->save();
         //$productsIds_array  = [];
 
-        foreach ($products as $key => $value) {
-            $order->products()->attach($value->id, ['price' => $value->new_price ?? $value->price, 'quantity' => $value->quantity]);
+        foreach ($orders_products as $key => $value) {
+            $order->products()->attach($value->product->id, ['price' => $value->price, 'quantity' => $value->quantity, 'material' => $value->material]);
             //array_push($productsIds_array, $value->id);
         }
 
@@ -118,8 +117,9 @@ class OrderController extends Controller
 
         // $order->products()->attach($productsIds_array);
         session()->forget('productsCardSession');
-        session()->flash('status', 'product was commanded, your order is added successfully, you will be contacted by our support');
-        return true;
+        session()->flash('status', 'order was commanded, your order is added successfully, you will be contacted by our support');
+        
+        return redirect()->back();
     }
 
     /**

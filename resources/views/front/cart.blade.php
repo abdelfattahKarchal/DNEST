@@ -31,7 +31,7 @@
                     @else
                     {{-- {{ dd(Session::get('productsCardSession')) }} --}}
                         @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
-                            <form action="javascript:void(0)">
+                            <form action="{{ route('orders.store') }}" method="POST">
                                 @csrf
                                 <div style="border: 1px solid #e5e5e5; padding:30px;">
                                     @foreach (Session::get('productsCardSession') as $order_product)
@@ -46,9 +46,9 @@
                                                     <div class="col-7 my-auto">
                                                         <p>Name</p>
                                                         <h6 class="mb-3">{{ $order_product->product->name }}</h6>
-                                                        <p class="text-danger">
+                                                        <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
                                                             <i class="fa fa-trash"></i> Delete
-                                                        </p>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -59,11 +59,11 @@
                                             <div class="col-2 my-auto">
                                                 <p>Quantity</p>
                                                 <div>
-                                                    <select class="nice-select" style="border-radius: 0px !important;">
-                                                        @for($i=1; $i<=15; $i++)
+                                                    <select onchange="udpdateQte({{ $order_product->product->id }},'{{ $order_product->material }}')" name="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" id="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" class="nice-select" style="border-radius: 0px !important;">
+                                                        @for($i=1; $i<=10; $i++)
                                                             <option {{ $order_product->quantity == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
                                                         @endfor
-                                                        @if($order_product->quantity > 15)
+                                                        @if($order_product->quantity > 10)
                                                             <option value="{{ $order_product->quantity }}" selected>{{ $order_product->quantity }}</option>
                                                         @endif
                                                     </select>
@@ -94,9 +94,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3 ml-auto text-right">
+                                    <div class="col-md-2 ml-auto text-right">
                                         <div class="cart-page-total">
-                                            <a onclick="commandNow()" id="commadNow-btn" href="javascript:void(0)">Checkout</a>
+                                            <button type="submit" id="commadNow-btn" class="hiraola-login_btn">Checkout</button>
                                         </div>
                                     </div>
                                 </div>
@@ -123,71 +123,44 @@
 @section('js')
     <script>
         function deleteProductCart(idProduct, material) {
-            var cardCount = parseInt($('.card-counter').text()[0]);
             $.ajax({
-                type: 'GET',
-                url: 'carts/' + idProduct + '/'+ material +'/delete',
+                type: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: 'carts/' + idProduct + '/material/'+ material +'/delete',
                 success: function(data) {
-                    $("#cartDiv").load(location.href + " #cartDiv");
-                    $('.card-counter').text(cardCount -1);
+                    location.reload();
                 }
             });
         }
 
-        // change quantity value
-        function updateQuantity(productId, obj) {
 
-            var quantity = obj.value;
-            if (quantity > 0) {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'POST',
-                    url: 'carts/quantity/update',
-                    data: {
-                        'quantity': quantity,
-                        'productId': productId
-                    },
-                    success: function(data) {
-                        $("#cartDiv").load(location.href + " #cartDiv");
-                    }
-                });
+// change quantity value
+function udpdateQte(product_id, material) {
+
+    var quantity = $('#quantity_selected_'+product_id+'_'+material).val();
+    
+    if (quantity > 0) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: 'carts/quantity/update',
+            data: {
+                'quantity': quantity,
+                'productId': product_id,
+                'material': material
+            },
+            success: function(data) {
+                location.reload();
             }
-
-        }
-
-        // add command
-function commandNow () {
-    Swal.fire({
-                title: 'do you really want to place this order ?',
-                showCancelButton: true,
-                confirmButtonText: `Save`,
-                confirmButtonColor: '#a5dc86',
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: 'POST',
-                        url: "{{ route('orders.store') }}",
-                        success: function(data) {
-                            if (data) {
-                                $('.card-counter').text(0);
-                                $("#cartDiv").load(location.href + " #cartDiv");
-                            }else{
-                                window.location.href = "/loginForm";
-                            }
-                        }
-                    });
-                    //Swal.fire('Saved!', '', 'success')
-                }
-            });
- }
-
-
+        });
+    }
+  }
+  
+      
     </script>
     <script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>
     <script src="{{ asset('front/assets/js/jquery-dateFormat.js') }}"></script>
