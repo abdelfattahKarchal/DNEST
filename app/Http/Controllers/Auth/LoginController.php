@@ -45,21 +45,19 @@ class LoginController extends Controller
 
     public function logout(HttpRequest $request)
     {
-        $route = 'index';
-        if (in_array(Auth::user()->role->label, ['admin','supadmin'])) {
-            $route = 'admin.index';
-        }
         $this->performLogout($request);
     
-        return redirect()->route($route);
+        return redirect()->route('index');
     }
 
     public function showLoginForm()
-{
-    if(!session()->has('url.intended'))
     {
-        session(['url.intended' => url()->previous()]);
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+            
+        }
+        return view('auth.login');
+        
     }
-    return view('front.login.login');
-}
 }

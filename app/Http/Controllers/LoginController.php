@@ -10,6 +10,9 @@ class LoginController extends Controller
     
     public function loginForm()
     {
+        if (in_array(Auth::user()->role->label, ['admin','supadmin'])) {
+            $route = 'admin.index';
+        }
         if (Auth::check()) {
             return redirect()->route('index');
         }

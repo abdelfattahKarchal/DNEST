@@ -36,9 +36,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     { 
-        if (!Auth::check()) {
-            return false;
-        }
+        
         $review = Review::create([
             'product_id' => $request->product_id,
             'description' => htmlspecialchars($request->description),

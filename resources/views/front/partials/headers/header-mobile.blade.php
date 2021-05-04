@@ -51,8 +51,8 @@
                         </a>
                         <ul class="sub-menu">
                             @if (!Auth::check())
-                                <li><a href="{{ route('register.form') }}">Register</a></li>
-                                <li><a href="{{ route('login.form') }}">Login</a></li>
+                                <li><a href="{{ route('register') }}">Register</a></li>
+                                <li><a href="{{ route('login') }}">Login</a></li>
                             @else
                                 <li><a href="{{ route('login.form') }}">My Profile</a></li>
 

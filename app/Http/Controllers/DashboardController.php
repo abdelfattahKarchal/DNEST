@@ -9,7 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //dd('dddd');
         if('customer' === Auth::user()->role->label){
             return redirect()->route('index');
         }
