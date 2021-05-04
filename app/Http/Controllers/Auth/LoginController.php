@@ -46,7 +46,7 @@ class LoginController extends Controller
     public function logout(HttpRequest $request)
     {
         $this->performLogout($request);
-    
+
         return redirect()->route('index');
     }
 
@@ -55,9 +55,7 @@ class LoginController extends Controller
         if(!session()->has('url.intended'))
         {
             session(['url.intended' => url()->previous()]);
-            
         }
         return view('auth.login');
-        
     }
 }

@@ -22,7 +22,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 //Route::put('/myaccount/{myaccount}/address', 'MyAccountController@address')->name('myaccount.address');
-Route::resource('myaccount', 'MyAccountController');
+Route::resource('myaccount', 'MyAccountController')->middleware('verified');
 
 /* login form for customer*/
 Route::get('/loginForm','LoginController@loginForm')->name('login.form');
@@ -98,8 +98,6 @@ Route::get('/404', function () {
     return view('front.404');
 })->name('404');
 
-
-
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');

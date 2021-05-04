@@ -31,20 +31,12 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
-                            {{-- <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel"
-                                aria-labelledby="account-dashboard-tab">
-                                <div class="myaccount-dashboard">
-                                    <p>Hello <b>{{ Auth::user()->name }} {{ Auth::user()->lname }}</b> </p>
-                                    <p>From your account dashboard you can view your recent orders, manage your shipping and
-                                        personal addresses and edit your password and account
-                                        details.</p>
-                                </div>
-                            </div> --}}
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
                                 aria-labelledby="account-orders-tab">
                                 <div class="myaccount-orders">
                                     <h4 class="small-title mb-5">MY ORDERS</h4>
-                                    <div class="table-responsive">
+                                    @if(count($my_orders) > 0)
+                                        <div class="table-responsive">
                                         <table id="orders-table" class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
@@ -55,9 +47,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
+
                                                 @forelse ($my_orders as $order)
-                                                
+
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                 href="javascript:void(0)">{{ $order->id }}</a></td>
@@ -88,67 +80,25 @@
 
                                                 @endforelse
 
-                                                    
+
                                             </tbody>
-                                           
+
                                         </table>
                                     </div>
+                                    @else
+                                        <div class="text-center">
+                                            <img style="margin-top: 50px;" src="{{asset("front/assets/images/test.png")}}" />
+                                            <h5 class="text-muted">Your cart is empty.</h5>
+                                            <ul class="mt-3">
+                                                <li>Explorez nos catégories et découvrez nos meilleures offres!</li>
+                                            </ul>
+                                            <div class="mt-5 hiraola-btn-ps_center">
+                                                <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                            {{-- <div class="tab-pane fade" id="account-address" role="tabpanel"
-                                aria-labelledby="account-address-tab">
-                                <div class="myaccount-address">
-                                    <p>The following addresses will be used on the checkout page by default.</p>
-                                    <div class="alert alert-success" id="success-alert"></div>
-                                    <div id="alert-error-address" class="alert alert-danger"></div>
-                                    @php
-                                        $idUser = Auth::user()->id;
-                                    @endphp
-                                    <form id="form_address" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="row">
-                                            <div class="col">
-                                                <h4 class="small-title">Personal ADDRESS</h4>
-
-                                                <address>
-                                                    <textarea name="address" id="" cols="30"
-                                                        rows="5">{{ Auth::user()->address }}</textarea>
-                                                </address>
-
-                                            </div>
-                                            <div class="col">
-                                                <h4 class="small-title">SHIPPING ADDRESS</h4>
-                                                <address>
-                                                    <textarea name="shipping_address" id="" cols="30"
-                                                        rows="5">{{ Auth::user()->shipping_address ?? Auth::user()->address }}</textarea>
-                                                </address>
-                                                @if ($errors->any())
-                                                    <div class="alert alert-danger">
-                                                        <ul>
-                                                            @foreach ($errors->all() as $error)
-                                                                <li>{{ $error }}</li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-10 text-center">
-                                                <div class="form-group last-child required">
-                                                    <div class="hiraola-btn-ps_right cart-page">
-                                                        <a onclick="saveAddress({{ Auth::user()->id }})"
-                                                            id="save_address" href="javascript:void(0)">Save</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
-                                </div>
-                            </div> --}}
                             <div class="tab-pane fade show active" id="account-details" role="tabpanel"
                                 aria-labelledby="account-details-tab">
                                 <div class="myaccount-details">
@@ -188,7 +138,7 @@
                                             </div>
 
                                             <div class="single-input">
-                                                <label for="old_password">Current Password(leave blank to leave
+                                                <label for="old_password">Current Password (leave blank to leave
                                                     unchanged)</label>
                                                 <input type="password" name="old_password" id="old_password">
                                             </div>
@@ -203,9 +153,8 @@
                                                     id="confirmation_password">
                                             </div>
                                             <div class="single-input">
-
                                                 <div class="form-group last-child required">
-                                                    <div class="hiraola-btn-ps_right cart-page">
+                                                    <div class="hiraola-btn-ps_right cart-page text-right">
                                                         <a onclick="updateInformationAccount({{ Auth::user()->id }})"
                                                             href="javascript:void(0)"> Save changes</a>
                                                     </div>
@@ -296,7 +245,7 @@
                     $("#alert-error-account").append('<li>'+ value + '</li>');
                 });
                 $("#alert-error-account").append('</ul>');
-                
+
                 $('#alert-error-account').show();
             }
         });
@@ -310,5 +259,5 @@
 </script>
 <script src="{{ asset('front/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('front/assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    
+
 @endsection

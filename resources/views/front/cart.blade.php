@@ -36,11 +36,18 @@
             <div class="row">
                 <div class="col-12" >
                     @if (session()->has('status'))
-                        <div class="alert alert-info" role="alert">
-                            <strong>Info : </strong> {{ session()->get('status') }}
+                        <div class="col-lg-12 text-center">
+                            <img style="margin-top: 50px;" src="{{asset("front/assets/images/order-ok.jpg")}}" />
+                            <h5 class="text-muted">Order was registered successfully</h5>
+                            <ul class="mt-3">
+                                <li>You will receive a confirmation email</li>
+                                <li>Thank you for blablabla</li>
+                            </ul>
+                            <div class="mt-5 hiraola-btn-ps_center">
+                                <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
+                            </div>
                         </div>
                     @else
-                    {{-- {{ dd(Session::get('productsCardSession')) }} --}}
                         @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
                             <form action="{{ route('orders.store') }}" method="POST">
                                 @csrf

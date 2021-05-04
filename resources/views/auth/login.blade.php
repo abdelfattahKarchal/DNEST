@@ -41,17 +41,19 @@
                             </div>
                         </div>
                         <div class="col-md-5 text-md-right">
-                            <div class="forgotton-password_info">
-                                <a href="#"> Forgotten password?</a>
-                            </div>
+                            @if (Route::has('password.request'))
+                                <div class="forgotton-password_info">
+                                    <a href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                </div>
+                            @endif
+
                         </div>
-                        
-                        <div class="col-12 mt-4 mb-4 form-group">
-                            <button type="submit" class="hiraola-login_btn">{{ __('Login') }}</button>
-                            {{-- <button type="submit" class="btn btn-primary form-control">
-                               {{ __('Login') }}
-                           </button> --}}
-                       </div>
+
+                        <div class="col-12 mt-4 mb-4 form-group text-right">
+                            <button type="submit" class="hiraola-login_btn" style="display: inline !important;">{{ __('Login') }}</button>
+                        </div>
                     </div>
                 </div>
             </form>

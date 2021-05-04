@@ -96,10 +96,9 @@
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
 
                         </div>
-                        <div class="col-12  form-group">
-                             <button type="submit" class="btn btn-primary form-control">
-                                {{ __('Register') }}
-                            </button>
+
+                        <div class="col-12 mt-4 mb-4 form-group text-right">
+                            <button type="submit" class="hiraola-login_btn" style="display: inline !important;">{{ __('Register') }}</button>
                         </div>
                     </div>
                 </div>
