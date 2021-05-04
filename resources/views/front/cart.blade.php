@@ -1,4 +1,15 @@
 @extends('layout.app')
+@section('style')
+    <style>
+        .nice-select{
+            border-radius: 0px !important;
+        }
+
+        .nice-select .list{
+            border-radius: 0px !important;
+        }
+    </style>
+@endsection
 
 @section('content')
     @php
@@ -43,23 +54,25 @@
                                                                 src="{{ $order_product->product->url_1() }}"
                                                                 alt="{{ $order_product->product->name }}"></a>
                                                     </div>
-                                                    <div class="col-7 my-auto">
+                                                    <div class="col-7">
                                                         <p>Name</p>
-                                                        <h6 class="mb-3">{{ $order_product->product->name }}</h6>
-                                                        <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
-                                                            <i class="fa fa-trash"></i> Delete
-                                                        </a>
+                                                        <div class="my-auto">
+                                                            <h6 class="mb-3">{{ $order_product->product->name }}</h6>
+                                                            <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
+                                                                <i class="fa fa-trash mr-2"></i>Delete
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-2 my-auto">
+                                            <div class="col-2 text-center">
                                                 <p>Material</p>
-                                                <h6>{{ $order_product->material }}</h6>
+                                                <h6 class="my-auto">{{ $order_product->material }}</h6>
                                             </div>
-                                            <div class="col-2 my-auto">
+                                            <div class="col-2 text-center">
                                                 <p>Quantity</p>
-                                                <div>
-                                                    <select onchange="udpdateQte({{ $order_product->product->id }},'{{ $order_product->material }}')" name="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" id="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" class="nice-select" style="border-radius: 0px !important;">
+                                                <div class="my-auto">
+                                                    <select class="nice-select small ml-5" style="border-radius: 0px !important;" onchange="udpdateQte({{ $order_product->product->id }},'{{ $order_product->material }}')" name="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" id="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}">
                                                         @for($i=1; $i<=10; $i++)
                                                             <option {{ $order_product->quantity == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
                                                         @endfor
@@ -69,13 +82,13 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-2 my-auto">
+                                            <div class="col-2 text-center">
                                                 <p>Price</p>
-                                                <h6>{{ $order_product->price }} MAD</h6>
+                                                <h6 class="my-auto">{{ $order_product->price }} MAD</h6>
                                             </div>
-                                            <div class="col-2 my-auto">
-                                                <p>Total</p>
-                                                <h6>{{ $order_product->quantity * $order_product->price }} MAD</h6>
+                                            <div class="col-2 text-center">
+                                                <p>Sub Total</p>
+                                                <h6 class="my-auto">{{ $order_product->quantity * $order_product->price }} MAD</h6>
                                             </div>
                                         </div>
                                         <hr/>
@@ -84,19 +97,19 @@
                                         @endphp
                                     @endforeach
                                         <div class="row" >
-                                            <div class="col-10">
-                                            </div>
-                                            <div class="col-2 my-auto">
+                                            <div class="col-2 offset-10 my-auto text-center">
                                                 <p>Total TTC</p>
                                                 <h6 class="mt-2">{{ $sum }} MAD</h6>
                                             </div>
                                         </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-2 ml-auto text-right">
-                                        <div class="cart-page-total">
-                                            <button type="submit" id="commadNow-btn" class="hiraola-login_btn">Checkout</button>
+                                <div style="padding:30px;">
+                                    <div class="row">
+                                        <div class="col-md-2 offset-md-10 text-center">
+                                            <div class="cart-page-total">
+                                                <button type="submit" id="commadNow-btn" class="hiraola-login_btn" style="display: inline !important;">Checkout</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +153,7 @@
 function udpdateQte(product_id, material) {
 
     var quantity = $('#quantity_selected_'+product_id+'_'+material).val();
-    
+
     if (quantity > 0) {
         $.ajax({
             headers: {
@@ -159,8 +172,8 @@ function udpdateQte(product_id, material) {
         });
     }
   }
-  
-      
+
+
     </script>
     <script src="{{ asset('front/assets/js/sweetalert2.js') }}"></script>
     <script src="{{ asset('front/assets/js/jquery-dateFormat.js') }}"></script>
