@@ -41,22 +41,20 @@
                     <nav>
                         <ul>
                             <li class="dropdown-holder">
-                                {{-- <a href="javascript:void(0)" class="wishlist-btn">
-                                            <i class="ion-person" style="font-size: 1.5rem;"></i>
-                                            {{ Auth::user()->name ?? null }}
-                                        </a> --}}
                                 @if (!Auth::check())
                                     <a href="javascript:void(0)" class="wishlist-btn">
                                         <i class="ion-person" style="font-size: 1.5rem;"></i>
-                                        {{-- {{ Auth::user()->name ?? null }} --}}
                                     </a>
                                 @else
-                                    <u style="color: #fff"> {{ Auth::user()->name }}</u>
+                                    <a href="javascript:void(0)" class="wishlist-btn">
+                                        <i class="ion-person" style="font-size: 1.5rem;"></i>
+                                        <u class="ml-1" style="color: #fff"> {{  Auth::user()->name  }}</u>
+                                    </a>
                                 @endif
                                 <ul class="hm-dropdown">
                                     @if (!Auth::check())
-                                        <li><a href="{{ route('register') }}">Register</a></li>
-                                        <li><a href="{{ route('login') }}">Login</a></li>
+                                        <li><a href="{{ route('login') }}">Sign In</a></li>
+                                        <li><a href="{{ route('register') }}">Sign Up</a></li>
                                     @else
                                         <li><a href="{{ route('login.form') }}">My Profile</a></li>
                                         <li>

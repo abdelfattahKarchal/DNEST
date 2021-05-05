@@ -21,6 +21,9 @@ Route::get('/clear', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
+Route::get('/checkout', function () {
+    return view('front.checkout');
+});
 //Route::put('/myaccount/{myaccount}/address', 'MyAccountController@address')->name('myaccount.address');
 Route::resource('myaccount', 'MyAccountController')->middleware('verified');
 

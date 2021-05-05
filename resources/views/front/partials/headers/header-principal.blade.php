@@ -1,7 +1,7 @@
 <div class="header-bottom_area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-2 col-md-4 col-sm-4">
+            <div class="col-lg-2 col-md-4 col-sm-4 mt-2 mb-2">
                 <div class="header-logo">
                     <a href="{{ route('index') }}">
                         <img src="{{ asset('front/assets/images/logo/logo-header.png') }}" alt="The DNest jewelery"
@@ -9,7 +9,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block position-static d-lg-flex justify-content-center">
+            <div class="col-lg-7 d-none d-lg-block position-static d-lg-flex justify-content-center mt-2 mb-2">
                 <div class="main-menu_area">
                     <nav>
                         <ul>
@@ -35,24 +35,26 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-8 col-sm-8">
+            <div class="col-lg-3 col-md-8 col-sm-8 mt-2 mb-2">
                 <div class="header-right_area main-menu_area">
                     <nav>
                         <ul>
                             <li class="dropdown-holder">
                                 @if (!Auth::check() )
                                     <a href="javascript:void(0)" class="wishlist-btn">
-                                    <i class="ion-person" style="font-size: 1.5rem;"></i>
-                                    {{-- {{ Auth::user()->name ?? null }} --}}
-                                </a>
+                                        <i class="ion-person" style="font-size: 1.5rem;"></i>
+                                    </a>
                                 @else
-                                <u style="color: #fff"> {{  Auth::user()->name  }}</u>
+                                    <a href="javascript:void(0)" class="wishlist-btn">
+                                       <i class="ion-person" style="font-size: 1.5rem;"></i>
+                                       <u class="ml-1" style="color: #fff"> {{  Auth::user()->name  }}</u>
+                                    </a>
                                 @endif
                                 
                                 <ul class="hm-dropdown">
                                     @if (!Auth::check())
-                                        <li><a href="{{ route('register') }}">Register</a></li>
-                                        <li><a href="{{ route('login') }}">Login</a></li>
+                                        <li><a href="{{ route('login') }}">Sign In</a></li>
+                                        <li><a href="{{ route('register') }}">Sign Up</a></li>
                                     @else
                                         <li><a href="{{ route('myaccount.index') }}">My Profile</a></li>
                                         <li>

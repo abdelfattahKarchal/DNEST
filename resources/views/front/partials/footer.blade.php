@@ -82,7 +82,7 @@
                                             target="_blank" novalidate>
                                             <div id="mc_embed_signup_scroll">
                                                 <div id="mc-form" class="mc-form subscribe-form">
-                                                    <input id="mc-email" class="newsletter-input" type="email"
+                                                    <input id="mc-email" class="newsletter-input form-control" type="email"
                                                         autocomplete="off" placeholder="Enter your email" />
                                                     <button class="newsletter-btn" id="mc-submit">
                                                         <i class="ion-android-mail" aria-hidden="true"></i>

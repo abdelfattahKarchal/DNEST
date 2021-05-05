@@ -2,8 +2,8 @@
 
 @section('content')
 
-<div class="row d-flex justify-content-center mb-lg-1">
-    <div class=" mt-2 col-sm-12 col-md-10 col-xs-12 col-lg-4">
+<div class="row d-flex justify-content-center" style="margin: 50px;">
+    <div class=" mt-2 col-sm-12 col-md-10 col-xs-12 col-lg-4 p-5" style="border: 1px solid #e5e5e5; background-color: #f4f4f4;"
         @if (session('resent'))
             <div class="alert alert-success" role="alert">
                 {{ __('A fresh verification link has been sent to your email address.') }}
@@ -12,20 +12,19 @@
         <!-- Login Form s-->
         <form  class="d-inline" method="POST" action="{{ route('verification.resend') }}">
             @csrf
-            <div class="mt-4 mb-4">
-                <h3 class="mb-4 register-title" style="">Verify Your Email Address</h3>
+                <h3 class="register-title text-center" style="">Email verification</h3>
+                <p style="font-size: 14px;" class="mb-5 text-center"></p>
                 <div class="row">
 
                     <div class="col-12 mb--20 form-group">
                         {{ __('Before proceeding, please check your email for a verification link.') }}
-                        {{ __('If you did not receive the email') }},
+                        {{ __('If you did not receive the email') }}
                     </div>
 
-                        <div class="col-12 mt-4 mb-4 form-group text-right">
-                            <button type="submit" class="hiraola-login_btn" style="display: inline !important;">{{ __('click here to request another') }}</button>
+                        <div class="col-12 mt-4 form-group">
+                            <button type="submit" class="hiraola-login_btn">Resend verification link</button>
                         </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>

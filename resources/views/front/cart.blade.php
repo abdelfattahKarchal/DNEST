@@ -36,8 +36,8 @@
             <div class="row">
                 <div class="col-12" >
                     @if (session()->has('status'))
-                        <div class="col-lg-12 text-center">
-                            <img style="margin-top: 50px;" src="{{asset("front/assets/images/order-ok.jpg")}}" />
+                        {{-- <div class="text-center" style="margin: 50px;">
+                            <img class="mb-4" width="100px" src="{{asset("front/assets/images/order.png")}}" />
                             <h5 class="text-muted">Order was registered successfully</h5>
                             <ul class="mt-3">
                                 <li>You will receive a confirmation email</li>
@@ -46,7 +46,7 @@
                             <div class="mt-5 hiraola-btn-ps_center">
                                 <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
                             </div>
-                        </div>
+                        </div> --}}
                     @else
                         @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
                             <form action="{{ route('orders.store') }}" method="POST">
@@ -111,19 +111,38 @@
                                         </div>
                                 </div>
 
-                                <div style="padding:30px;">
-                                    <div class="row">
-                                        <div class="col-md-2 offset-md-10 text-center">
-                                            <div class="cart-page-total">
-                                                <button type="submit" id="commadNow-btn" class="hiraola-login_btn" style="display: inline !important;">Checkout</button>
+                                <div class="row">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                            <h2>Cart totals</h2>
+                                            <div class="row">
+                                                <div class="col-6 pt-2 pb-2" style="background-color: red;">
+                                                    Subtotal
+                                                </div>
+                                                <div class="col-6 text-right"">
+                                                    {{ $sum }} MAD
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6 pt-2 pb-2" style="background-color: red;">
+                                                    Total
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    {{ $sum }} MAD
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6" style="padding: 0px; width:100%;">
+                                                    <a href="{{url('/checkout')}}">Proceed to checkout</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         @else
-                            <div class="col-lg-12 text-center">
-                                <img style="margin-top: 50px;" src="{{asset("front/assets/images/test.png")}}" />
+                            <div class="text-center" style="margin: 50px;">
+                                <img class="mb-4" width="100px" src="{{asset("front/assets/images/cart.png")}}" />
                                 <h5 class="text-muted">Your cart is empty.</h5>
                                 <ul class="mt-3">
                                     <li>Explorez nos catégories et découvrez nos meilleures offres!</li>

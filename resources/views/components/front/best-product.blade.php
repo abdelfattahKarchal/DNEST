@@ -4,18 +4,19 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="hiraola-section_title">
-                    <h4>New products</h4>
+                    <h4>Best sellers</h4>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="hiraola-product_slider">
                     <!-- Begin new products Slide Item -->
-                    @foreach ($newProducts as $newProduct)
+                    @foreach ($bestProducts as $bestProduct)
                     <div class="slide-item">
-                        <x-front.product-item :product="$newProduct" :isNew="true"> </x-front.product-item>
+                        <x-front.product-item :product="$bestProduct" :isNew="false"> </x-front.product-item>
                     </div>
                     @endforeach
                     <!-- End new products Slide Item -->
+
                 </div>
             </div>
         </div>
@@ -40,7 +41,7 @@
                    },
                    success: function(data) {
 
-                         // $("#listOfNewProduct").load(location.href + "#listOfNewProduct");
+                         // $("#listOfbestProduct").load(location.href + "#listOfbestProduct");
                         location.reload();
                         Swal.fire({
                            // position: 'top-end',

@@ -94,7 +94,7 @@ class OrderController extends Controller
     {
         if (!Auth::check()) {
             $request->session()->put('url.intended', url('/cart'));
-            return redirect()->to('/loginForm');
+            return redirect()->to('/login');
         }
         $statut = Status::where('label', 'not confirmed')->first();
         $orders_products = session()->get('productsCardSession');

@@ -28,14 +28,19 @@
                         </div>
 
                         <div class="product-item-selection_area">
-                            <div class="product-short">
-                                <x-front.errors></x-front.errors>
+
+                            <div class="newsletter-form_wrap">
                                 <form action="{{ url('search/product') }}" method="GET" class="form-inline">
                                     <input type="hidden" name="collection_name" value="{{$collection_name}}" />
-                                    <input class="form-control" type="text" name="product_name" id="product_name"
-                                        placeholder="Cherchez un produit">
-                                    <button style="margin-top:0; width: auto; padding-left: 15px; padding-right: 15px;" class="hiraola-login_btn" type="submit"> <i
-                                            class="ion-ios-search-strong text-white"></i></button>
+                                    <div id="mc_embed_signup_scroll">
+                                        <div id="mc-form" class="mc-form subscribe-form">
+                                            <input type="text" name="product_name" id="product_name"
+                                            placeholder="Cherchez un produit" class="newsletter-input form-control"/>
+                                            <button class="newsletter-btn" type="submit" id="mc-submit">
+                                                <i class="ion-ios-search-strong text-white" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -47,19 +52,19 @@
                             @foreach($products as $product)
                                 <div class="col-lg-4">
                                     <div class="slide-item">
-                                        <x-front.product-item :product=" $product">
+                                        <x-front.product-item :product=" $product" :isNew="false">
                                         </x-front.product-item>
                                     </div>
                                     <div class="list-slide_item">
-                                        <x-front.product-item-list :product=" $product">
+                                        <x-front.product-item-list :product=" $product" :isNew="false">
                                         </x-front.product-item-list>
                                     </div>
                                 </div>
                             @endforeach
                             </div>
                         @else
-                            <div class="col-lg-12 text-center">
-                                <img style="margin-top: 50px;" src="{{asset("front/assets/images/nothing-found.png")}}" />
+                            <div class="text-center" style="margin: 50px;">
+                                <img class="mb-4" width="100px" src="{{asset("front/assets/images/search.png")}}" />
                                 <h5 class="text-muted">No result for "{{$productName}}".</h5>
                                 <ul class="mt-3">
                                     <li>- Vérifiez que vous n'avez pas fait de faute de frappe : "Lirves" au lieu de "Livres"</li>

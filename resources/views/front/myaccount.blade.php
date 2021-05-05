@@ -8,27 +8,26 @@
         <div class="account-page-area">
             <div class="container">
                 <div class="row">
+
+                    <div class="col-12">
+                        <div class="alert alert-success" id="success-alert-account" style="display: none"></div>
+                        <div id="alert-error-account" class="alert alert-danger" style="display: none"></div>
+                    </div>
+
                     <div class="col-lg-3">
                         <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="account-details-tab" data-toggle="tab" href="#account-details"
                                     role="tab" aria-controls="account-details" aria-selected="false">Account Details</a>
                             </li>
-                           {{--  <li class="nav-item">
-                                <a class="nav-link active" id="account-dashboard-tab" data-toggle="tab"
-                                    href="#account-dashboard" role="tab" aria-controls="account-dashboard"
-                                    aria-selected="true">Dashboard</a>
-                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-orders"
                                     role="tab" aria-controls="account-orders" aria-selected="false">Orders</a>
                             </li>
                             <li class="nav-item">
-                            {{--     <a class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
-                                    role="tab" aria-controls="account-address" aria-selected="false">Addresses</a>
-                            </li> --}}
                         </ul>
                     </div>
+
                     <div class="col-lg-9">
                         <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
                             <div class="tab-pane fade" id="account-orders" role="tabpanel"
@@ -86,9 +85,9 @@
                                         </table>
                                     </div>
                                     @else
-                                        <div class="text-center">
-                                            <img style="margin-top: 50px;" src="{{asset("front/assets/images/test.png")}}" />
-                                            <h5 class="text-muted">Your cart is empty.</h5>
+                                        <div class="text-center" style="margin: 50px;">
+                                            <img class="mb-4" width="100px" src="{{asset("front/assets/images/search.png")}}" />
+                                            <h5 class="text-muted">It looks like you shopping history is empty.</h5>
                                             <ul class="mt-3">
                                                 <li>Explorez nos catégories et découvrez nos meilleures offres!</li>
                                             </ul>
@@ -105,61 +104,49 @@
                                     <h4 class="small-title mb-5">MY ACCOUNT DETAILS</h4>
                                     <form id="form-myaccount-details" action="#" class="hiraola-form" style="border: none; padding:0;">
                                         @csrf
-                                        <div class="alert alert-success" id="success-alert-account" style="display: none"></div>
-                                        <div id="alert-error-account" class="alert alert-danger" style="display: none"></div>
                                         <div class="hiraola-form-inner">
                                             <div class="single-input single-input-half">
-                                                <label for="fname">First Name*</label>
+                                                <label for="fname">First name <span style="color:red;">(*)</span> </label>
                                                 <input type="text" name="fname" id="fname"
                                                     value="{{ Auth::user()->name }}">
                                             </div>
                                             <div class="single-input single-input-half">
-                                                <label for="lname">Last Name*</label>
+                                                <label for="lname">Last name <span style="color:red;">(*)</span></label>
                                                 <input type="text" name="lname" id="lname"
                                                     value="{{ Auth::user()->lname }}">
                                             </div>
                                             <div class="single-input single-input-half">
-                                                <label for="phone">Phone*</label>
+                                                <label for="phone">Phone number <span style="color:red;">(*)</span></label>
                                                 <input type="phone" name="phone" id="phone"
                                                     value="{{ Auth::user()->phone }}">
                                             </div>
                                             <div class="single-input single-input-half">
-                                                <label for="email">Email*</label>
+                                                <label for="email">E-mail address <span style="color:red;">(*)</span></label>
                                                 <input type="email" name="email" id="email"
                                                     value="{{ Auth::user()->email }}">
                                             </div>
                                             <div class="single-input">
-                                                <label for="address">Personal address*</label>
+                                                <label for="address">Personal address <span style="color:red;">(*)</span></label>
                                                 <input type="text" name="address" id="address" value="{{ Auth::user()->address }}">
                                             </div>
                                             <div class="single-input">
-                                                <label for="shipping_address">Shipping address*</label>
-                                                <input type="shipping_address" name="shipping_address" id="shipping_address" value="{{ Auth::user()->shipping_address ?? Auth::user()->address }}">
-                                            </div>
-
-                                            <div class="single-input">
-                                                <label for="old_password">Current Password (leave blank to leave
-                                                    unchanged)</label>
-                                                <input type="password" name="old_password" id="old_password">
+                                                <label for="old_password">Current password</label>
+                                                <input type="password" name="old_password" id="old_password" placeholder="*************">
                                             </div>
                                             <div class="single-input">
-                                                <label for="new_password">New Password (leave blank to leave
-                                                    unchanged)</label>
-                                                <input type="password" name="new_password" id="new_password">
+                                                <label for="new_password">New password</label>
+                                                <input type="password" name="new_password" id="new_password" placeholder="*************">
                                             </div>
                                             <div class="single-input">
-                                                <label for="confirmation_password">Confirm New Password</label>
+                                                <label for="confirmation_password">Confirm new password</label>
                                                 <input type="password" name="confirmation_password"
-                                                    id="confirmation_password">
+                                                    id="confirmation_password" placeholder="*************">
                                             </div>
-                                            <div class="single-input">
-                                                <div class="form-group last-child required">
-                                                    <div class="hiraola-btn-ps_right cart-page text-right">
-                                                        <a onclick="updateInformationAccount({{ Auth::user()->id }})"
-                                                            href="javascript:void(0)"> Save changes</a>
-                                                    </div>
-                                                </div>
+                                            
+                                            <div class="col-12 mt-4 mb-4 form-group text-right">
+                                                <button type="button" onclick="updateInformationAccount({{ Auth::user()->id }})" class="hiraola-login_btn" style="display: inline !important;">Save</button>
                                             </div>
+                                            
                                         </div>
                                     </form>
                                 </div>

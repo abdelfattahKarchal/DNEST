@@ -14,7 +14,9 @@
             {{-- <img class="primary-img" src="{{ $product->path_small_1 }}" alt="{{ $product->name }}">
             <img class="secondary-img" src="{{ $product->path_small_2 }}" alt="{{ $product->name }}"> --}}
         </a>
-        
+        @if ($isNew)
+            <span class="sticker">New</span>
+        @endif
     </div>
     <div class="hiraola-product_content">
         <div class="product-desc_info">
