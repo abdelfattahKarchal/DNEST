@@ -46,7 +46,7 @@
                                         <div class="mt-4 row">
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>First Name <span class="required">*</span></label>
+                                                    <label for="first_name">First Name <span style="color:red;">(*)</span></label>
                                                     <input name="first_name" type="text"
                                                         class="form-control @error('first_name') is-invalid @enderror"
                                                         value="{{ old('first_name') }}">
@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Last Name <span class="required">*</span></label>
+                                                    <label>Last Name <span style="color:red;">(*)</span></label>
                                                     <input 
                                                     class="form-control @error('last_name') is-invalid @enderror"
                                                     name="last_name" type="text"
@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
-                                                    <label>Address <span class="required">*</span></label>
+                                                    <label>Address <span style="color:red;">(*)</span></label>
                                                     <input 
                                                     class="form-control @error('address') is-invalid @enderror"
                                                     name="address" placeholder="Street address" type="text"
@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>City <span class="required">*</span></label>
+                                                    <label>City <span style="color:red;">(*)</span></label>
                                                     <input
                                                     class="form-control @error('city') is-invalid @enderror" 
                                                     name="city" placeholder="" type="text"
@@ -107,7 +107,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Postcode / Zip <span class="required">*</span></label>
+                                                    <label>Postcode / Zip <span style="color:red;">(*)</span></label>
                                                     <input
                                                     class="form-control @error('postcode') is-invalid @enderror" 
                                                     name="postcode" placeholder="" type="text"
@@ -121,7 +121,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Email Address <span class="required">*</span></label>
+                                                    <label>Email Address <span style="color:red;">(*)</span></label>
                                                     <input
                                                     class="form-control @error('email') is-invalid @enderror"  
                                                     name="email" placeholder="" type="email"
@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Phone <span class="required">*</span></label>
+                                                    <label>Phone <span style="color:red;">(*)</span></label>
                                                     <input
                                                     class="form-control @error('phone') is-invalid @enderror"  
                                                     name="phone" type="text"
