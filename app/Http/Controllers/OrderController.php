@@ -19,6 +19,7 @@ class OrderController extends Controller
     public function __construct()
     {
        $this->middleware('auth')->only(['listNotConfirmed', 'listConfirmed', 'listInprogress', 'listCanceled', 'show', 'edit', 'update', 'destroy', 'updateStatut']);
+       $this->middleware('verified')->only(['store']);
     }
 
 
@@ -121,12 +122,11 @@ class OrderController extends Controller
         $order->email = $request->email;
         $order->phone = $request->phone;
         $order->status_id = $statut->id;
-        
+
         if ($request->address_2) {
             $order->shipping_address_2 = $request->address_2;
         }
         $order->save();
-        //$productsIds_array  = [];
 
         foreach ($orders_products as $key => $value) {
             $order->products()->attach($value->product->id, ['price' => $value->price, 'quantity' => $value->quantity, 'material' => $value->material]);

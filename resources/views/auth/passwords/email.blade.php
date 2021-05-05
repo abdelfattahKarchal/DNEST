@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row d-flex justify-content-center" style="margin: 50px;">
-        <div class=" mt-2 col-sm-12 col-md-10 col-xs-12 col-lg-4 p-5" style="border: 1px solid #e5e5e5; background-color: #f4f4f4;"
+        <div class=" mt-2 col-sm-12 col-md-10 col-xs-12 col-lg-4 p-5" style="border: 1px solid #e5e5e5; background-color: #f4f4f4;">
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
