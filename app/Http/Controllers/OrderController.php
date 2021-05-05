@@ -93,9 +93,19 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         if (!Auth::check()) {
-            $request->session()->put('url.intended', url('/cart'));
+            $request->session()->put('url.intended', url('/checkout'));
             return redirect()->to('/login');
         }
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'address' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
+            'postcode' => 'required',
+        ]);
+
         $statut = Status::where('label', 'not confirmed')->first();
         $orders_products = session()->get('productsCardSession');
         $order = new Order();
@@ -104,8 +114,17 @@ class OrderController extends Controller
             $order->total_price  += ($value->price * $value->quantity);
         }
         $order->user_id = Auth::user()->id;
-        $order->shipping_address = Auth::user()->shipping_address ?? Auth::user()->address;
+        $order->shipping_address = $request->address;
+        $order->fname = $request->first_name;
+        $order->lname = $request->last_name;
+        $order->city = $request->city;
+        $order->postcode = $request->postcode;
+        $order->email = $request->email;
+        $order->phone = $request->phone;
         $order->status_id = $statut->id;
+        if ($request->address_2) {
+            $order->shipping_address_2 = $request->address_2;
+        }
         $order->save();
         //$productsIds_array  = [];
 

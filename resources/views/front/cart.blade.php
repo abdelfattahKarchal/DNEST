@@ -119,7 +119,7 @@
                                                 <div class="col-6 pt-2 pb-2" style="background-color: red;">
                                                     Subtotal
                                                 </div>
-                                                <div class="col-6 text-right"">
+                                                <div class="col-6 text-right">
                                                     {{ $sum }} MAD
                                                 </div>
                                             </div>
