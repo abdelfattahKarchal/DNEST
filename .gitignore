@@ -9,4 +9,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-sonar-script.sh
+
+.DS_Store
+.DS_Store?
