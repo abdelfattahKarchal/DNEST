@@ -18,11 +18,7 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                @if (session()->has('productsCardSession'))
-                    <h2>Shopping cart ({{count(Session::get('productsCardSession'))}} item(s))</h2>
-                @else
-                    <h2>Shopping cart (0 item(s))</h2>
-                @endif
+                <h2>Shopping cart</h2>
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="active">Cart</li>
@@ -48,14 +44,23 @@
                             </div>
                         </div> --}}
                     @else
+                        <h4 class="mb-4 text-uppercase">Cart Details ({{count(Session::get('productsCardSession'))}} item(s))</h4>
                         @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
                             <form action="{{ route('orders.store') }}" method="POST">
                                 @csrf
                                 <div style="border: 1px solid #e5e5e5; padding:30px;">
                                     @foreach (Session::get('productsCardSession') as $order_product)
                                         <div class="row">
-                                            <div class="col-4 my-auto">
+                                            {{-- <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
+                                                <i class="fa fa-trash mr-2"></i>Delete
+                                            </a> --}}
+                                            <div class="col-4">
                                                 <div class="row">
+                                                    <div class="col-1 my-auto">
+                                                        <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
+                                                            <i class="fa fa-trash mr-2"></i>
+                                                        </a>
+                                                    </div>
                                                     <div class="col-3 my-auto">
                                                         <a href="javascript:void(0)"><img class="img-fluid"
                                                                 src="{{ $order_product->product->url_1() }}"
@@ -64,17 +69,14 @@
                                                     <div class="col-7">
                                                         <p>Name</p>
                                                         <div class="my-auto">
-                                                            <h6 class="mb-3">{{ $order_product->product->name }}</h6>
-                                                            <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
-                                                                <i class="fa fa-trash mr-2"></i>Delete
-                                                            </a>
+                                                            <strong class="mb-3">{{ $order_product->product->name }}</strong>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-2 text-center">
                                                 <p>Material</p>
-                                                <h6 class="my-auto">{{ $order_product->material }}</h6>
+                                                <strong class="my-auto">{{ $order_product->material }}</strong>
                                             </div>
                                             <div class="col-2 text-center">
                                                 <p>Quantity</p>
@@ -91,51 +93,51 @@
                                             </div>
                                             <div class="col-2 text-center">
                                                 <p>Price</p>
-                                                <h6 class="my-auto">{{ $order_product->price }} MAD</h6>
+                                                <div class="my-auto">{{ $order_product->price }} MAD</div>
                                             </div>
                                             <div class="col-2 text-center">
                                                 <p>Sub Total</p>
-                                                <h6 class="my-auto">{{ $order_product->quantity * $order_product->price }} MAD</h6>
+                                                <div class="my-auto">{{ $order_product->quantity * $order_product->price }} MAD</div>
                                             </div>
                                         </div>
-                                        <hr/>
+
+                                        @if (!$loop->last)
+                                            <hr/>
+                                        @endif
+
                                         @php
                                             $sum += ($order_product->quantity * $order_product->price)
                                         @endphp
                                     @endforeach
-                                        <div class="row" >
-                                            <div class="col-2 offset-10 my-auto text-center">
-                                                <p>Total TTC</p>
-                                                <h6 class="mt-2">{{ $sum }} MAD</h6>
-                                            </div>
-                                        </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                            <h2>Cart totals</h2>
-                                            <div class="row">
-                                                <div class="col-6 pt-2 pb-2" style="background-color: red;">
-                                                    Subtotal
+                                <div class="mt-4" style="padding: 30px;">
+                                    <div class="row">
+                                        <div class="col-md-4 offset-8">
+                                                <div class="row" >
+                                                    <h4 class="mb-4 text-uppercase">Cart Totals</h4>
                                                 </div>
-                                                <div class="col-6 text-right"">
-                                                    {{ $sum }} MAD
+                                                <div class="row" style="border: 1px solid #e5e5e5;">
+                                                    <div class="col-6 pt-2 pb-2" style="border-right: 1px solid #e5e5e5;">
+                                                        Sub Total
+                                                    </div>
+                                                    <div class="col-6 my-auto text-center">
+                                                        <strong><span class="amount">{{ $sum }} MAD</span></strong>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6 pt-2 pb-2" style="background-color: red;">
-                                                    Total
+                                                <div class="row" style="border-right: 1px solid #e5e5e5; border-left: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5;">
+                                                    <div class="col-6 pt-2 pb-2" style="border-right: 1px solid #e5e5e5;">
+                                                        Total
+                                                    </div>
+                                                    <div class="col-6 my-auto text-center">
+                                                        <strong><span class="amount">{{ $sum }} MAD</span></strong>
+                                                    </div>
                                                 </div>
-                                                <div class="col-6 text-right">
-                                                    {{ $sum }} MAD
+                                                <div class="row">
+                                                    <div class="col-6 p-0 mt-3">
+                                                        <button type="button" onclick="window.location.href='{{url('/checkout')}}';" class="hiraola-login_btn">Checkout</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6" style="padding: 0px; width:100%;">
-                                                    <a href="{{url('/checkout')}}">Proceed to checkout</a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

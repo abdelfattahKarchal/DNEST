@@ -1,17 +1,15 @@
     <div class="hiraola-sidebar-catagories_area">
 
         <div class="category-module hiraola-sidebar_categories">
-            <div class="category-module_heading">
-                <h5 class="mt-2 mb-2" style="padding-top: 2px; padding-bottom: 2px;">Collections</h5>
+            <div class="category-module_heading my-auto" style="padding-top:30px;padding-bottom:30px">
+                <h5 class="mb-0">Collections</h5>
             </div>
             <div class="module-body">
                 <ul class="module-list_item">
                     @foreach ($collections as $collection)
                         @if ($collection->active == 1)
                             <li>
-                                {{-- <a href="javascript:void(0)"
-                                    class="text-uppercase font-weight-bold target">
-                                    --}} <a href="#pageSubmenu-{{ $collection->id }}"
+                                    <a href="#pageSubmenu-{{ $collection->id }}"
                                         data-toggle="collapse" aria-expanded="false"
                                         class="dropdown-toggle text-uppercase font-weight-bold target">
                                         {{ $collection->name }}

@@ -23,8 +23,8 @@
 
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="shop-toolbar">
-                        <div class="text-center align-middle">
-                            <h5 class="mt-2 mb-2">{{ $collection_name ?? '' }}</h5>
+                        <div class="my-auto">
+                            <h5 class="mb-0">{{ $collection_name ?? '' }}</h5>
                         </div>
 
                         <div class="product-item-selection_area">
