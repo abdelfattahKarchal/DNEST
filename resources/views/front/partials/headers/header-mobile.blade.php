@@ -25,11 +25,11 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="menu-item-has-children">
+                    {{-- <li class="menu-item-has-children">
                         <a href="{{ route('blogs.index') }}">
                             <span class="mm-text">Blog</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="menu-item-has-children">
                         <a href="{{ route('aboutUs') }}">
                             <span class="mm-text">About AS</span>

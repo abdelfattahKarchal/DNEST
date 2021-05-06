@@ -4,6 +4,11 @@
     <div class="contact-main-page">
         <div class="container">
             <div id="google-map"></div>
+        @if (session()->has('status'))
+            <div id="message-success" class="alert alert-success mt-3" role="alert">
+                {{ session()->get('status') }}
+            </div>
+        @endif
         </div>
         <div class="container">
             <div class="row">
@@ -33,22 +38,54 @@
                     <div class="contact-form-content">
                         <h3 class="contact-page-title">Tell Us Your Message</h3>
                         <div class="contact-form">
-                            <form id="contact-form" action="http://hasthemes.com/file/mail.php" method="post">
+                            <form id="contact-form" action="{{ url('contacts') }}" method="post">
+                                @csrf
                                 <div class="form-group">
-                                    <label>Your Name <span class="required">*</span></label>
-                                    <input type="text" name="con_name" id="con_name" required>
+                                    <label>Your Name <span class="required">(*)</span></label>
+                                    <input
+                                    class="form-control @error('name') is-invalid @enderror"
+                                     type="text" name="name" id="name"
+                                     value="{{ old('name')}}">
+                                     @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong class="text-danger">{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Your Email <span class="required">*</span></label>
-                                    <input type="email" name="con_email" id="con_email" required>
+                                    <label>Your Email <span class="required">(*)</span></label>
+                                    <input 
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    type="email" name="email" id="email" 
+                                    value="{{ old('email')}}">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong class="text-danger">{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Subject</label>
-                                    <input type="text" name="con_subject" id="con_subject">
+                                    <label>Subject <span class="required">(*)</span></label>
+                                    <input 
+                                    class="form-control @error('subject') is-invalid @enderror"
+                                    type="text" name="subject" id="subject"
+                                    value="{{ old('subject')}}">
+                                    @error('subject')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong class="text-danger">{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group form-group-2">
-                                    <label>Your Message</label>
-                                    <textarea name="con_message" id="con_message"></textarea>
+                                    <label>Your Message <span class="required">(*)</span></label>
+                                    <textarea
+                                    class="form-control @error('message') is-invalid @enderror"
+                                     name="message" id="message"></textarea>
+                                     @error('message')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong class="text-danger">{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" value="submit" id="submit" class="alsita-contact-form_btn"

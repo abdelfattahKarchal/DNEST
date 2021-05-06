@@ -28,7 +28,7 @@
 
                                 </ul>
                             </li>
-                            <li><a href=" {{ route('blogs.index') }} ">Blog</a></li>
+                           {{--  <li><a href=" {{ route('blogs.index') }} ">Blog</a></li> --}}
                             <li><a href=" {{ route('aboutUs') }} ">About Us</a></li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>

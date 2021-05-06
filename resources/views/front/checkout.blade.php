@@ -49,7 +49,7 @@
                                                     <label for="first_name">First Name <span style="color:red;">(*)</span></label>
                                                     <input name="first_name" type="text"
                                                         class="form-control @error('first_name') is-invalid @enderror"
-                                                        value="{{ old('first_name') }}">
+                                                        value="{{ old('first_name') ?? Auth()->user()->name }}">
                                                     @error('first_name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong class="text-danger">{{ $message }}</strong>
@@ -63,7 +63,7 @@
                                                     <input 
                                                     class="form-control @error('last_name') is-invalid @enderror"
                                                     name="last_name" type="text"
-                                                    value="{{ old('last_name') }}">
+                                                    value="{{ old('last_name') ?? Auth()->user()->lname }}">
                                                     @error('last_name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong class="text-danger">{{ $message }}</strong>
@@ -77,7 +77,7 @@
                                                     <input 
                                                     class="form-control @error('address') is-invalid @enderror"
                                                     name="address" placeholder="Street address" type="text"
-                                                    value="{{ old('address') }}">
+                                                    value="{{ old('address') ?? Auth()->user()->address }}">
                                                     @error('address')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong class="text-danger">{{ $message }}</strong>
@@ -125,7 +125,7 @@
                                                     <input
                                                     class="form-control @error('email') is-invalid @enderror"  
                                                     name="email" placeholder="" type="email"
-                                                    value="{{ old('email') }}">
+                                                    value="{{ old('email') ?? Auth()->user()->email }}">
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong class="text-danger">{{ $message }}</strong>
@@ -139,7 +139,7 @@
                                                     <input
                                                     class="form-control @error('phone') is-invalid @enderror"  
                                                     name="phone" type="text"
-                                                    value="{{ old('phone') }}">
+                                                    value="{{ old('phone') ?? Auth()->user()->phone }}">
                                                     @error('phone')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong class="text-danger">{{ $message }}</strong>

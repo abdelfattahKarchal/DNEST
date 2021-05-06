@@ -35,14 +35,16 @@ class NewsLetterController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validation = $request->validate([
-            'email' => 'email',
+            'email' => 'required|email',
         ]);
         $email = NewsLetter::where('email', $request->email)->get();
-        if ($email) {
+        if (count($email) > 0) {
             session()->put('showNewsletter', false);
             return $email;
         }
+        
         $newsLetter = NewsLetter::create(['email'=>$request->email]);
         if($newsLetter){
             session()->put('showNewsletter', false);

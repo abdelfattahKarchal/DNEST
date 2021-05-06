@@ -521,57 +521,6 @@
 
 @section('js')
     <script>
-        /* function addReview(product_id) {
-            var description = $('#con_message').val();
-            var note = $('#note').val();
-            if (description) {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: 'POST',
-                    url: "{{ url('reviews') }}",
-                    data: {
-                        product_id: product_id,
-                        description: description,
-                        note: note
-                    },
-                    success: function (data) {
-                        if (data) {
-                            var reviewsCount = parseInt($.trim($('#reviews-count').text()));
-                            var longDateFormat = 'dd/MM/yyyy';
-                            var date_review = jQuery.format.date(data.review.created_at, longDateFormat)
-                            var reviewContent = '';
-                            reviewContent = `
-                                                        <tr>
-                                                            <td style="width: 50%;">
-                                                                <strong>` + data.user.name + `</strong></td>
-                                                            <td class="text-right">` + date_review + `</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">
-                                                                <p>` + data.review.description + `</p>
-                                                            </td>
-                                                        </tr>
-                                                        `;
-                            $('#reviews-content').append(reviewContent);
-                            $('#reviews-count').text(reviewsCount + 1);
-                            $('#con_message').val('');
-                            Swal.fire({
-                                // position: 'top-end',
-                                icon: 'success',
-                                title: 'Your review has been saved',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        } else {
-                            window.location.href = "/loginForm";
-                        }
-
-                    }
-                });
-            }
-        }; */
 
         /* add to card method */
         function addToCard(product_id) {

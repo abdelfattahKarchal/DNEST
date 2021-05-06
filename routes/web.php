@@ -79,9 +79,10 @@ Route::delete('carts/{id}/material/{material}/delete', 'CartController@delete');
 Route::post('carts/quantity/update', 'CartController@updateQuantity');
 Route::resource('newsletters','NewsLetterController')->only('store');
 Route::post('newsletters/stop', 'NewsLetterController@stop');
+Route::post('contacts', 'MessageController@store');
 
 
-Route::resource('blogs','BlogController');
+//Route::resource('blogs','BlogController');
 Route::resource('comments','CommentController');
 
 

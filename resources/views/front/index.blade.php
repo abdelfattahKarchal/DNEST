@@ -86,7 +86,7 @@
     </div>
 
     <!-- Begin best sellers -->
-    <x-front.best-product :bestProducts="$newProducts"></x-front.best-product>
+    <x-front.best-product :bestProducts="$best_products"></x-front.best-product>
     <!-- end best sellers -->
 
     <div class="hiraola-banner_area-2 hiraola-banner_area-7">

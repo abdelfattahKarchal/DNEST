@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class OrderProduct extends Model
 {
@@ -12,4 +13,8 @@ class OrderProduct extends Model
     public $quantity;
     public $price;
     public $material;
+
+    public function best_product(){
+        return $this->hasOne(Product::class);
+    }
 }

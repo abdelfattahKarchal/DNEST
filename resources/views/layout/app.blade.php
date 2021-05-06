@@ -164,13 +164,7 @@
                     },
                     success: function(data) {
                         $('#newsletter').hide();
-                       /*  Swal.fire({
-                            // position: 'top-end',
-                            icon: 'success',
-                            title: 'Your response has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
-                        }) */
+                       
                     },
                     error: function(data) {
                         $('.errorsMessage').empty();
@@ -203,6 +197,35 @@
             });
 
         });
+
+        $('#mc-submit').click(function(e) {
+            console.log(555555);
+                e.preventDefault();
+                var email = $('#mc-email').val();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: "{{ url('newsletters') }}",
+                    data: {
+                        email: email,
+                    },
+                    success: function(data) {
+                        $('#mc-email').val('');
+                       
+                    },
+                    error: function(data) {
+                        $('.errorsMessage').empty();
+                        $.each(data.responseJSON.errors, function(key, value) {
+                            console.log(key + ": " + value);
+                            $('<span>' + value + '</span> <br>').appendTo(
+                                '.errorsMessage');
+                        });
+                        $('.errorsMessage').show();
+                    }
+                });
+            })
 
     </script>
 
