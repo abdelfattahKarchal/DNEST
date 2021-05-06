@@ -36,7 +36,7 @@
                                         <div id="mc-form" class="mc-form subscribe-form">
                                             <input type="text" name="product_name" id="product_name"
                                             placeholder="Cherchez un produit" class="newsletter-input form-control"/>
-                                            <button class="newsletter-btn" type="submit" id="mc-submit">
+                                            <button class="newsletter-btn" type="submit">
                                                 <i class="ion-ios-search-strong text-white" aria-hidden="true"></i>
                                             </button>
                                         </div>
