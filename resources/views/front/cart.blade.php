@@ -44,8 +44,8 @@
                             </div>
                         </div> --}}
                     @else
-                        <h4 class="mb-4 text-uppercase">Cart Details ({{count(Session::get('productsCardSession'))}} item(s))</h4>
-                        @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
+                    @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
+                    <h4 class="mb-4 text-uppercase">Cart Details ({{count(Session::get('productsCardSession'))}} item(s))</h4>
                             <form action="{{ route('orders.store') }}" method="POST">
                                 @csrf
                                 <div style="border: 1px solid #e5e5e5; padding:30px;">
