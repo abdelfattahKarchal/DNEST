@@ -22,7 +22,7 @@ class MessageController extends Controller
             'subject' => $request->subject,
             'message' => $request->message,
         ]);
-
+        
         session()->flash('status', 'Your message have been saved');
         return redirect()->back();
     }
