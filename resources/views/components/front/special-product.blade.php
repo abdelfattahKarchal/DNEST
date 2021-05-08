@@ -4,15 +4,15 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="hiraola-section_title">
-                    <h4>Best sellers</h4>
+                    <h4>VOUS AIMERIEZ AUSSI</h4>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="hiraola-product_slider">
                     <!-- Begin new products Slide Item -->
-                    @foreach ($bestProducts as $bestProduct)
+                    @foreach ($specialProducts as $specialProduct)
                     <div class="slide-item">
-                        <x-front.product-item :product="$bestProduct" :isNew="false"> </x-front.product-item>
+                        <x-front.product-item :product="$specialProduct" :isNew="false"> </x-front.product-item>
                     </div>
                     @endforeach
                     <!-- End new products Slide Item -->

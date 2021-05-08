@@ -113,12 +113,18 @@ class ProductController extends Controller
         $reviews_notes = (int) (count($product->reviews) > 0 ? ($product_sum / count($product->reviews)) : 0);
 
         $order_product_count = OrderProduct::where('product_id',$id)->count();
-        
+
+        $specialProducts = SubCategory::with(['products' => function($product) use($id){
+            $product->where('id', '!=', $id);
+
+        }])->find($product->subCategory->id)->products->take(10); 
+        //dd($specialProducts);
         return view('front.single-product', [
             'product' => $product,
             'material' => 'gold',
             'reviews_notes' => $reviews_notes,
-            'order_product_count' => $order_product_count
+            'order_product_count' => $order_product_count,
+            'specialProducts' => $specialProducts
         ]);
     }
 

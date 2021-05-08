@@ -7,6 +7,7 @@ use App\Image;
 use App\OrderProduct;
 use App\Product;
 use App\Review;
+use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -177,11 +178,17 @@ class ImageController extends Controller
 
         $order_product_count = OrderProduct::where('product_id',$id)->count();
 
+        $specialProducts = SubCategory::with(['products' => function($product) use($id){
+            $product->where('id', '!=', $id);
+
+        }])->find($product->subCategory->id)->products->take(10);
+
         return view('front.single-product', [
             'product' => $product,
             'material' => $material,
             'reviews_notes' => $reviews_notes,
-            'order_product_count' => $order_product_count
+            'order_product_count' => $order_product_count,
+            'specialProducts' => $specialProducts
         ]);
     }
 }
