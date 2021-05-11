@@ -133,7 +133,7 @@ class OrderController extends Controller
             //array_push($productsIds_array, $value->id);
         }
 
-        Mail::to('abdelfattah59@gmail.com')->send(new OrderConfirmationMail($order));
+        Mail::to($order->email)->send(new OrderConfirmationMail($order));
 
         // $order->products()->attach($productsIds_array);
         session()->forget('productsCardSession');

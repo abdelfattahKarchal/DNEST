@@ -26,9 +26,12 @@ Route::get('/checkout', function () {
 });
 Route::get('/mail', function () {
 
-    $order = \App\Order::find(2);
+    $order = \App\Order::find(33);
 
-    return view('emails.orders.confirmation', [
+    /* return view('emails.orders.confirmation', [
+        'order' => $order,
+    ]); */
+    return view('emails.test', [
         'order' => $order,
     ]);
 });
