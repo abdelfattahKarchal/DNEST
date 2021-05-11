@@ -107,7 +107,6 @@
                             </table></td>
                     </tr>
                 </table>
-{{--                Header--}}
                 <table cellpadding="0" cellspacing="0" class="es-header" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
                     <tr style="border-collapse:collapse">
                         <td align="center" style="padding:0;Margin:0">
@@ -141,23 +140,20 @@
                                                         <tr style="border-collapse:collapse">
                                                             <td align="left" style="padding:0;Margin:0"><h3 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#666666">Hi, {{$order->fname.' '.$order->lname}},</h3></td>
                                                         </tr>
-
                                                         <tr style="border-collapse:collapse">
-                                                            <td colspan="2" align="center" style="padding:0;Margin:0;padding-top:15px"><h4 style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Order N #{{$order->id}}</h4></td>
+                                                            <td align="left" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">I am reaching out to you because I was hoping you would like to know more about us.</p></td>
                                                         </tr>
-
-                                                        @foreach($order->products as $product)
-                                                            <tr style="border-collapse:">
-                                                                <td align="center" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Product : {{$product->name}}</p></td>
-                                                                <td align="center" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Product : {{$product->name}}</p></td>
-                                                            </tr>
-                                                        @endforeach
-
+                                                        <tr style="border-collapse:collapse">
+                                                            <td align="left" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">I'm an account executive at Financial company. We provide extensive assistance with any audit issues to modern businesses. You had partnered with some our clients like CustomerName1 and CustomerName2. I believe I could be of great value for your business and would love to work with you.<br></p></td>
+                                                        </tr>
+                                                        <tr style="border-collapse:collapse">
+                                                            <td align="left" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Are you available for a 15 minute-meeting on Monday (June 18th) at 9:00 am. Let me know if it sounds good for you.</p></td>
+                                                        </tr>
                                                         <tr style="border-collapse:collapse">
                                                             <td align="left" style="padding:0;Margin:0;padding-top:25px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Thanks for your time! I am sincerely grateful!<br></p></td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
-                                                            <td align="left" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Best regards,</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">TheDNest</p></td>
+                                                            <td align="left" style="padding:0;Margin:0;padding-top:15px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Best regards,</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#999999;font-size:14px">Adam Kendal</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -166,8 +162,6 @@
                             </table></td>
                     </tr>
                 </table>
-
-{{--                Footer--}}
                 <table cellpadding="0" cellspacing="0" class="es-footer" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top">
                     <tr style="border-collapse:collapse">
                         <td align="center" style="padding:0;Margin:0">

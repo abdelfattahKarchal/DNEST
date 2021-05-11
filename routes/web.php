@@ -24,6 +24,14 @@ Route::get('/welcome', function () {
 Route::get('/checkout', function () {
     return view('front.checkout');
 });
+Route::get('/mail', function () {
+
+    $order = \App\Order::find(2);
+
+    return view('emails.orders.confirmation', [
+        'order' => $order,
+    ]);
+});
 //Route::put('/myaccount/{myaccount}/address', 'MyAccountController@address')->name('myaccount.address');
 Route::resource('myaccount', 'MyAccountController')->middleware('verified');
 
