@@ -91,7 +91,7 @@
                                                         type="text">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                           {{--  <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>City <span style="color:red;">(*)</span></label>
                                                     <input
@@ -118,7 +118,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
                                                     <label>Email Address <span style="color:red;">(*)</span></label>

@@ -103,8 +103,8 @@ class OrderController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'address' => 'required',
             'phone' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
+            /* 'city' => 'required',
+            'postcode' => 'required', */
         ]);
         $statut = Status::where('label', 'not confirmed')->first();
         $orders_products = session()->get('productsCardSession');
@@ -117,8 +117,8 @@ class OrderController extends Controller
         $order->shipping_address = $request->address;
         $order->fname = $request->first_name;
         $order->lname = $request->last_name;
-        $order->city = $request->city;
-        $order->postcode = $request->postcode;
+        /* $order->city = $request->city;
+        $order->postcode = $request->postcode; */
         $order->email = $request->email;
         $order->phone = $request->phone;
         $order->status_id = $statut->id;
