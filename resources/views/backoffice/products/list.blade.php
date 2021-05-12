@@ -5,6 +5,11 @@
     <link href="{{ asset('backoffice/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}"
         rel="stylesheet">
     <!-- ------------- end JQuery DataTable Css not in index -->
+    <style> 
+        .dt-buttons{
+            display: none !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -31,18 +36,22 @@
                        
                         
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                       {{--  <table class="table table-bordered table-striped table-hover dataTable"> --}}
                             
                             <thead>
                                 <tr>
+                                    <th>Pd Nº</th>
                                     <th>Name</th>
                                     <th>Image 1</th>
                                     <th>Image 2</th>
-                                    <th>Unit price</th>
-                                    <th>New Price</th>
+                                    <th>Oldprice_gold</th>
+                                    <th>Newprice_gold</th>
+                                    <th>Oldprice_silver</th>
+                                    <th>Newprice_silver</th>
                                     <th>Quantity</th>
                                     <th>Sub Category</th>
-                                    <th>Category</th>
-                                    <th>Collection</th>
+                                   {{--  <th>Category</th>
+                                    <th>Collection</th> --}}
                                     <th>Action</th>
                                     <th>Active</th>
                                     <th>Photos</th>
@@ -50,15 +59,18 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>Pd Nº</th>
                                     <th>Name</th>
                                     <th>Image 1</th>
                                     <th>Image 2</th>
-                                    <th>Unit price</th>
-                                    <th>New Price</th>
+                                    <th>Oldprice_gold</th>
+                                    <th>Newprice_gold</th>
+                                    <th>Oldprice_silver</th>
+                                    <th>Newprice_silver</th>
                                     <th>Quantity</th>
                                     <th>Sub Category</th>
-                                    <th>Category</th>
-                                    <th>Collection</th>
+                                    {{-- <th>Category</th>
+                                    <th>Collection</th> --}}
                                     <th>Action</th>
                                     <th>Active</th>
                                     <th>Photos</th>
@@ -68,15 +80,19 @@
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr>
+                                        <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td> <img src="{{ $product->url_1() }}" width="90px" alt=""> </td>
                                         <td> <img src="{{ $product->url_2() }}" width="90px" alt=""> </td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->new_price }}</td>
+                                        <td>{{ $product->price_silver }}</td>
+                                        <td>{{ $product->new_price_silver }}</td>
                                         <td>{{ $product->quantity }}</td>
-                                        <td nowrap="nowrap">{{ $product->subCategory->name ?? 'n/d' }}</td>
-                                        <td nowrap="nowrap">{{ $product->subCategory->category->name ?? 'n/d' }}</td>
-                                        <td nowrap="nowrap">{{ $product->subCategory->category->collection->name ?? 'n/d'}}</td>
+                                       {{--  <td nowrap="nowrap">{{ $product->subCategory->name ?? 'n/d' }}</td> --}}
+                                        <td nowrap="nowrap">{{ $product->subCategory->category->collection->name ?? 'n/d'}}->{{ $product->subCategory->category->name ?? 'n/d' }}->{{ $product->subCategory->name ?? 'n/d' }}</td>
+                                        {{-- <td nowrap="nowrap">{{ $product->subCategory->category->name ?? 'n/d' }}</td>
+                                        <td nowrap="nowrap">{{ $product->subCategory->category->collection->name ?? 'n/d'}}</td> --}}
                                         <td nowrap="nowrap">
                                             <a title="delete" 
                                                 onclick="deleteProduct({{ $product->id }})"

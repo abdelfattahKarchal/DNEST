@@ -42,12 +42,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    
 
     public function logout(HttpRequest $request)
     {
+        $route = 'index';
+        if (in_array(Auth::user()->role->label, ['admin','supadmin'])) {
+            $route = 'back.login';
+        }
         $this->performLogout($request);
 
-        return redirect()->route('index');
+        return redirect()->route($route);
     }
 
     public function showLoginForm()
@@ -58,4 +63,21 @@ class LoginController extends Controller
         }
         return view('auth.login');
     }
+
+    public function redirectTo()
+    {
+        switch(Auth::user()->role->label){
+            case 'admin':
+                $this->redirectTo = '/administrationhome';
+                return $this->redirectTo;
+                break;
+            case 'supadmin':
+                $this->redirectTo = '/administrationhome';
+                return $this->redirectTo;
+                break;
+            default:
+                $this->redirectTo = '/login';
+                return $this->redirectTo;
+        }
+    } 
 }

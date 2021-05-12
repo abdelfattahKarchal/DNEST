@@ -186,6 +186,10 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $order->shipping_address = $request->shipping_address;
         $order->total_price = $request->total_price;
+        $order->fname = $request->fname;
+        $order->lname = $request->lname;
+        $order->phone = $request->phone;
+        $order->email = $request->email;
 
         $order->save();
 

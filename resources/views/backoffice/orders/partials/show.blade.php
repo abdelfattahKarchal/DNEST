@@ -18,7 +18,7 @@
                         <img src="{{ asset('backoffice/images/user-lg.jpg') }}" alt="AdminBSB - Profile Image" />
                     </div>
                     <div class="content-area">
-                        <h3>{{ $order->user->name }}</h3>
+                        <h3>{{ $order->fname }} {{ $order->lname }}</h3>
                     </div>
                 </div>
                 <div class="profile-footer">
@@ -77,7 +77,16 @@
                                 Email
                             </div>
                             <div class="content">
-                                {{ $order->user->email }}
+                                {{ $order->email }}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="title">
+                                <i class="material-icons">phone</i>
+                                Phone number
+                            </div>
+                            <div class="content">
+                                {{ $order->phone}}
                             </div>
                         </li>
                         <li>
@@ -89,7 +98,8 @@
                                 User Address : {{ $order->user->address }}
                                 @if ($order->shipping_address)
                                     <br>
-                                    Shipping Address : {{ $order->shipping_address}}
+                                    Shipping Address : {{ $order->shipping_address}} <br>
+                                    {{ $order->shipping_address_2}}
                                 @endif
                                 
                             </div>
@@ -120,12 +130,14 @@
 
                         <div class="body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                {{-- <table class="table table-bordered table-striped table-hover dataTable js-exportable"> --}}
+                                <table class="table table-bordered table-striped table-hover dataTable">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
+                                            <th>Material</th>
 
                                         </tr>
                                     </thead>
@@ -134,6 +146,7 @@
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
+                                            <th>Material</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -144,6 +157,7 @@
                                                 --}}
                                                 <td>{{ $product->pivot->price }}</td>
                                                 <td>{{ $product->pivot->quantity }}</td>
+                                                <td>{{ $product->pivot->material }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

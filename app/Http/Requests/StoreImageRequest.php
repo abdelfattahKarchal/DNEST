@@ -27,6 +27,7 @@ class StoreImageRequest extends FormRequest
             'confirm' => 'bail|required',
             'image1' => 'required|image|mimes:jpeg,jpg,png|dimensions:width=438,height=438',
             'image2' => 'required|image|mimes:jpeg,jpg,png|dimensions:width=1000,height=1000',
+            'material' => 'required'
         ];
     }
 }

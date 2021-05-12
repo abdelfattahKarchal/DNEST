@@ -42,7 +42,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Image1</th>
-                                    <th>Image2</th>
                                     <th>Description</th>
                                     <th>CreatedAt</th>
                                     <th>Action</th>
@@ -53,7 +52,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Image1</th>
-                                    <th>Image2</th>
                                     <th>Description</th>
                                     <th>CreatedAt</th>
                                     <th>Action</th>
@@ -65,13 +63,6 @@
                                     <tr>
                                         <td>{{ $collection->name }}</td>
                                         <td> <img src="{{ $collection->url_1() }}" width="90px" alt=""> </td>
-                                        <td>
-                                            @if ($collection->url_2())
-                                                <img src="{{ $collection->url_2() }}" width="90px" alt="">
-                                            @else
-                                                n/d
-                                            @endif
-                                        </td>
                                         <td>{{ $collection->description }}</td>
                                         <td>{{ $collection->created_at }}</td>
                                         <td nowrap="nowrap">

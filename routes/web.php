@@ -41,9 +41,7 @@ Route::resource('myaccount', 'MyAccountController')->middleware('verified');
 /* login form for customer*/
 Route::get('/loginForm','LoginController@loginForm')->name('login.form');
 Route::get('/registerForm','LoginController@registerForm')->name('register.form');
-/* Route::get('/admin', function () {
-    return view('backoffice.index');
-})->middleware('auth'); */
+Route::get('/administrationhome','AdministrationController@index')->middleware('auth');
 
 //Route::get('redirection', 'DashboardController@index')->name('admin.index')->middleware('auth');
 
@@ -53,7 +51,7 @@ Route::get('/registerForm','LoginController@registerForm')->name('register.form'
 
 Route::get('/administration', function () {
     return view('backoffice.auth.login');
-});
+})->name('back.login');
 /** admisitration routes */
 Route::get('/admin/collections', 'CollectionController@adminCollections');
 Route::get('products/{id}/material/{material}', 'ImageController@getproductsImagesByMaterial');
