@@ -7,8 +7,11 @@
             
             <thead>
                 <tr>
+                    <th>Order Nº</th>
                     <th>Client</th>
                     <th>Shipping address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th>total price</th>
                     <th>CreatedAt</th>
                     <th>Action</th>
@@ -17,8 +20,11 @@
             </thead>
             <tfoot>
                 <tr>
+                    <th>Order Nº</th>
                     <th>Client</th>
                     <th>Shipping address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th>total price</th>
                     <th>CreatedAt</th>
                     <th>Action</th>
@@ -28,8 +34,11 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr>
-                        <td>{{ $order->user->name }}</td>
+                        <td>{{ $order->id }}</td>
+                        <td>{{ $order->fname }} {{ $order->lname }}</td>
                         <td>{{ $order->shipping_address }}</td>
+                        <td>{{ $order->email }}</td>
+                        <td>{{ $order->phone }}</td>
                         <td>{{ $order->total_price }}</td>
                         <td>{{ $order->created_at }}</td>
                         <td width="90px">

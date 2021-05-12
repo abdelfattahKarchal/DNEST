@@ -30,28 +30,45 @@
 </div> 
 <div class="form-group form-float">
     <div class="form-line">
-        <label for="price">Price <span class="text-danger">*</span></label>
+        <label for="price">Old Price gold <span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="price" name="price"
             value="{{ old('price', $product->price ?? null) }}" required>
     </div>
 </div>
 <div class="form-group form-float">
     <div class="form-line">
-        <label for="new_price">New price <span class="text-danger">*</span></label>
+        <label for="new_price">New price gold<span class="text-danger">*</span></label>
         <input type="text" class="form-control" id="new_price" name="new_price"
             value="{{ old('new_price', $product->new_price ?? null) }}" required>
     </div>
 </div>
+
 <div class="form-group form-float">
     <div class="form-line">
-        <label for="image1">Image 1 (438*438) <span class="text-danger">*</span></label>
+        <label for="price_silver">Old price silver<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="price_silver" name="price_silver"
+            value="{{ old('price_silver', $product->price_silver ?? null) }}" required>
+    </div>
+</div>
+
+<div class="form-group form-float">
+    <div class="form-line">
+        <label for="new_price_silver">New price silver<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="new_price_silver" name="new_price_silver"
+            value="{{ old('new_price_silver', $product->new_price_silver ?? null) }}" required>
+    </div>
+</div>
+
+<div class="form-group form-float">
+    <div class="form-line">
+        <label for="image1">Image gold (438*438) <span class="text-danger">*</span></label>
         <input type="file" class="form-control" id="image1" name="image1"
             value="{{ old('image1', $product->path_small_1 ?? null) }}">
     </div>
 </div>
 <div class="form-group form-float">
     <div class="form-line">
-        <label for="image2">Image 2 (438*438) <span class="text-danger">*</span></label>
+        <label for="image2">Image silver (438*438) <span class="text-danger">*</span></label>
         <input type="file" class="form-control" id="image2" name="image2"
             value="{{ old('image2', $product->path_small_2 ?? null) }}">
     </div>

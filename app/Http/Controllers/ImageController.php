@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\UpdateImageRequest;
 use App\Image;
 use App\OrderProduct;
@@ -44,7 +45,7 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreImageRequest $request)
     {
         $this->authorize('create', new Image());
         $hasFile1 = $request->hasFile('image1');
@@ -64,9 +65,10 @@ class ImageController extends Controller
         $image = Image::create([
             'path_small' => $file1_name,
             'path_large' => $file2_name,
-            'product_id' => $request->product_id
+            'product_id' => $request->product_id,
+            'active' => 0
         ]);
-        
+        $image->material = $request->material;
         $image->save();
         session()->flash('status', 'Image was saved successfully');
         return redirect()->back();
@@ -128,6 +130,7 @@ class ImageController extends Controller
             }
             $image->path_large = $file2->store('products');
         }
+        $image->material = $request->material;
         $image->save();
         session()->flash('status', 'Image was updated successfully');
         return redirect()->back();

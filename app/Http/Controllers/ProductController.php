@@ -86,10 +86,13 @@ class ProductController extends Controller
             'sub_category_id' => $request->subcategory,
             'price' => $request->price,
             'new_price' => $request->new_price,
+            'price_silver' => $request->price_silver,
+            'new_price_silver' => $request->new_price_silver,
             'quantity' => $request->quantity,
             'path_small_1' => $file1_name,
             'path_small_2' => $file2_name,
             'description' => $request->description,
+            'active' => 0,
         ]);
         session()->flash('status','Product add successfully');
        return redirect()->back();
@@ -160,6 +163,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = $request->price;
         $product->new_price = $request->new_price;
+        $product->price_silver = $request->price_silver;
+        $product->new_price_silver = $request->new_price_silver;
         $product->quantity = $request->quantity;
 
         $product->sub_category_id = $request->subcategory;

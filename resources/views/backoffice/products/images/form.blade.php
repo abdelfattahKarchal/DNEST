@@ -22,6 +22,30 @@ value="{{ $product_id }}">
     </div>
 </div>
 
+<div class="form-group form-float">
+    <div class="form-line">
+        <label for="material"> Material <span class="text-danger">*</span></label>
+        <select class="form-control show-tick" name="material">
+                <option value="gold"
+                    @isset($image)
+                        @if ($image->material== 'gold')
+                            selected="selected"
+                        @endif
+                    @endisset
+                  >Gold</option>
+
+                  <option value="silver"
+                  @isset($image)
+                    @if ($image->material== 'silver')
+                        selected="selected"
+                    @endif
+                  @endisset
+                      
+                  >Sliver</option>
+        </select>
+    </div>
+</div> 
+
 <div class="form-group">
     <input type="checkbox" id="confirm" name="confirm">
     <label for="confirm">I confirm all informations</label>

@@ -5,6 +5,11 @@
     <link href="{{ asset('backoffice/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}"
         rel="stylesheet">
     <!-- ------------- end JQuery DataTable Css not in index -->
+    <style> 
+        .dt-buttons{
+            display: none !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -31,11 +36,13 @@
                        
                         
                         <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                       {{--  <table class="table table-bordered table-striped table-hover dataTable"> --}}
                             
                             <thead>
                                 <tr>
                                     <th>Image small (438*438)</th>
                                     <th>Image large (1000*1000)</th>
+                                    <th>Material</th>
                                     <th>Action</th>
                                     <th>Active</th>
                                 </tr>
@@ -44,6 +51,7 @@
                                 <tr>
                                     <th>Image small (438*438)</th>
                                     <th>Image large (1000*1000)</th>
+                                    <th>Material</th>
                                     <th>Action</th>
                                     <th>Active</th>
                              
@@ -55,6 +63,7 @@
                                         
                                         <td> <img src="{{ $image->urlSmall() }}" width="300px" height="200px" alt=""> </td>
                                         <td> <img src="{{ $image->urlLarge() }}" width="300px" height="200px" alt=""> </td>
+                                        <td> {{ $image->material }}</td>
                                         {{-- <td> <img src="{{ $image->path_small }}" width="300px" height="200px" alt=""> </td>
                                         <td> <img src="{{ $image->path_large }}" width="300px" height="200px" alt=""> </td> --}}
                                         

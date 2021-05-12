@@ -25,7 +25,12 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'confirm' => 'bail|required',
-            'total_price' => 'required|numeric|min:1'
+            'total_price' => 'required|numeric|min:1',
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'shipping_address' => 'required',
+            'phone' => 'required',
         ];
     }
 }

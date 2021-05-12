@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Image extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['path_small','path_large','product_id'];
+    protected $fillable = ['path_small','path_large','product_id','active'];
 
     public function product()
     {
