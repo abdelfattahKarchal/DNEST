@@ -93,6 +93,7 @@ Route::post('contacts', 'MessageController@store');
 
 //Route::resource('blogs','BlogController');
 Route::resource('comments','CommentController');
+Route::resource('users','UserController')->middleware('auth');
 
 
 Route::get('/aboutUs', function () {

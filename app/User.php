@@ -19,6 +19,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'name', 'email', 'password', 'address', 'phone', 'role_id', 'active', 'lname', 'shipping_address'
     ];
 
+    protected $rules = [
+        'email' => 'sometimes|required|email|unique:users',
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *

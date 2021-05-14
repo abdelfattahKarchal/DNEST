@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="my_pages/table.html">
+                <a href="{{ url('/users') }}">
                     <i class="material-icons">face</i>
                     <span>Users</span>
                 </a>
