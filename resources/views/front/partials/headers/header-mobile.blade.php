@@ -43,7 +43,7 @@
                 </ul>
             </nav>
 
-            <nav class="offcanvas-navigation user-setting_area">
+            {{-- <nav class="offcanvas-navigation user-setting_area">
                 <ul class="mobile-menu">
                     <li class="menu-item-has-children active">
                         <a href="#">
@@ -68,7 +68,7 @@
                         </ul>
                     </li>
                 </ul>
-            </nav>
+            </nav> --}}
         </div>
     </div>
 </div>

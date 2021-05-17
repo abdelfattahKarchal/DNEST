@@ -29,8 +29,16 @@ class MessageController extends Controller
             NewsLetter::create(['email'=>$request->email]);
         }
         
-        $newsLetter = NewsLetter::create(['email'=>$request->email]);
         session()->flash('status', 'Your message have been saved');
         return redirect()->back();
+    }
+
+    public function index()
+    {
+        $messages = Message::all();
+
+        return view('backoffice.messages.list', [
+            'messages' => $messages
+        ]);
     }
 }

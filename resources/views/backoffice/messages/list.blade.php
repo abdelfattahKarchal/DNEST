@@ -19,13 +19,13 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        List of users
+                        List of messages
                     </h2>
-                    <ul class="header-dropdown m-r--5">
+                   {{--  <ul class="header-dropdown m-r--5">
                         <a href="{{ route('users.create') }}" title="add new sub category" type="button"
                             class="btn btn-success waves-effect">new user</a>
-                    </ul>
-                    <x-back.success type="margin-top: 15px;"></x-back.success>
+                    </ul> --}}
+                    {{-- <x-back.success type="margin-top: 15px;"></x-back.success> --}}
                     
                 </div>
                
@@ -39,52 +39,30 @@
                             
                             <thead>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Adress</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
                                     <th>CreatedAt</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Role</th>
-                                    <th>Adress</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
                                     <th>CreatedAt</th>
-                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($messages as $message)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->lname }}</td>
-                                        <td>{{ $user->email}}</td>
-                                        <td>{{ $user->phone }}</td>
-                                        <td>{{ $user->role->label ?? '' }}</td>
-                                        <td>{{ $user->address }}</td>
-                                        <td>{{ $user->created_at }}</td>
-                                        <td width="90px">
-                                            <a title="delete" type="button"
-                                                onclick="deleteUser({{ $user->id }})"
-                                                class="btn btn-danger btn-circle waves-effect waves-circle waves-float">
-                                                <i class="material-icons">delete</i>
-                                            </a>
-
-                                            <a href="{{ route('users.edit', ['user' => $user->id]) }}"
-                                                title="edit" type="button"
-                                                class="btn btn-warning btn-circle waves-effect waves-circle waves-float">
-                                                <i class="material-icons">edit</i>
-                                            </a>
-                                        </td>
-
+                                        <td>{{ $message->name }}</td>
+                                        <td>{{ $message->email}}</td>
+                                        <td>{{ $message->subject }}</td>
+                                        <td>{{ $message->message}}</td>
+                                        <td>{{ $message->created_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
