@@ -134,6 +134,7 @@
                                 <table class="table table-bordered table-striped table-hover dataTable">
                                     <thead>
                                         <tr>
+                                            <th>Prd Nº</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
@@ -143,6 +144,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>Prd Nº</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
@@ -152,6 +154,7 @@
                                     <tbody>
                                         @foreach ($order->products as $product)
                                             <tr>
+                                                <td>{{ $product->id }}</td>
                                                 <td>{{ $product->name }}</td>
                                                 {{-- <td>{{ $product->price }}</td>
                                                 --}}

@@ -88,11 +88,12 @@ Route::delete('carts/{id}/material/{material}/delete', 'CartController@delete');
 Route::post('carts/quantity/update', 'CartController@updateQuantity');
 Route::resource('newsletters','NewsLetterController')->only('store');
 Route::post('newsletters/stop', 'NewsLetterController@stop');
-Route::post('contacts', 'MessageController@store');
+Route::resource('contacts', 'MessageController');
 
 
 //Route::resource('blogs','BlogController');
 Route::resource('comments','CommentController');
+Route::resource('users','UserController')->middleware('auth');
 
 
 Route::get('/aboutUs', function () {

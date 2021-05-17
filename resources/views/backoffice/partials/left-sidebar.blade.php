@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="my_pages/table.html">
+                <a href="{{ url('/users') }}">
                     <i class="material-icons">face</i>
                     <span>Users</span>
                 </a>
@@ -90,7 +90,15 @@
             <li class="{{ request()->is('products') ? 'active' : '' }}">
                 <a href="{{ route('products.index') }}">
                     <i class="material-icons col-red">donut_large</i>
-                    <span>products list</span>
+                    <span>Products list</span>
+                </a>
+            </li>
+
+            <li class="header">Message</li>
+            <li class="{{ request()->is('contacts') ? 'active' : '' }}">
+                <a href="{{ route('contacts.index') }}">
+                    <i class="material-icons">message</i>
+                    <span>Messages list</span>
                 </a>
             </li>
             
@@ -100,7 +108,7 @@
     <!-- Footer -->
     <div class="legal">
         <div class="copyright">
-            &copy; 2020 - 2021 <a href="javascript:void(0);">Admin - THE D-NEST</a>.
+            &copy; 2021 - 2022 <a href="javascript:void(0);">Admin - THE D-NEST</a>.
         </div>
         <div class="version">
             <b>Version: </b> 1.0
