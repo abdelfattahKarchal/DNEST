@@ -3,9 +3,9 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                <h2>Single Product Style</h2>
+                <h2>{{ $product->name }}</h2>
                 <ul>
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Acceuil</a></li>
                     <li class="breadcrumb-item"><a href="#">{{$product->subCategory->category->collection->name}}</a>
                     </li>
                     <li class="breadcrumb-item"><a href="#">{{$product->subCategory->category->name}}</a></li>
@@ -19,10 +19,10 @@
     <div class="sp-area sp-tab-style_left">
         <div class="container">
             <div id="message-error" class="alert alert-danger" role="alert" style="display: none;">
-                Error in adding product !
+                Erreur lors de l'ajout du produit
               </div>
               <div id="message-success" class="alert alert-success" role="alert" style="display: none;">
-                The product added succefully check your cart for more details !
+                Le produit ajouté avec succès
               </div>
             <div class="sp-nav">
                 {{--                <nav aria-label="breadcrumb">--}}
@@ -72,14 +72,14 @@
                                         <li class="silver-color"><i class="fa fa-star"></i></li>
                                     @endfor
 
-                                    <li class="ml-2">({{ count($product->reviews)}} Reviews)</li>
-                                    <li class="ml-2">({{ $order_product_count }} Orders)</li>
+                                    <li class="ml-2">({{ count($product->reviews)}} Vues)</li>
+                                    <li class="ml-2">({{ $order_product_count }} Commandes)</li>
                                 </ul>
                             </div>
                             <div class="sp-essential_stuff">
                                 <h6>Collection : {{ $product->subCategory->category->collection->name }}</h6>
 
-                                <h6>Disponibilité : IN STOCK</h6>
+                                <h6>Disponibilité : En stock</h6>
 
                                 <hr/>
                                 @php
@@ -105,18 +105,18 @@
                                 <div class="color-list">
                                     <a id="gold" href='javascript:void(0)' class="single-color text-left {{ $material =='gold' ? 'active' : '' }}" data-pid="{{ $product->id }}" data-swatch-color="red">
                                         <span class="bg-gold_color"></span>
-                                        <span class="color-text">Gold&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <span class="color-text">Or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                     <a id="silver" href="javascript:void(0)" class="single-color text-left {{ $material =='silver' ? 'active' : '' }}" data-pid="{{ $product->id }}" data-swatch-color="orange">
                                         <span class="bg-silver_color"></span>
-                                        <span class="color-text">Silver&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <span class="color-text">Argent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                 </div>
                             </div>
 
                             <div class="align-bottom" style="margin-top: 65px !important;">
                                 <button id="add-to-cart" class="hiraola-login_btn" type="button" onclick="addToCard({{ $product->id }})">
-                                    Add To Cart
+                                    Ajouter au panier
                                 </button>
                             </div>
                         </div>
@@ -137,9 +137,11 @@
                             <ul class="nav product-menu">
                                 <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a>
                                 </li>
+                                <li><a data-toggle="tab" href="#taille"><span>Taille</span></a>
+                                </li>
                                 <li>
                                     <a data-toggle="tab" href="#reviews">
-                                        <span>Reviews
+                                        <span>Vues
                                             (<span id="reviews-count">{{ count($product->reviews) }}</span>)
                                         </span>
                                     </a>
@@ -150,6 +152,62 @@
                             <div id="description" class="tab-pane active show" role="tabpanel">
                                 <div class="product-description">
                                     {!! $product->description !!}
+                                </div>
+                            </div>
+                            <div id="taille" class="tab-pane" role="tabpanel">
+                                <div class="product-description">
+                                    <table width="100%" style="margin-left: auto; margin-right: auto;">
+                                        <tbody>
+                                        <tr>
+                                        <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
+                                        <div style="text-align: center;"><strong>Tailles Américaines</strong></div>
+                                        </td>
+                                        <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
+                                        <div><strong>Tailles Européennes</strong></div>
+                                        </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                        <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
+                                        <div>5</div>
+                                        </td>
+                                        <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
+                                        <div>49.32</div>
+                                        </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                        <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
+                                        <div>6</div>
+                                        </td>
+                                        <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
+                                        <div>51.87</div>
+                                        </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                        <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
+                                        <div>7</div>
+                                        </td>
+                                        <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
+                                        <div>54.51&nbsp;</div>
+                                        </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                        <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
+                                        <div>8</div>
+                                        </td>
+                                        <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
+                                        <div>57.15</div>
+                                        </td>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                        <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
+                                        <div>9</div>
+                                        </td>
+                                        <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
+                                        <div>59.34</div>
+                                        </td>
+                                        </tr>
+                                        </tbody>
+                                        </table>
                                 </div>
                             </div>
                             <div id="reviews" class="tab-pane" role="tabpanel">
@@ -181,10 +239,10 @@
                                             </table>
                                         </div>
                                      @if (Auth::check())
-                                     <h2>Write a review</h2>
+                                     <h2>Ajouter un commentaire</h2>
                                      <div class="form-group required second-child">
                                          <div class="col-sm-12 p-0">
-                                             <label class="control-label">Share your opinion</label>
+                                             <label class="control-label">Donnez votre avis</label>
                                              <textarea class="review-textarea" name="description"
                                                        id="description" required></textarea>
                                          </div>
@@ -192,7 +250,7 @@
                                      <div class="form-group last-child required">
                                          <div class="col-sm-12 p-0">
                                              <div class="your-opinion">
-                                                 <label>Your Rating</label>
+                                                 <label>Niveau de satisfaction</label>
                                                  <span>
                                                  <select id="note" name="note" class="star-rating">
                                                      <option value="1">1</option>
@@ -204,9 +262,9 @@
                                              </span>
                                              </div>
                                          </div>
-                                         <div class="hiraola-btn-ps_right cart-page">
+                                         <div class="hiraola-btn-ps_right cart-page col-md-2">
                                              <button id="add-to-cart" class="hiraola-login_btn" type="submit">
-                                                 Send
+                                                 Envoyer
                                              </button>
                                             {{--  <a  id="add_review"
                                                 href="javascript:void(0)">Send</a> --}}

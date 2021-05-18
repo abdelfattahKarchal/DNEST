@@ -3,11 +3,11 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                <h2>Single Product Style</h2>
-                <ul>
-                    <li><a href="{{url('/')}}">Home</a></li>
+                <h2>{{-- Single Product Style --}}</h2>
+                {{-- <ul>
+                    <li><a href="{{url('/')}}">Acceuil</a></li>
                     <li class="active">{{ $collection_name ?? '' }}</li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
                         @else
                             <div class="text-center" style="margin: 50px;">
                                 <img class="mb-4" width="100px" src="{{asset("front/assets/images/search.png")}}" />
-                                <h5 class="text-muted">No result for "{{$productName}}".</h5>
+                                <h5 class="text-muted">Aucun résultat trouvé pour "{{$productName}}".</h5>
                                 <ul class="mt-3">
                                     <li>- Vérifiez que vous n'avez pas fait de faute de frappe : "Lirves" au lieu de "Livres"</li>
                                     <li>- Essayez avec un autre mot clé ou synonyme</li>

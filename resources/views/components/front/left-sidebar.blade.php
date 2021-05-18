@@ -52,10 +52,10 @@
             </div>
         </div>
     </div>
-    <div class="sidebar-banner_area">
+    {{-- <div class="sidebar-banner_area">
         <div class="banner-item img-hover_effect">
             <a href="javascript:void(0)">
                 <img src="{{ asset('front/assets/images/banner/1_1.jpg') }}" alt="Hiraola's Shop Banner Image">
             </a>
         </div>
-    </div>
+    </div> --}}

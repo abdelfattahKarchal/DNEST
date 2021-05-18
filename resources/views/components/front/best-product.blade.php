@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="hiraola-section_title">
-                    <h4>Best sellers</h4>
+                    <h4>Top ventes</h4>
                 </div>
             </div>
             <div class="col-lg-12">

@@ -14,34 +14,43 @@
             <div class="row">
                 <div class="col-lg-5 offset-lg-1 col-md-12 order-1 order-lg-2">
                     <div class="contact-page-side-content">
-                        <h3 class="contact-page-title">Contact Us</h3>
-                        <p class="contact-page-message">Claritas est etiam processus dynamicus, qui sequitur
-                            mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum
-                            claram anteposuerit litterarum formas human.</p>
+                        <h3 class="contact-page-title">Contactez-nous</h3>
+                        <p class="contact-page-message"></p>
+                        
                         <div class="single-contact-block">
-                            <h4><i class="fa fa-fax"></i> Address</h4>
-                            <p>123 Main Street, Anytown, CA 12345 – USA</p>
-                        </div>
-                        <div class="single-contact-block">
-                            <h4><i class="fa fa-phone"></i> Phone</h4>
-                            <p>Mobile: (08) 123 456 789</p>
-                            <p>Hotline: 1009 678 456</p>
+                            <h4><i class="fa fa-phone"></i> Télèphone</h4>
+                            <p>Mobile:  {{ $contacts[0]->phone }}</p>
                         </div>
                         <div class="single-contact-block last-child">
                             <h4><i class="fa fa-envelope-o"></i> Email</h4>
-                            <p>yourmail@domain.com</p>
-                            <p>support@hastech.company</p>
+                            <p> {{ $contacts[0]->email }}</p>
+                           
                         </div>
+                        <div class="single-contact-block">
+                            <h4><i class="fa fa-fax"></i> Adresse</h4>
+                            <p> {{ $contacts[0]->address }}</p>
+                        </div>
+                    </div>
+                    <div class="contact-page-side-content">
+                        <h3 class="contact-page-title">Suivez-nous</h3>
+                        <p class="contact-page-message"></p>
+                        
+                        <div class="single-contact-block">
+                            <h4> <a href="{{ $contacts[0]->facebook }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Facebook </a> </h4>
+                        </div>
+                        <div class="single-contact-block">
+                            <h4> <a href="{{ $contacts[0]->instagram }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram </a> </h4>
+                        </div>
+                      
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 order-2 order-lg-1">
                     <div class="contact-form-content">
-                        <h3 class="contact-page-title">Tell Us Your Message</h3>
                         <div class="contact-form">
                             <form id="contact-form" action="{{ url('contacts') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Your Name <span class="required">(*)</span></label>
+                                    <label>Nom et prénom <span class="required">(*)</span></label>
                                     <input
                                     class="form-control @error('name') is-invalid @enderror"
                                      type="text" name="name" id="name"
@@ -53,7 +62,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Your Email <span class="required">(*)</span></label>
+                                    <label>Email <span class="required">(*)</span></label>
                                     <input 
                                     class="form-control @error('email') is-invalid @enderror"
                                     type="email" name="email" id="email" 
@@ -65,7 +74,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Subject <span class="required">(*)</span></label>
+                                    <label>Télèphone <span class="required">(*)</span></label>
                                     <input 
                                     class="form-control @error('subject') is-invalid @enderror"
                                     type="text" name="subject" id="subject"
@@ -77,7 +86,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group form-group-2">
-                                    <label>Your Message <span class="required">(*)</span></label>
+                                    <label>Votre Message <span class="required">(*)</span></label>
                                     <textarea
                                     class="form-control @error('message') is-invalid @enderror"
                                      name="message" id="message"></textarea>
@@ -88,8 +97,8 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" value="submit" id="submit" class="alsita-contact-form_btn"
-                                        name="submit">send</button>
+                                    <button style="border-radius: 0px;" type="submit" value="submit" id="submit" class="alsita-contact-form_btn"
+                                        name="submit">Envoyer</button>
                                 </div>
                             </form>
                         </div>
@@ -292,7 +301,7 @@
             var map = new google.maps.Map(mapElement, mapOptions);
             // Let's also add a marker while we're at it
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(40.740610, -73.935242),
+                position: new google.maps.LatLng(33.5983292, -7.6412708),
                 map: map,
                 title: 'Limupa',
                 animation: google.maps.Animation.BOUNCE

@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use App\Collection;
+use App\Contact;
 use Illuminate\View\View;
 
 class CollectionComposer{
@@ -12,9 +13,11 @@ class CollectionComposer{
         //if not admin => active = 1
        // $collections = Collection::where('active',1)->get();
         $collections = Collection::all();
+        $contacts = Contact::all();
 
         $view->with([
-            'collections' => $collections
+            'collections' => $collections,
+            'contacts' => $contacts
         ]);
     }
 }

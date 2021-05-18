@@ -16,8 +16,8 @@
                                 <img src="{{asset('front/assets/images/shipping-icon/1.png')}}" alt="Hiraola's Shipping Icon">
                             </div>
                             <div class="shipping-content">
-                                <h6>Fast Delivery</h6>
-                                <p>Designated day delivery</p>
+                                <h6>Livraison à domicile</h6>
+                               {{--  <p>Livraison le jour désigné</p> --}}
                             </div>
                         </div>
                     </div>
@@ -27,8 +27,8 @@
                                 <img src="{{asset('front/assets/images/shipping-icon/2.png')}}" alt="Hiraola's Shipping Icon">
                             </div>
                             <div class="shipping-content">
-                                <h6>Freshyly Prepared Ingredients</h6>
-                                <p>Made for your delivery date</p>
+                                <h6>Payement à la livraison</h6>
+                                {{-- <p>Made for your delivery date</p> --}}
                             </div>
                         </div>
                     </div>
@@ -38,8 +38,7 @@
                                 <img src="{{asset('front/assets/images/shipping-icon/3.png')}}" alt="Hiraola's Shipping Icon">
                             </div>
                             <div class="shipping-content">
-                                <h6>98% Of Anta Clients</h6>
-                                <p>Reach their personal goals set</p>
+                                <h6>Certification & Garantie</h6>
                             </div>
                         </div>
                     </div>
@@ -49,8 +48,7 @@
                                 <img src="{{asset('front/assets/images/shipping-icon/4.png')}}" alt="Hiraola's Shipping Icon">
                             </div>
                             <div class="shipping-content">
-                                <h6>Winner Of 15 Awards</h6>
-                                <p>Healthy food and drink 2019</p>
+                                <h6>Service après vente</h6>
                             </div>
                         </div>
                     </div>
@@ -128,25 +126,15 @@
                                 <a href="javascript:void(0)" tabindex="-1">
                                     <img src="{{asset('front/assets/images/brand/2.jpg')}}" alt="Uren's Brand Image">
                                 </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 198px;">
+                            </div>
+                            <div class="slide-item slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 198px;">
                                 <a href="javascript:void(0)" tabindex="-1">
                                     <img src="{{asset('front/assets/images/brand/3.jpg')}}" alt="Uren's Brand Image">
                                 </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/4.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/5.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/6.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 198px;">
+                            </div>
+                            <div class="slide-item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 198px;">
                                 <a href="javascript:void(0)" tabindex="0">
-                                    <img src="{{asset('front/assets/images/brand/1.jpg')}}" alt="Uren's Brand Image">
+                                    <img src="http://www.brandyourmorocco.ma/wp-content/uploads/2015/08/logo-artisanat.png" alt="Uren's Brand Image">
                                 </a>
                             </div><div class="slide-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" style="width: 198px;">
                                 <a href="javascript:void(0)" tabindex="0">
@@ -158,7 +146,7 @@
                                 </a>
                             </div><div class="slide-item slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" style="width: 198px;">
                                 <a href="javascript:void(0)" tabindex="0">
-                                    <img src="{{asset('front/assets/images/brand/4.jpg')}}" alt="Uren's Brand Image">
+                                    <img src="http://www.brandyourmorocco.ma/wp-content/uploads/2015/08/logo-artisanat.png" alt="Uren's Brand Image">
                                 </a>
                             </div><div class="slide-item slick-slide slick-active" data-slick-index="4" aria-hidden="false" tabindex="0" style="width: 198px;">
                                 <a href="javascript:void(0)" tabindex="0">

@@ -7,7 +7,7 @@
             <nav class="offcanvas-navigation">
                 <ul class="mobile-menu">
                     <li class="menu-item-has-children active"><a href="{{ route('index') }}"><span
-                                class="mm-text">Home</span></a>
+                                class="mm-text">Acceuil</span></a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="javascript:void(0)">
@@ -32,7 +32,7 @@
                     </li> --}}
                     <li class="menu-item-has-children">
                         <a href="{{ route('aboutUs') }}">
-                            <span class="mm-text">About AS</span>
+                            <span class="mm-text">A propos de nous</span>
                         </a>
                     </li>
                     <li class="menu-item-has-children">

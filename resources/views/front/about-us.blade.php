@@ -29,7 +29,7 @@
     <!-- Hiraola's About Us Area End Here -->
 
     <!-- Begin Hiraola's Team Area -->
-    <div class="team-area">
+    {{-- <div class="team-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -226,6 +226,6 @@
                 </div> <!-- end single team member -->
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Hiraola's Team Area End Here -->
 @endsection

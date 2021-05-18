@@ -29,7 +29,7 @@ class MessageController extends Controller
             NewsLetter::create(['email'=>$request->email]);
         }
         
-        session()->flash('status', 'Your message have been saved');
+        session()->flash('status', 'Votre message est envoyé');
         return redirect()->back();
     }
 

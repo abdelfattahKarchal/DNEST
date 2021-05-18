@@ -14,11 +14,11 @@
                         </div>
 
                         <div class="widget-short_desc">
-                            <p>We are a team of designers and developers that create high quality jewelry.
-                            </p>
+                            {{-- <p>We are a team of designers and developers that create high quality jewelry.
+                            </p> --}}
                         </div>
                         {{-- begin footer --}}
-                        <x-front.media></x-front.media>
+                        <x-front.media :contacts="$contacts"></x-front.media>
                         {{-- end footer --}}
                     </div>
                 </div>
@@ -44,22 +44,24 @@
                             <div class="col-lg-5">
                                 <div class="footer-widgets_info">
                                     <div class="footer-widgets_title">
-                                        <h6>About Us</h6>
+                                        <h6>Contactez-nous</h6>
                                     </div>
                                     <div class="widgets-essential_stuff">
                                         <ul>
-                                            <li class="hiraola-address"><i
-                                                    class="ion-ios-location"></i><span>Address:</span> The Barn,
-                                                Ullenhall, Henley
-                                                in
-                                                Arden B578 5CC, England</li>
+                                            
                                             <li class="hiraola-phone"><i
-                                                    class="ion-ios-telephone"></i><span>Call Us:</span> <a
-                                                    href="tel://+123123321345">+123 321 345</a>
+                                                    class="ion-ios-telephone"></i><span>Télèphone:</span> <a
+                                                    href="tel://{{ $contacts[0]->phone }}">{{ $contacts[0]->phone }}</a>
                                             </li>
+                                            
                                             <li class="hiraola-email"><i
                                                     class="ion-android-mail"></i><span>Email:</span> <a
-                                                    href="mailto://info@yourdomain.com">info@yourdomain.com</a>
+                                                    href="mailto://{{ $contacts[0]->email }}">{{ $contacts[0]->email }}</a>
+                                            </li>
+
+                                            <li class="hiraola-address"><i
+                                                class="ion-ios-location"></i><span>Adresse:</span> 
+                                                {{ $contacts[0]->address }}
                                             </li>
                                         </ul>
                                     </div>
@@ -68,11 +70,10 @@
                             <div class="col-lg-4">
                                 <div class="instagram-container footer-widgets_area">
                                     <div class="footer-widgets_title">
-                                        <h6>Sign Up For Newslatter</h6>
+                                        <h6> NEWSLETTERS</h6>
                                     </div>
                                     <div class="widget-short_desc">
-                                        <p>Subscribe to our newsletters now and stay up-to-date with new
-                                            collections</p>
+                                        <p>Abonnez-vous et restez au courant des nouvelles collections</p>
                                     </div>
                                     <div class="newsletter-form_wrap">
                                         <form
@@ -81,7 +82,7 @@
                                             <div id="mc_embed_signup_scroll">
                                                 <div id="mc-form" class="mc-form subscribe-form">
                                                     <input id="mc-email" class="newsletter-input form-control" type="email"
-                                                        autocomplete="off" placeholder="Enter your email" />
+                                                        autocomplete="off" placeholder="Email" />
                                                     <button class="newsletter-btn" id="mc-submit">
                                                         <i class="ion-android-mail" aria-hidden="true"></i>
                                                     </button>
@@ -103,7 +104,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright align-middle">
-                            <span>Copyright &copy; 2021 <a href="#">THE DNEST.</a> All rights reserved.</span>
+                            <span>Copyright &copy; 2021 <a href="#">THE DNEST.</a> Tous les droits sont réservés.</span>
                         </div>
                     </div>
                 </div>

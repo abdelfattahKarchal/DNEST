@@ -14,8 +14,8 @@
                 <div class="main-menu_area">
                     <nav>
                         <ul>
-                            <li class="dropdown-holder"><a href="{{ route('index') }}">Home</a></li>
-                            <li class="dropdown-holder"><a href="javascript:void(0)">Collection</a>
+                            <li class="dropdown-holder"><a href="{{ route('index') }}">Acceuil</a></li>
+                            <li class="dropdown-holder"><a href="javascript:void(0)">Collections</a>
                                 <ul class="hm-dropdown">
                                     @foreach ($collections as $collection)
                                         @if ($collection->active == 1)
@@ -30,7 +30,7 @@
                                 </ul>
                             </li>
                             {{-- <li><a href=" {{ route('blogs.index') }} ">Blog</a></li> --}}
-                            <li><a href=" {{ route('aboutUs') }} ">About Us</a></li>
+                            <li><a href=" {{ route('aboutUs') }} ">A propos de nous</a></li>
                             <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </nav>
@@ -53,14 +53,14 @@
                                 @endif
                                 <ul class="hm-dropdown">
                                     @if (!Auth::check())
-                                        <li><a href="{{ route('login') }}">Sign In</a></li>
-                                        <li><a href="{{ route('register') }}">Sign Up</a></li>
+                                        <li><a href="{{ route('login') }}">Se connecter</a></li>
+                                        <li><a href="{{ route('register') }}">Créer un compte</a></li>
                                     @else
-                                        <li><a href="{{ route('login.form') }}">My Profile</a></li>
+                                        <li><a href="{{ route('login.form') }}">Mon compte</a></li>
                                         <li>
                                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                 document.getElementById('logout-form').submit();">
-                                                Sign Out</a>
+                                                Se déconnecter</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf

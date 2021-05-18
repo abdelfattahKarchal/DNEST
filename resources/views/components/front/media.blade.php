@@ -1,12 +1,12 @@
 <div class="hiraola-social_link">
     <ul>
         <li class="facebook">
-            <a href="https://www.facebook.com" data-toggle="tooltip" target="_blank"
+            <a href="{{ $contacts[0]->facebook }}" data-toggle="tooltip" target="_blank"
                 title="Facebook">
                 <i class="fab fa-facebook"></i>
             </a>
         </li>
-        <li class="twitter">
+       {{--  <li class="twitter">
             <a href="https://twitter.com" data-toggle="tooltip" target="_blank" title="Twitter">
                 <i class="fab fa-twitter-square"></i>
             </a>
@@ -16,9 +16,9 @@
                 title="Google Plus">
                 <i class="fab fa-google-plus"></i>
             </a>
-        </li>
+        </li> --}}
         <li class="instagram">
-            <a href="https://rss.com" data-toggle="tooltip" target="_blank" title="Instagram">
+            <a href="{{ $contacts[0]->instagram }}" data-toggle="tooltip" target="_blank" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
         </li>

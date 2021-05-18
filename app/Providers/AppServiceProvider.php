@@ -28,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         'front.partials.footer',
         'front.partials.headers.header',
         'front.shop-left-sidebar',
+        'front.contact',
         'backoffice.collections.list',
         'backoffice.categories.form',
         'backoffice.products.form',

@@ -35,12 +35,12 @@
                             @php
                             $status_price = 'old-price';
                             @endphp
-                            <div class="col-6"><span class="new-price">${{ $product->new_price }}</span>
+                            <div class="col-6"><span class="new-price">{{ $product->new_price }} MAD</span>
                             </div>
                         @endif
                         @if ($product->price)
                             <div class="col-6 text-right">
-                                <span class="{{ $status_price }}">${{ $product->price }}
+                                <span class="{{ $status_price }}">{{ $product->price }} MAD
                                 </span>
                             </div>
                         @endif
