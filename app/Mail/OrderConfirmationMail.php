@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Contact;
 use App\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,6 +14,7 @@ class OrderConfirmationMail extends Mailable
     use Queueable, SerializesModels;
 
     public $order;
+    public $contact;
     /**
      * Create a new message instance.
      *
@@ -21,6 +23,7 @@ class OrderConfirmationMail extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
+        $this->contact = Contact::first();
     }
 
     /**

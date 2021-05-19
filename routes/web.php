@@ -1,5 +1,6 @@
 <?php
 
+use App\Contact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +28,14 @@ Route::get('/checkout', function () {
 Route::get('/mail', function () {
 
     $order = \App\Order::find(33);
+    $contact = Contact::first();
 
     /* return view('emails.orders.confirmation', [
         'order' => $order,
     ]); */
-    return view('emails.test', [
+    return view('emails.orders.confirmation', [
         'order' => $order,
+        'contact' => $contact,
     ]);
 });
 //Route::put('/myaccount/{myaccount}/address', 'MyAccountController@address')->name('myaccount.address');

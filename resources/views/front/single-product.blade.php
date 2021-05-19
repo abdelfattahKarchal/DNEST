@@ -262,13 +262,10 @@
                                              </span>
                                              </div>
                                          </div>
-                                         <div class="hiraola-btn-ps_right cart-page col-md-2">
-                                             <button id="add-to-cart" class="hiraola-login_btn" type="submit">
-                                                 Envoyer
-                                             </button>
-                                            {{--  <a  id="add_review"
-                                                href="javascript:void(0)">Send</a> --}}
-                                         </div>
+                                         <div class="col-12 ml-auto col-md-2 mt-4 mb-4 form-group">
+                                            <button id="add-to-cart" type="submit" class="hiraola-login_btn" style="display: inline !important;">Envoyer</button>
+                                        </div>
+                                         
                                      </div>
                                      @endif
                                     </form>

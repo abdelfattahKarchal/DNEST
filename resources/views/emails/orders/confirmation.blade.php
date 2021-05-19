@@ -110,7 +110,7 @@
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                 <tr>
                                     <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;"> <img src="{{asset("front/assets/images/order.png")}}" width="125" height="120" style="display: block; border: 0px;" /><br>
-                                        <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Thank You For Your Order! </h2>
+                                        <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Nous vous remercions de votre commande! </h2>
                                     </td>
                                 </tr>
                                 <tr>
@@ -123,13 +123,15 @@
                                         <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 
-                                                <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> Order Confirmation  </td>
+                                                <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> Confirmation de commande </td>
                                                 <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> #{{ $order->id }} </td>
+                                                <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> Matière </td>
                                             </tr>
                                             @foreach($order->products as $product)
                                             <tr>
                                                 <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> {{ $product->name }} x ({{ $product->pivot->quantity }}) </td>
                                                 <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> {{ $product->pivot->price }} MAD </td>
+                                                <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> {{ $product->pivot->material == 'gold' ? 'Or' : 'Argent' }}</td>
                                             </tr>
                                             @endforeach
                                             
@@ -159,7 +161,7 @@
                                             <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
                                                 <tr>
                                                     <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
-                                                        <p style="font-weight: 800;">Delivery Address</p>
+                                                        <p style="font-weight: 800;">Adresse de livraison</p>
                                                         <p>{{ $order->shipping_address }}</p>
                                                         <p>{{ $order->shipping_address_2 }}</p>
                                                     </td>
@@ -205,16 +207,24 @@
                         <td align="center" style="padding: 35px; background-color: #ffffff;" bgcolor="#ffffff">
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                 <tr>
-                                    <td align="center"> <img src="logo-footer.png" width="37" height="37" style="display: block; border: 0px;" /> </td>
+                                    <td align="center"> 
+                                        <a href="{{ $contact->facebook }}" target="_blank" rel="noopener noreferrer">
+                                            <img src="{{ asset('front/assets/images/mail/facebook-logo-black.png') }}" width="37" height="37" style="display: inline-block; border: 0px;" />
+                                        </a>
+                                        <a href="{{ $contact->instagram }}" target="_blank" rel="noopener noreferrer">
+                                            <img src="{{ asset('front/assets/images/mail/instagram-logo-black.png') }}" width="37" height="37" style="display: inline-block; border: 0px;" /> 
+                                        </a>
+                                    </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px; padding: 5px 0 10px 0;">
-                                        <p style="font-size: 14px; font-weight: 800; line-height: 18px; color: #333333;"> 675 Parko Avenue<br> LA, CA 02232 </p>
+                                        <p style="font-size: 14px; font-weight: 800; line-height: 18px; color: #333333;"> {{ $contact->address }}</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 24px;">
-                                        <p style="font-size: 14px; font-weight: 400; line-height: 20px; color: #777777;"> If you didn't create an account using this email address, please ignore this email. </p>
+                                        <p style="font-size: 14px; font-weight: 400; line-height: 20px; color: #777777;"> Si vous n'avez pas créé de compte à l'aide de cette adresse e-mail, veuillez ignorer cet e-mail. </p>
                                     </td>
                                 </tr>
                             </table>

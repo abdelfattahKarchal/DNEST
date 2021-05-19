@@ -116,77 +116,41 @@
     <x-front.new-collection :newCollections="$newCollections"></x-front.new-collection>
     <!-- end collection tab -->
 
+    <!-- Begin Hiraola's Brand Area -->
     <div class="brand-area">
         <div class="container">
             <div class="brand-slider_nav">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="brand-slider slick-initialized slick-slider">
-                            <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 3876px; transform: translate3d(-1140px, 0px, 0px);"><div class="slide-item slick-slide slick-cloned" data-slick-index="-5" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/2.jpg')}}" alt="Uren's Brand Image">
+                        <div class="hiraola-section_title">
+                            <h4>Partenaires</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 mt-5">
+                        <div class="brand-slider" style="border-right: 0px; border-left: 0px; border-top: 0px; border-bottom: 0px;">
+                            <div class="slide-item" style="border-right: 0px !important;">
+                                <a href="javascript:void(0)">
+                                    <img src="{{ asset('front/assets/images/partners/logo-artisanat.png') }}" alt="artisanat">
                                 </a>
                             </div>
-                            <div class="slide-item slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/3.jpg')}}" alt="Uren's Brand Image">
+                            <div class="slide-item" style="border-right: 0px !important;">
+                                <a href="javascript:void(0)">
+                                    <img src="{{ asset('front/assets/images/partners/initiativenational.png') }}" alt="initiative national" height="131px">
                                 </a>
                             </div>
-                            <div class="slide-item slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="0">
-                                    <img src="http://www.brandyourmorocco.ma/wp-content/uploads/2015/08/logo-artisanat.png" alt="Uren's Brand Image">
+                            <div class="slide-item" style="border-right: 0px !important;">
+                                <a href="javascript:void(0)">
+                                    <img src="{{ asset('front/assets/images/partners/carrefour.png') }}" alt="carrefour">
                                 </a>
-                            </div><div class="slide-item slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="0">
-                                    <img src="{{asset('front/assets/images/brand/2.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="0">
-                                    <img src="{{asset('front/assets/images/brand/3.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="0">
-                                    <img src="http://www.brandyourmorocco.ma/wp-content/uploads/2015/08/logo-artisanat.png" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-active" data-slick-index="4" aria-hidden="false" tabindex="0" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="0">
-                                    <img src="{{asset('front/assets/images/brand/5.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/6.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/1.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/2.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="8" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/3.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/4.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="10" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/5.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div><div class="slide-item slick-slide slick-cloned" data-slick-index="11" aria-hidden="true" tabindex="-1" style="width: 198px;">
-                                <a href="javascript:void(0)" tabindex="-1">
-                                    <img src="{{asset('front/assets/images/brand/6.jpg')}}" alt="Uren's Brand Image">
-                                </a>
-                            </div></div></div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Hiraola's Brand Area End Here -->
 
     <!-- Begin Latest Blog Area -->
     @include('front.partials.lastblog')
