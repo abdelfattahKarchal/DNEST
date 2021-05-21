@@ -70,13 +70,13 @@
                         <p><span>-25% Off</span>This Week</p>
                         <h2>Featured Product</h2>
                         <h3>Meito Accessories 2019</h3>
-                        <p class="schedule">
+                        {{-- <p class="schedule">
                             Starting at
                             <span> £1209.00</span>
                         </p>
                         <div class="hiraola-btn-ps_left">
                             <a href="shop-left-sidebar.html" class="hiraola-btn">Shopping Now</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -94,8 +94,8 @@
                     <div class="banner-item img-hover_effect">
                         <a href="shop-left-sidebar.html">
                             <img class="img-full"
-                                src="https://demo.hasthemes.com/hiraola-preview/hiraola/assets/images/banner/3_4.jpg"
-                                alt="Hiraola's Banner">
+                                src="{{asset('front/assets/images/banner/1.jpg')}}"
+                                alt="Banner">
                         </a>
                     </div>
                 </div>
@@ -103,8 +103,8 @@
                     <div class="banner-item img-hover_effect">
                         <a href="shop-left-sidebar.html">
                             <img class="img-full"
-                                src="https://demo.hasthemes.com/hiraola-preview/hiraola/assets/images/banner/3_5.jpg"
-                                alt="Hiraola's Banner">
+                                src="{{asset('front/assets/images/banner/2.jpg')}}"
+                                alt="Banner">
                         </a>
                     </div>
                 </div>
