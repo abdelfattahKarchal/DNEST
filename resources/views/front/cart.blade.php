@@ -54,7 +54,7 @@
                                             {{-- <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
                                                 <i class="fa fa-trash mr-2"></i>Delete
                                             </a> --}}
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="row">
                                                     <div class="col-1 my-auto">
                                                         <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
@@ -91,6 +91,19 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            @if($order_product->size && $order_product->size > 0)
+                                                <div class="col-1 text-center">
+                                                    <p>Taille</p>
+                                                    <div class="my-auto">
+                                                        <select class="nice-select small" style="border-radius: 0px !important;" onchange="udpdateSize({{ $order_product->product->id }},'{{ $order_product->material }}')"  name="size_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" id="size_selected_{{ $order_product->product->id }}_{{ $order_product->material }}">
+                                                            @for($i=1; $i<=5; $i++)
+                                                                <option {{ $order_product->size == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div> 
+                                            @endif
+                                            
                                             <div class="col-2 text-center">
                                                 <p>Price</p>
                                                 <div class="my-auto">{{ $order_product->price }} MAD</div>
@@ -145,12 +158,12 @@
                         @else
                             <div class="text-center" style="margin: 50px;">
                                 <img class="mb-4" width="100px" src="{{asset("front/assets/images/cart.png")}}" />
-                                <h5 class="text-muted">Your cart is empty.</h5>
+                                <h5 class="text-muted">Votre panier est vide.</h5>
                                 <ul class="mt-3">
                                     <li>Explorez nos catégories et découvrez nos meilleures offres!</li>
                                 </ul>
                                 <div class="mt-5 hiraola-btn-ps_center">
-                                    <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
+                                    <a class="hiraola-btn" href="{{ url('/') }}">Acheter maintenant</a>
                                 </div>
                             </div>
                         @endif
@@ -196,6 +209,29 @@ function udpdateQte(product_id, material) {
             },
             success: function(data) {
                 location.reload();
+            }
+        });
+    }
+  }
+// change quantity value
+function udpdateSize(product_id, material) {
+
+    var size = $('#size_selected_'+product_id+'_'+material).val();
+
+    if (size > 0) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: 'carts/size/update',
+            data: {
+                'size': size,
+                'productId': product_id,
+                'material': material
+            },
+            success: function(data) {
+                //location.reload();
             }
         });
     }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class Product extends Model
 {
     use SoftDeletes;
-    protected $fillable =['name','sub_category_id','price','new_price','price_silver', 'new_price_silver','quantity','path_small_1','path_small_2','description','active'];
+    protected $fillable =['name','sub_category_id','price','new_price','price_silver', 'new_price_silver','quantity','path_small_1','path_small_2','description','active', 'size'];
 
     public function subCategory()
     {

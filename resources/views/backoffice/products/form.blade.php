@@ -81,7 +81,10 @@
     </div>
 </div>
 
-
+<div class="form-group">
+    <input type="checkbox" id="size" name="size" {{ (isset($product->has_size) && $product->has_size ) ? 'checked' : null  }} >
+    <label for="size">Has size</label>
+</div>
 
 
 <div class="form-group form-float">

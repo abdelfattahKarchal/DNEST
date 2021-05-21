@@ -10,7 +10,7 @@
                 <div class="breadcrumb-content">
                     <h2>Checkout</h2>
                     <ul>
-                        <li><a href="{{ url('/') }}">Home</a></li>
+                        <li><a href="{{ url('/') }}">Acceuil</a></li>
                         <li class="active">Checkout</li>
                     </ul>
                 </div>
@@ -42,11 +42,11 @@
                             <div class="row">
                                 <div class="col-lg-6 col-12">
                                     <div class="checkbox-form">
-                                        <h3>Billing Details</h3>
+                                        <h3>DÉTAILS DE LA FACTURATION</h3>
                                         <div class="mt-4 row">
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label for="first_name">First Name <span style="color:red;">(*)</span></label>
+                                                    <label for="first_name">Prénom <span style="color:red;">(*)</span></label>
                                                     <input name="first_name" type="text"
                                                         class="form-control @error('first_name') is-invalid @enderror"
                                                         value="{{ old('first_name') ?? (Auth()->user()->name ?? '') }}">
@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Last Name <span style="color:red;">(*)</span></label>
+                                                    <label>Nom <span style="color:red;">(*)</span></label>
                                                     <input 
                                                     class="form-control @error('last_name') is-invalid @enderror"
                                                     name="last_name" type="text"
@@ -73,7 +73,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
-                                                    <label>Address <span style="color:red;">(*)</span></label>
+                                                    <label>Adresse <span style="color:red;">(*)</span></label>
                                                     <input 
                                                     class="form-control @error('address') is-invalid @enderror"
                                                     name="address" placeholder="Street address" type="text"
@@ -121,7 +121,7 @@
                                             </div> --}}
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Email Address <span style="color:red;">(*)</span></label>
+                                                    <label>Email <span style="color:red;">(*)</span></label>
                                                     <input
                                                     class="form-control @error('email') is-invalid @enderror"  
                                                     name="email" placeholder="" type="email"
@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="checkout-form-list">
-                                                    <label>Phone <span style="color:red;">(*)</span></label>
+                                                    <label>Télèphone <span style="color:red;">(*)</span></label>
                                                     <input
                                                     class="form-control @error('phone') is-invalid @enderror"  
                                                     name="phone" type="text"
@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="col-lg-6 col-12">
                                     <div class="your-order">
-                                        <h3>Your order</h3>
+                                        <h3>VOTRE COMMANDE</h3>
                                         <div class="your-order-table table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -167,7 +167,11 @@
                                                             <td class="cart-product-name text-left">
                                                                 {{ $order_product->product->name }}<strong
                                                                     class="product-quantity">
-                                                                    × {{ $order_product->quantity }}</strong></td>
+                                                                    × {{ $order_product->quantity }}</strong>
+                                                                    @if($order_product->size) 
+                                                                        <strong> &nbsp; &taille=</strong>{{ $order_product->size}}
+                                                                    @endif
+                                                                </td>
                                                             <td class="cart-product-total text-center"><span
                                                                     class="amount">{{ $order_product->quantity * $order_product->price }}
                                                                     MAD</span></td>
@@ -179,11 +183,11 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr class="cart-subtotal">
-                                                        <th>Cart Subtotal</th>
+                                                        <th>Sous-total du panier</th>
                                                         <td class="text-center"><span class="amount">{{$sum}} MAD</span></td>
                                                     </tr>
                                                     <tr class="order-total">
-                                                        <th>Order Total</th>
+                                                        <th>Total de la commande</th>
                                                         <td class="text-center"><strong><span class="amount">{{$sum}} MAD</span></strong></td>
                                                     </tr>
                                                 </tfoot>
@@ -192,7 +196,7 @@
                                         <div class="payment-method">
                                             <div class="payment-accordion">
                                                 <div class="order-button-payment">
-                                                    <input value="Place order" type="submit">
+                                                    <input value="Passer la commande" type="submit">
                                                 </div>
                                             </div>
                                         </div>
@@ -203,12 +207,12 @@
                     @else
                         <div class="text-center" style="margin: 50px;">
                             <img class="mb-4" width="100px" src="{{asset("front/assets/images/cart.png")}}" />
-                            <h5 class="text-muted">Your cart is empty.</h5>
+                            <h5 class="text-muted">Votre panier est vide.</h5>
                             <ul class="mt-3">
                                 <li>Explorez nos catégories et découvrez nos meilleures offres!</li>
                             </ul>
                             <div class="mt-5 hiraola-btn-ps_center">
-                                <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
+                                <a class="hiraola-btn" href="{{ url('/') }}">Acheter maintenant</a>
                             </div>
                         </div>
                     @endif

@@ -11,7 +11,7 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <h3 class="register-title text-center" style="">S'inscrire</h3>
-                <p style="font-size: 14px;" class="mb-5 text-center">Nouveau ici! Inscrivez vous s'il vous plait.</p>
+                <p style="font-size: 14px;" class="mb-5 text-center">Nouveau ici! Inscrivez vous.</p>
                     <div class="row">
                         <div class="col-md-6 col-12 mb--20 form-group">
                             {{-- <label for="name">{{ __('Name') }}</label> --}}

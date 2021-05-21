@@ -116,7 +116,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                List of products
+                                List of products / Order Nº : #{{ $order->id }}
                             </h2>
                             {{-- <ul class="header-dropdown m-r--5">
                                 <a href="{{ route('products.create') }}" title="add new product" type="button"
@@ -139,6 +139,7 @@
                                             <th>Price</th>
                                             <th>Quantity</th>
                                             <th>Material</th>
+                                            <th>Size</th>
 
                                         </tr>
                                     </thead>
@@ -149,6 +150,7 @@
                                             <th>Price</th>
                                             <th>Quantity</th>
                                             <th>Material</th>
+                                            <th>Size</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -161,6 +163,7 @@
                                                 <td>{{ $product->pivot->price }}</td>
                                                 <td>{{ $product->pivot->quantity }}</td>
                                                 <td>{{ $product->pivot->material }}</td>
+                                                <td>{{ $product->pivot->size ?? 'n/d' }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

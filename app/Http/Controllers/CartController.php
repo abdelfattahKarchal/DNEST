@@ -17,6 +17,10 @@ class CartController extends Controller
 
         $orderProduct->product = Product::with('sizes')->findOrFail($request->product_id);
         $orderProduct->material = $request->material;
+       
+        if ($request->size > 0) {
+            $orderProduct->size = $request->size;
+        }
         
         if ($request->material == 'gold') {
             $orderProduct->price = $orderProduct->product->new_price;
@@ -64,6 +68,19 @@ class CartController extends Controller
         foreach ($orders_products as &$item) {
             if ($item->product->id == $request->productId && $request->material == $item->material) {
                 $item->quantity = $request->quantity;
+            break;
+            }
+        }
+
+        session()->put('productsCardSession', $orders_products);
+    }
+
+    public function updateSize(Request $request)
+    {
+        $orders_products = session()->pull('productsCardSession');
+        foreach ($orders_products as &$item) {
+            if ($item->product->id == $request->productId && $request->material == $item->material) {
+                $item->size = $request->size;
             break;
             }
         }

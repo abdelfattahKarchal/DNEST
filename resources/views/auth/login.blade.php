@@ -8,7 +8,7 @@
             <form class="contact-form"  method="POST" action="{{ route('login') }}">
                 @csrf
                 <h3 class="register-title text-center" style="">Se connecter</h3>
-                <p style="font-size: 14px;" class="mb-5 text-center">Content de vous revoir! Connectez-vous à votre compte s'il vous plaît.</p>
+                <p style="font-size: 14px;" class="mb-5 text-center">Content de vous revoir! Connectez-vous à votre compte.</p>
                     <div class="row">
                         <div class="col-md-12 col-12 form-group">
                             {{-- <label for="email">E-Mail address</label> --}}

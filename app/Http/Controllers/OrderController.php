@@ -129,7 +129,7 @@ class OrderController extends Controller
         $order->save();
 
         foreach ($orders_products as $key => $value) {
-            $order->products()->attach($value->product->id, ['price' => $value->price, 'quantity' => $value->quantity, 'material' => $value->material]);
+            $order->products()->attach($value->product->id, ['price' => $value->price, 'quantity' => $value->quantity, 'material' => $value->material, 'size' => $value->size ?? null]);
             //array_push($productsIds_array, $value->id);
         }
 

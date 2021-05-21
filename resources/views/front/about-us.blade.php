@@ -1,17 +1,14 @@
 @extends('layout.app')
 @section('content')
     <!-- Begin Hiraola's About Us Area -->
-    <div class="about-us-area">
+    <div class="about-us-area" style="padding-bottom: 80px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-7 d-flex align-items-center">
                     <div class="overview-content">
-                        <h2>Welcome To <span>THE D-Nest</span> Store!</h2>
-                        <p class="short_desc">We Provide Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            Repudiandae nisi fuga facilis, consequuntur, maiores eveniet voluptatum, omnis possimus
-                            temporibus aspernatur nobis animi in exercitationem vitae nulla! Adipisci ullam illum quisquam.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, nulla veniam? Magni aliquid
-                            asperiores magnam. Veniam ex tenetur.</p>
+                        <h2>A propos <span>THE D-Nest</span></h2>
+                        <p class="short_desc">Un savoir-faire antique, l’excellence de l’artisanat Marocaine combinée au désigne et au raffinemet moderne.
+                            <br> THE D-Nest à pour mission de concevoir des bijoux qui correspondent parfaitement à vos attentes, c’est pour cette raison que nous travaillons étroitement avec notre communauté afin d’imaginer et de co-créer avec elle de vrais compagnons de succès.</p>
 
                     </div>
                 </div>

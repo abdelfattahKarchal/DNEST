@@ -62,7 +62,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreProductRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreProductRequest $request)
@@ -93,6 +93,7 @@ class ProductController extends Controller
             'path_small_2' => $file2_name,
             'description' => $request->description,
             'active' => 0,
+            'has_size' => $request->size ? 1 : 0,
         ]);
         session()->flash('status','Product add successfully');
        return redirect()->back();
@@ -169,6 +170,7 @@ class ProductController extends Controller
 
         $product->sub_category_id = $request->subcategory;
         $product->description = $request->description;
+        $product->has_size = $request->size ? 1 : 0;
 
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');

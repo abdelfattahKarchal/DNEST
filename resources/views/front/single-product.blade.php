@@ -119,6 +119,16 @@
                                             class="color-text">Argent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                 </div>
+
+                                @if($product->has_size)
+                                    <h6>Taille</h6>
+                                    <select class="nice-select small" style="border-radius: 0px !important;" id="selected_size" name="selected_size">
+                                        @for($i=1; $i<=5; $i++)
+                                            <option  value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                    </select>
+                                @endif
+                                
                             </div>
 
                             <div class="align-bottom" style="margin-top: 65px !important;">
@@ -145,7 +155,9 @@
                             <ul class="nav product-menu">
                                 <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a>
                                 </li>
-                                <li><a data-toggle="tab" href="#taille"><span>Taille</span></a>
+                                @if($product->has_size)
+                                    <li><a data-toggle="tab" href="#taille"><span>Taille</span></a>
+                                @endif
                                 </li>
                                 <li>
                                     <a data-toggle="tab" href="#reviews">
@@ -162,63 +174,44 @@
                                     {!! $product->description !!}
                                 </div>
                             </div>
-                            <div id="taille" class="tab-pane" role="tabpanel">
-                                <div class="product-description">
-                                    <table width="100%" style="margin-left: auto; margin-right: auto;">
-                                        <tbody>
+                            @if($product->has_size)
+                                <div id="taille" class="tab-pane" role="tabpanel">
+                                    <div class="product-description">
+                                        <table class="table">
+                                            <thead>
                                             <tr>
-                                                <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
-                                                    <div style="text-align: center;"><strong>Tailles Américaines</strong>
-                                                    </div>
-                                                </td>
-                                                <td style="width: 53.8221%;" data-mce-style="width: 53.8221%;">
-                                                    <div><strong>Tailles Européennes</strong></div>
-                                                </td>
+                                                <th scope="col">Tailles Américaines</th>
+                                                <th scope="col">Tailles Européennes</th>
                                             </tr>
-                                            <tr style="text-align: center;">
-                                                <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
-                                                    <div>5</div>
-                                                </td>
-                                                <td align="left">
-                                                    <div>49.32</div>
-                                                </td>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>49.32</td>
                                             </tr>
-                                            <tr style="text-align: center;">
-                                                <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
-                                                    <div>6</div>
-                                                </td>
-                                                <td align="left">
-                                                    <div>51.87</div>
-                                                </td>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>51.87</td>
                                             </tr>
-                                            <tr style="text-align: center;">
-                                                <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
-                                                    <div>7</div>
-                                                </td>
-                                                <td align="left">
-                                                    <div>54.51&nbsp;</div>
-                                                </td>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>54.51</td>
                                             </tr>
-                                            <tr style="text-align: center;">
-                                                <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
-                                                    <div>8</div>
-                                                </td>
-                                                <td align="left">
-                                                    <div>57.15</div>
-                                                </td>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>57.15</td>
                                             </tr>
-                                            <tr style="text-align: center;">
-                                                <td style="width: 42.1779%;" data-mce-style="width: 42.1779%;">
-                                                    <div>9</div>
-                                                </td>
-                                                <td align="left">
-                                                    <div>59.34</div>
-                                                </td>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>59.34</td>
                                             </tr>
-                                        </tbody>
-                                    </table>
+                                            
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div id="reviews" class="tab-pane" role="tabpanel">
                                 <div class="tab-pane active" id="tab-review">
                                     <form action="{{ url('reviews') }}" method="POST" class="form-horizontal"
@@ -305,7 +298,7 @@
         function addToCard(product_id) {
 
             var cardCount = parseInt($('.card-counter').text()[0]);
-            var selectedSize = $('#selected_size').find(":selected").val();
+            var selectedSize = $('#selected_size').val();
             var selectedQantity = $('#quantity').val();
             var selectedMatiere = 'gold';
             if ($('#silver').hasClass('active')) {

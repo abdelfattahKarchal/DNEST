@@ -25,9 +25,10 @@ Route::get('/welcome', function () {
 Route::get('/checkout', function () {
     return view('front.checkout');
 });
+// to delete
 Route::get('/mail', function () {
 
-    $order = \App\Order::find(33);
+    $order = \App\Order::find(52);
     $contact = Contact::first();
 
     /* return view('emails.orders.confirmation', [
@@ -37,6 +38,12 @@ Route::get('/mail', function () {
         'order' => $order,
         'contact' => $contact,
     ]);
+});
+
+// to delete
+Route::get('/verify', function () {
+
+    return view('auth.verify');
 });
 //Route::put('/myaccount/{myaccount}/address', 'MyAccountController@address')->name('myaccount.address');
 Route::resource('myaccount', 'MyAccountController')->middleware('verified');
@@ -89,6 +96,7 @@ Route::post('carts/store', 'CartController@store');
 Route::get('collections/{id}/products', 'CollectionController@productsByCollectionId');
 Route::delete('carts/{id}/material/{material}/delete', 'CartController@delete');
 Route::post('carts/quantity/update', 'CartController@updateQuantity');
+Route::post('carts/size/update', 'CartController@updateSize');
 Route::resource('newsletters','NewsLetterController')->only('store');
 Route::post('newsletters/stop', 'NewsLetterController@stop');
 Route::resource('contacts', 'MessageController');

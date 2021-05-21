@@ -3325,12 +3325,12 @@ button.li-btn:hover {
 }
 
 .bg-5 {
-  background-image: url("https://demo.hasthemes.com/hiraola-preview/hiraola/assets/images/slider/5.jpg");
+  background-image: url("../images/slider/3.jpg");
 }
 
 .bg-6,
 .bg-7 {
-  background-image: url("https://demo.hasthemes.com/hiraola-preview/hiraola/assets/images/slider/6.jpg");
+  background-image: url("../images/slider/2.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

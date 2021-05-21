@@ -17,12 +17,11 @@
                 <div class="row">
 
                     <div class="col-12 mb--20 form-group">
-                        {{ __('Before proceeding, please check your email for a verification link.') }}
-                        {{ __('If you did not receive the email') }}
+                        {{ __('Avant de continuer, veuillez vérifier votre e-mail.') }}
                     </div>
 
                         <div class="col-12 mt-4 form-group">
-                            <button type="submit" class="hiraola-login_btn">Resend verification link</button>
+                            <button type="submit" class="hiraola-login_btn">Renvoyer le lien de vérification</button>
                         </div>
                 </div>
         </form>

@@ -13,6 +13,7 @@ class OrderProduct extends Model
     public $quantity;
     public $price;
     public $material;
+    public $size;
 
     public function best_product(){
         return $this->hasOne(Product::class);
