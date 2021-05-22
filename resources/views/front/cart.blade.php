@@ -18,10 +18,10 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-content">
-                <h2>Shopping cart</h2>
+                <h2>PANIER</h2>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active">Cart</li>
+                    <li><a href="index.html">Acceuil</a></li>
+                    <li class="active">Panier</li>
                 </ul>
             </div>
         </div>
@@ -45,7 +45,7 @@
                         </div> --}}
                     @else
                     @if (session()->has('productsCardSession') && count(Session::get('productsCardSession')))
-                    <h4 class="mb-4 text-uppercase">Cart Details ({{count(Session::get('productsCardSession'))}} item(s))</h4>
+                    <h4 class="mb-4 text-uppercase">DÉTAILS DU PANIER ({{count(Session::get('productsCardSession'))}} article(s))</h4>
                             <form action="{{ route('orders.store') }}" method="POST">
                                 @csrf
                                 <div style="border: 1px solid #e5e5e5; padding:30px;">
@@ -54,7 +54,7 @@
                                             {{-- <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
                                                 <i class="fa fa-trash mr-2"></i>Delete
                                             </a> --}}
-                                            <div class="col-3">
+                                            <div class="col-4">
                                                 <div class="row">
                                                     <div class="col-1 my-auto">
                                                         <a href="javascript:void(0)" onclick="deleteProductCart({{ $order_product->product->id }}, '{{ $order_product->material }}')" class="text-danger">
@@ -62,24 +62,27 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-3 my-auto">
-                                                        <a href="javascript:void(0)"><img class="img-fluid"
+                                                        <a href="{{ route('products.show', ['product' => $order_product->product->id]) }}"><img class="img-fluid"
                                                                 src="{{ $order_product->product->url_1() }}"
                                                                 alt="{{ $order_product->product->name }}"></a>
                                                     </div>
                                                     <div class="col-7">
-                                                        <p>Name</p>
+                                                        <p>Désignation</p>
                                                         <div class="my-auto">
-                                                            <strong class="mb-3">{{ $order_product->product->name }}</strong>
+                                                           <a href="{{ route('products.show', ['product' => $order_product->product->id]) }}"> <strong class="mb-3">{{ $order_product->product->name }}</strong> </a> 
+                                                            @if($order_product->size && $order_product->size > 0)
+                                                                <p>Taille : {{ $order_product->size }}</p>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-2 text-center">
-                                                <p>Material</p>
+                                                <p>Matière</p>
                                                 <strong class="my-auto">{{ $order_product->material }}</strong>
                                             </div>
                                             <div class="col-2 text-center">
-                                                <p>Quantity</p>
+                                                <p>Quantité</p>
                                                 <div class="my-auto">
                                                     <select class="nice-select small ml-5" style="border-radius: 0px !important;" onchange="udpdateQte({{ $order_product->product->id }},'{{ $order_product->material }}')" name="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" id="quantity_selected_{{ $order_product->product->id }}_{{ $order_product->material }}">
                                                         @for($i=1; $i<=10; $i++)
@@ -91,25 +94,14 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            @if($order_product->size && $order_product->size > 0)
-                                                <div class="col-1 text-center">
-                                                    <p>Taille</p>
-                                                    <div class="my-auto">
-                                                        <select class="nice-select small" style="border-radius: 0px !important;" onchange="udpdateSize({{ $order_product->product->id }},'{{ $order_product->material }}')"  name="size_selected_{{ $order_product->product->id }}_{{ $order_product->material }}" id="size_selected_{{ $order_product->product->id }}_{{ $order_product->material }}">
-                                                            @for($i=1; $i<=5; $i++)
-                                                                <option {{ $order_product->size == $i ? 'selected' : '' }} value="{{$i}}">{{$i}}</option>
-                                                            @endfor
-                                                        </select>
-                                                    </div>
-                                                </div> 
-                                            @endif
+                                           
                                             
                                             <div class="col-2 text-center">
-                                                <p>Price</p>
+                                                <p>Prix</p>
                                                 <div class="my-auto">{{ $order_product->price }} MAD</div>
                                             </div>
                                             <div class="col-2 text-center">
-                                                <p>Sub Total</p>
+                                                <p>Sous Total</p>
                                                 <div class="my-auto">{{ $order_product->quantity * $order_product->price }} MAD</div>
                                             </div>
                                         </div>
@@ -128,11 +120,11 @@
                                     <div class="row">
                                         <div class="col-md-4 offset-8">
                                                 <div class="row" >
-                                                    <h4 class="mb-4 text-uppercase">Cart Totals</h4>
+                                                    <h4 class="mb-4 text-uppercase">Total DU PANIER</h4>
                                                 </div>
                                                 <div class="row" style="border: 1px solid #e5e5e5;">
                                                     <div class="col-6 pt-2 pb-2" style="border-right: 1px solid #e5e5e5;">
-                                                        Sub Total
+                                                        Sous Total
                                                     </div>
                                                     <div class="col-6 my-auto text-center">
                                                         <strong><span class="amount">{{ $sum }} MAD</span></strong>
@@ -148,7 +140,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6 p-0 mt-3">
-                                                        <button type="button" onclick="window.location.href='{{url('/checkout')}}';" class="hiraola-login_btn">Checkout</button>
+                                                        <button type="button" onclick="window.location.href='{{url('/checkout')}}';" class="hiraola-login_btn">VÉRIFIER</button>
                                                     </div>
                                                 </div>
                                         </div>

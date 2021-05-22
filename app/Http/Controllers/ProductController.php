@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\OrderProduct;
 use App\Product;
 use App\Review;
+use App\Size;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -122,13 +123,15 @@ class ProductController extends Controller
             $product->where('id', '!=', $id);
 
         }])->find($product->subCategory->id)->products->take(10); 
-        //dd($specialProducts);
+
+        $sizes = Size::all();
         return view('front.single-product', [
             'product' => $product,
             'material' => 'gold',
             'reviews_notes' => $reviews_notes,
             'order_product_count' => $order_product_count,
-            'specialProducts' => $specialProducts
+            'specialProducts' => $specialProducts,
+            'sizes' => $sizes,
         ]);
     }
 

@@ -135,12 +135,12 @@
                             </div>
                             <div class="slide-item" style="border-right: 0px !important;">
                                 <a href="javascript:void(0)">
-                                    <img src="{{ asset('front/assets/images/partners/initiativenational.png') }}" alt="initiative national" height="131px">
+                                    <img src="{{ asset('front/assets/images/partners/sela.png') }}" alt="initiative national" height="131px">
                                 </a>
                             </div>
                             <div class="slide-item" style="border-right: 0px !important;">
                                 <a href="javascript:void(0)">
-                                    <img src="{{ asset('front/assets/images/partners/carrefour.png') }}" alt="carrefour">
+                                    <img src="{{ asset('front/assets/images/partners/chambreartisana.jpg') }}" alt="chambreartisana" height="131px">
                                 </a>
                             </div>
                             

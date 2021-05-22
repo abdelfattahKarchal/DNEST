@@ -8,10 +8,10 @@
         <div class="breadcrumb-area">
             <div class="container">
                 <div class="breadcrumb-content">
-                    <h2>Checkout</h2>
+                    <h2>Confirmation</h2>
                     <ul>
                         <li><a href="{{ url('/') }}">Acceuil</a></li>
-                        <li class="active">Checkout</li>
+                        <li class="active">confirmation</li>
                     </ul>
                 </div>
             </div>
@@ -23,10 +23,10 @@
             @if (session()->has('status'))
                 <div class="text-center" style="margin: 50px;">
                     <img class="mb-4" width="100px" src="{{asset("front/assets/images/order.png")}}" />
-                    <h5 class="text-muted">Order was registered successfully</h5>
+                    <h5 class="text-muted">La commande a été enregistrée avec succès</h5>
                     <ul class="mt-3">
-                        <li>You will receive a confirmation email</li>
-                        <li>Thank you for blablabla</li>
+                        <li>Vous recevrez un email de votre visite</li>
+                        <li>Merci de votre confiance à très bientôt</li>
                     </ul>
                     <div class="mt-5 hiraola-btn-ps_center">
                         <a class="hiraola-btn" href="{{ url('/') }}">Shopping now</a>
@@ -76,7 +76,7 @@
                                                     <label>Adresse <span style="color:red;">(*)</span></label>
                                                     <input 
                                                     class="form-control @error('address') is-invalid @enderror"
-                                                    name="address" placeholder="Street address" type="text"
+                                                    name="address" type="text"
                                                     value="{{ old('address') ?? (Auth()->user()->address ?? '')}}">
                                                     @error('address')
                                                         <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="checkout-form-list">
-                                                    <input name="address_2" placeholder="Apartment, suite, unit etc. (optional)"
+                                                    <input name="address_2" placeholder="Appartement, suite, unité etc. (facultatif)"
                                                         type="text">
                                                 </div>
                                             </div>
@@ -157,8 +157,8 @@
                                             <table class="table">
                                                 <thead>
                                                     <tr>
-                                                        <th style="padding:12px;" class="cart-product-name text-left"><strong>Product</strong></th>
-                                                        <th style="padding:12px;" class="cart-product-total"><strong>Total</strong></th>
+                                                        <th style="padding:12px;" class="cart-product-name text-left"><strong>Article</strong></th>
+                                                        <th style="padding:12px;" class="cart-product-total"><strong>Prix</strong></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -169,7 +169,8 @@
                                                                     class="product-quantity">
                                                                     × {{ $order_product->quantity }}</strong>
                                                                     @if($order_product->size) 
-                                                                        <strong> &nbsp; &taille=</strong>{{ $order_product->size}}
+                                                                       <br>
+                                                                            Taille : {{ $order_product->size}} 
                                                                     @endif
                                                                 </td>
                                                             <td class="cart-product-total text-center"><span

@@ -15,10 +15,10 @@ class CartController extends Controller
         $orderProductList = [];
         $orderProduct = new OrderProduct();
 
-        $orderProduct->product = Product::with('sizes')->findOrFail($request->product_id);
+        $orderProduct->product = Product::findOrFail($request->product_id);
         $orderProduct->material = $request->material;
        
-        if ($request->size > 0) {
+        if ($request->size) {
             $orderProduct->size = $request->size;
         }
         
@@ -34,6 +34,7 @@ class CartController extends Controller
             foreach ($orderProductList as &$item) {
                 if ($orderProduct->product->id == $item->product->id && $orderProduct->material == $item->material ) {
                     $item->quantity += 1;
+                    $item->size = $request->size;
                     $isExist = true;
                     break;
                 }

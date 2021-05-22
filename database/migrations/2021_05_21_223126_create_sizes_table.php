@@ -14,14 +14,10 @@ class CreateSizesTable extends Migration
     public function up()
     {
         Schema::create('sizes', function (Blueprint $table) {
-            //$table->engine = 'InnoDB';
             $table->id();
-            $table->string('size');
-            $table->double('add_price');
-            $table->foreignId('product_id')
-                  ->constrained()
-                  ->onDelete('cascade');
-            $table->text('description')->nullable();
+            $table->string('EU');
+            $table->string('US');
+            $table->string('MM');
             $table->timestamps();
             $table->softDeletes();
         });

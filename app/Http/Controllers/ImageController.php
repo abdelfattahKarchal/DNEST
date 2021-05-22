@@ -8,6 +8,7 @@ use App\Image;
 use App\OrderProduct;
 use App\Product;
 use App\Review;
+use App\Size;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -186,12 +187,14 @@ class ImageController extends Controller
 
         }])->find($product->subCategory->id)->products->take(10);
 
+        $sizes = Size::all();
         return view('front.single-product', [
             'product' => $product,
             'material' => $material,
             'reviews_notes' => $reviews_notes,
             'order_product_count' => $order_product_count,
-            'specialProducts' => $specialProducts
+            'specialProducts' => $specialProducts,
+            'sizes' => $sizes,
         ]);
     }
 }

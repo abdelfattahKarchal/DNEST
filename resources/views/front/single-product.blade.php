@@ -123,9 +123,9 @@
                                 @if($product->has_size)
                                     <h6>Taille</h6>
                                     <select class="nice-select small" style="border-radius: 0px !important;" id="selected_size" name="selected_size">
-                                        @for($i=1; $i<=5; $i++)
-                                            <option  value="{{$i}}">{{$i}}</option>
-                                        @endfor
+                                        @foreach($sizes as $size)
+                                            <option  value="{{$size->US}}">{{$size->US}}</option>
+                                        @endforeach
                                     </select>
                                 @endif
                                 
@@ -182,29 +182,17 @@
                                             <tr>
                                                 <th scope="col">Tailles Américaines</th>
                                                 <th scope="col">Tailles Européennes</th>
+                                                <th scope="col">MM</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>49.32</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>51.87</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>54.51</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>57.15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td>59.34</td>
-                                            </tr>
+                                                @foreach($sizes as $size)
+                                                    <tr>
+                                                        <td>{{ $size->US }}</td>
+                                                        <td>{{ $size->EU }}</td>
+                                                        <td>{{ $size->MM }}</td>
+                                                    </tr>
+                                                @endforeach
                                             
                                             </tbody>
                                         </table>
