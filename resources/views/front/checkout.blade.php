@@ -170,8 +170,10 @@
                                                                     × {{ $order_product->quantity }}</strong>
                                                                     @if($order_product->size) 
                                                                        <br>
-                                                                            Taille : {{ $order_product->size}} 
+                                                                            Taille : {{ $order_product->size}}
                                                                     @endif
+                                                                    <br>
+                                                                            Matière : {{ $order_product->material}} 
                                                                 </td>
                                                             <td class="cart-product-total text-center"><span
                                                                     class="amount">{{ $order_product->quantity * $order_product->price }}

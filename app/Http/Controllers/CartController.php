@@ -33,8 +33,16 @@ class CartController extends Controller
         if ($orderProductList) {
             foreach ($orderProductList as &$item) {
                 if ($orderProduct->product->id == $item->product->id && $orderProduct->material == $item->material ) {
+                    if ($orderProduct->size == $item->size ) {
+                        $item->quantity += 1;
+                        $isExist = true;
+                        break;
+                    }
+                    if ($orderProduct->size && $orderProduct->size != $item->size ) {
+                        $isExist = false;
+                        break;
+                    }
                     $item->quantity += 1;
-                    $item->size = $request->size;
                     $isExist = true;
                     break;
                 }
