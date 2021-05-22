@@ -81,28 +81,28 @@
                             <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;">
                                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
                                     <tr>
-                                        <td align="left" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;" class="mobile-center">
-                                            <a href="{{ url('/') }}"> <img src="{{asset('front/assets/images/logo/logo-header.png')}}" alt="Financial logo" title="Financial logo" width="134" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"> </a>
+                                        <td align="center" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;" class="mobile-center">
+                                            <a href="{{ url('/') }}"> <img src="{{asset('front/assets/images/logo/logo-header.png')}}" alt="Financial logo" title="Financial logo" width="200" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic"> </a>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;" class="mobile-hide">
+                            {{-- <div style="display:inline-block; max-width:50%; min-width:100px; vertical-align:top; width:100%;" class="mobile-hide">
                                 <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
                                     <tr>
                                         <td align="right" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; line-height: 48px;">
                                             <table cellspacing="0" cellpadding="0" border="0" align="right">
                                                 <tr>
                                                     <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400;">
-                                                        {{-- <p style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;"><a href="#" target="_blank" style="color: #ffffff; text-decoration: none;">Shop &nbsp;</a></p> --}}
+                                                        <p style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;"><a href="#" target="_blank" style="color: #ffffff; text-decoration: none;">Shop &nbsp;</a></p>
                                                     </td>
-                                                    {{-- <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;"> <a href="#" target="_blank" style="color: #ffffff; text-decoration: none;"><img src="https://img.icons8.com/color/48/000000/small-business.png" width="27" height="23" style="display: block; border: 0px;" /></a> </td> --}}
+                                                    <td style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;"> <a href="#" target="_blank" style="color: #ffffff; text-decoration: none;"><img src="https://img.icons8.com/color/48/000000/small-business.png" width="27" height="23" style="display: block; border: 0px;" /></a> </td>
                                                 </tr>
                                             </table>
                                         </td>
                                     </tr>
                                 </table>
-                            </div>
+                            </div> --}}
                         </td>
                     </tr>
                     <tr>
@@ -110,7 +110,7 @@
                             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                                 <tr>
                                     <td align="center" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;"> <img src="{{asset("front/assets/images/order.png")}}" width="125" height="120" style="display: block; border: 0px;" /><br>
-                                        <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;"> Nous vous remercions de votre commande! </h2>
+                                        <h2 style="font-size: 25px; font-weight: 800; line-height: 36px; color: #333333; margin: 0; padding: 0px 10px 0px 10px"> Nous vous remercions de votre commande! </h2>
                                     </td>
                                 </tr>
                                 <tr>
