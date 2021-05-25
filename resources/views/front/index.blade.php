@@ -69,7 +69,7 @@
                     <div class="static-banner-content">
                         <p><span>-25% Off</span>This Week</p>
                         <h2>Featured Product</h2>
-                        <h3>Meito Accessories 2019</h3>
+                        <h3>Meito Accessories 2021</h3>
                         {{-- <p class="schedule">
                             Starting at
                             <span> £1209.00</span>
