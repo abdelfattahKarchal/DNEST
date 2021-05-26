@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class leftSidebar extends Component
 {
     public $collections;
+    public $collectionName;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($collections)
+    public function __construct($collections, $collectionName = null)
     {
         $this->collections = $collections;
+        $this->collectionName = $collectionName;
     }
 
     /**

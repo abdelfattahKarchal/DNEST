@@ -17,7 +17,7 @@
             <div class="row">
                 {{-- begin left sidebar --}}
                 <div class="col-lg-3 order-2 order-lg-1">
-                    <x-front.left-sidebar :collections="$collections"></x-front.left-sidebar>
+                    <x-front.left-sidebar :collections="$collections" :collectionName="$collection_name"></x-front.left-sidebar>
                 </div>
                 {{-- end left sidebar --}}
 

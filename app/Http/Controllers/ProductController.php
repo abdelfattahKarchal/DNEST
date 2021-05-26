@@ -55,6 +55,7 @@ class ProductController extends Controller
     {
         $this->authorize('create', new Product());
         $subcategories = SubCategory::all();
+        //dd(66);
         return view('backoffice.products.create',[
             'subcategories' => $subcategories
         ]);
