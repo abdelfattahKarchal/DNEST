@@ -199,6 +199,18 @@ class CollectionController extends Controller
     {
         $this->authorize('active', new Collection());
         $collection = Collection::findOrFail($id);
+        //dd($collection->categories);
+        if ($request->active != 'true') {
+            foreach ($collection->categories as $category) {
+                $category->active = 0;
+                $category->save();
+                foreach ($category->subCategories as $subCategory) {
+                    $subCategory->active = 0;
+                    $subCategory->save();
+                }
+            }
+        }
+        
         $collection->active = $request->active == 'true' ? 1 : 0;
         $collection->save();
     }

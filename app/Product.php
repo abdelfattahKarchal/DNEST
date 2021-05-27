@@ -43,4 +43,13 @@ class Product extends Model
     public function url_2(){
         return Storage::url($this->path_small_2);
     }
+
+    // this is a recommended way to declare event handlers
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($product) { // before delete() method call this
+             $product->images()->delete();
+        });
+    }
 }
