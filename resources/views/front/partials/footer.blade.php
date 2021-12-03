@@ -51,17 +51,17 @@
                                             
                                             <li class="hiraola-phone"><i
                                                     class="ion-ios-telephone"></i><span>Télèphone:</span> <a
-                                                    href="tel://{{ $contacts[0]->phone }}">{{ $contacts[0]->phone }}</a>
+                                                    href="tel://{{ $contacts[0]->phone ?? '' }}">{{ $contacts[0]->phone ?? '' }}</a>
                                             </li>
                                             
                                             <li class="hiraola-email"><i
                                                     class="ion-android-mail"></i><span>Email:</span> <a
-                                                    href="mailto://{{ $contacts[0]->email }}">{{ $contacts[0]->email }}</a>
+                                                    href="mailto://{{ $contacts[0]->email ?? '' }}">{{ $contacts[0]->email ?? '' }}</a>
                                             </li>
 
                                             <li class="hiraola-address"><i
                                                 class="ion-ios-location"></i><span>Adresse:</span> 
-                                                {{ $contacts[0]->address }}
+                                                {{ $contacts[0]->address ?? '' }}
                                             </li>
                                         </ul>
                                     </div>
