@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
     /**
      * Register any application services.
      *
@@ -24,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
+
         view()->composer([
         'front.partials.footer',
         'front.partials.headers.header',
