@@ -1,7 +1,7 @@
 <div class="hiraola-social_link">
     <ul>
         <li class="facebook">
-            <a href="{{ $contacts[0]->facebook }}" data-toggle="tooltip" target="_blank"
+            <a href="{{ $contacts[0]->facebook ?? '' }}" data-toggle="tooltip" target="_blank"
                 title="Facebook">
                 <i class="fab fa-facebook"></i>
             </a>
@@ -18,7 +18,7 @@
             </a>
         </li> --}}
         <li class="instagram">
-            <a href="{{ $contacts[0]->instagram }}" data-toggle="tooltip" target="_blank" title="Instagram">
+            <a href="{{ $contacts[0]->instagram ?? '' }}" data-toggle="tooltip" target="_blank" title="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
         </li>
