@@ -147,7 +147,7 @@
     <!-- Main JS -->
     <script src="{{ asset('front/assets/js/main.js') }}"></script>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
 
             $('#newsletter-subscribe').click(function(e) {
@@ -227,7 +227,7 @@
                 });
             })
 
-    </script>
+    </script> --}}
 
     @yield('js')
 </body>
