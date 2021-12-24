@@ -19,9 +19,9 @@ Route::get('/clear', function () {
   // dd(session()->get('productsCardSession'));
    //session()->forget('productsCardSession');
 });
-Route::get('/welcome', function () {
+/* Route::get('/welcome', function () {
     return view('welcome');
-});
+}); */
 Route::get('/checkout', function () {
     return view('front.checkout');
 });

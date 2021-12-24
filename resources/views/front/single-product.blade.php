@@ -82,8 +82,8 @@
 
                                 <hr />
                                 @php
-                                    $newPrice = $material == 'gold' ? $product->new_price : $product->new_price_silver;
-                                    $oldPrice = $material == 'gold' ? $product->price : $product->price_silver;
+                                    $newPrice = $product->material_type == 'gold' ? $product->new_price : $product->new_price_silver;
+                                    $oldPrice = $product->material_type == 'gold' ? $product->price : $product->price_silver;
                                 @endphp
                                 <div class="mt-4 new-price" style="font-size: 2rem">{{ $newPrice }} MAD
                                 </div>
@@ -104,31 +104,54 @@
                                 <h6>Matière</h6>
 
                                 <div class="color-list">
-                                    <a id="gold" href='javascript:void(0)'
-                                        class="single-color text-left {{ $material == 'gold' ? 'active' : '' }}"
-                                        data-pid="{{ $product->id }}" data-swatch-color="red">
-                                        <span class="bg-gold_color"></span>
-                                        <span
-                                            class="color-text">Or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    </a>
-                                    <a id="silver" href="javascript:void(0)"
-                                        class="single-color text-left {{ $material == 'silver' ? 'active' : '' }}"
-                                        data-pid="{{ $product->id }}" data-swatch-color="orange">
-                                        <span class="bg-silver_color"></span>
-                                        <span
-                                            class="color-text">Argent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    </a>
+                                    @if ($product->material_type == 'all')
+                                        <a id="gold" href='javascript:void(0)'
+                                            class="single-color text-left {{ $material == 'gold' ? 'active' : '' }}"
+                                            data-pid="{{ $product->id }}" data-swatch-color="red">
+                                            <span class="bg-gold_color"></span>
+                                            <span
+                                                class="color-text">Or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </a>
+                                        <a id="silver" href="javascript:void(0)"
+                                            class="single-color text-left {{ $material == 'silver' ? 'active' : '' }}"
+                                            data-pid="{{ $product->id }}" data-swatch-color="orange">
+                                            <span class="bg-silver_color"></span>
+                                            <span
+                                                class="color-text">Argent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </a>
+                                    @endif
+                                    @if ($product->material_type == 'gold')
+                                        <a id="gold" href='javascript:void(0)'
+                                            class="single-color text-left {{ $material == 'gold' ? 'active' : '' }}"
+                                            data-pid="{{ $product->id }}" data-swatch-color="red">
+                                            <span class="bg-gold_color"></span>
+                                            <span
+                                                class="color-text">Or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </a>
+                                    @endif
+
+                                    @if ($product->material_type == 'silver')
+                                        <a id="silver" href="javascript:void(0)"
+                                            class="single-color text-left {{ $material == 'silver' ? 'active' : '' }}"
+                                            data-pid="{{ $product->id }}" data-swatch-color="orange">
+                                            <span class="bg-silver_color"></span>
+                                            <span
+                                                class="color-text">Argent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        </a>
+                                    @endif
+
                                 </div>
 
-                                @if($product->has_size)
+                                @if ($product->has_size)
                                     <h6>Taille</h6>
-                                    <select class="nice-select small" style="border-radius: 0px !important;" id="selected_size" name="selected_size">
-                                        @foreach($sizes as $size)
-                                            <option  value="{{$size->US}}">{{$size->US}}</option>
+                                    <select class="nice-select small" style="border-radius: 0px !important;"
+                                        id="selected_size" name="selected_size">
+                                        @foreach ($sizes as $size)
+                                            <option value="{{ $size->US }}">{{ $size->US }}</option>
                                         @endforeach
                                     </select>
                                 @endif
-                                
+
                             </div>
 
                             <div class="align-bottom" style="margin-top: 65px !important;">
@@ -155,7 +178,7 @@
                             <ul class="nav product-menu">
                                 <li><a class="active" data-toggle="tab" href="#description"><span>Description</span></a>
                                 </li>
-                                @if($product->has_size)
+                                @if ($product->has_size)
                                     <li><a data-toggle="tab" href="#taille"><span>Taille</span></a>
                                 @endif
                                 </li>
@@ -174,29 +197,29 @@
                                     {!! $product->description !!}
                                 </div>
                             </div>
-                            @if($product->has_size)
+                            @if ($product->has_size)
                                 <div id="taille" class="tab-pane" role="tabpanel">
                                     <div class="product-description">
                                         <table class="table">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Tailles Américaines</th>
-                                                <th scope="col">Tailles Européennes</th>
-                                                <th scope="col">MM</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Tailles Américaines</th>
+                                                    <th scope="col">Tailles Européennes</th>
+                                                    <th scope="col">MM</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($sizes as $size)
+                                                @foreach ($sizes as $size)
                                                     <tr>
                                                         <td>{{ $size->US }}</td>
                                                         <td>{{ $size->EU }}</td>
                                                         <td>{{ $size->MM }}</td>
                                                     </tr>
                                                 @endforeach
-                                            
+
                                             </tbody>
                                         </table>
-                                        
+
                                     </div>
                                 </div>
                             @endif
@@ -212,7 +235,8 @@
                                                     @foreach ($product->reviews as $key => $review)
                                                         <tr>
                                                             <h5 class="{{ $key != 0 ? 'mt-4' : '' }}">
-                                                                <strong>{{ $review->user->name ?? '' }}</strong></h5>
+                                                                <strong>{{ $review->user->name ?? '' }}</strong>
+                                                            </h5>
                                                             <p>{{ $review->created_at->format('d/m/Y') }} -
                                                                 <span>
                                                                     @for ($i = 0; $i < $review->note; $i++)

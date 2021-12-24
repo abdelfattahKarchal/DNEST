@@ -9,8 +9,10 @@
             {{-- <img class="secondary-img"
                 src="{{ asset('front/assets/images/product/small/1-2.jpg') }}" alt="Hiraola's Product Image">
             --}}
-            <img class="primary-img" src="{{ $product->url_1() }}" alt="{{ $product->name }}">
-            <img class="secondary-img" src="{{ $product->url_2() }}" alt="{{ $product->name }}">
+            <img class="primary-img" src="{{ $product->material_type != 'silver' ? $product->url_1() : $product->url_2()}}" alt="{{ $product->name }}">
+            @if ($product->material_type == "all")
+                <img class="secondary-img" src="{{ $product->url_2() }}" alt="{{ $product->name }}">
+            @endif
             {{-- <img class="primary-img" src="{{ $product->path_small_1 }}" alt="{{ $product->name }}">
             <img class="secondary-img" src="{{ $product->path_small_2 }}" alt="{{ $product->name }}"> --}}
         </a>
@@ -35,12 +37,12 @@
                             @php
                             $status_price = 'old-price';
                             @endphp
-                            <div class="col-6"><span class="new-price">{{ $product->new_price }} MAD</span>
+                            <div class="col-6"><span class="new-price">{{ in_array($product->material_type, ['gold','all']) ? $product->new_price : $product->new_price_silver}} MAD</span>
                             </div>
                         @endif
                         @if ($product->price)
                             <div class="col-6 text-right">
-                                <span class="{{ $status_price }}">{{ $product->price }} MAD
+                                <span class="{{ $status_price }}">{{ in_array($product->material_type, ['gold','all']) ? $product->price : $product->price_silver}} MAD
                                 </span>
                             </div>
                         @endif

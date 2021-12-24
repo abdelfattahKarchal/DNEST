@@ -55,9 +55,11 @@ class ProductController extends Controller
     {
         $this->authorize('create', new Product());
         $subcategories = SubCategory::all();
+        $materialsType = ['gold', 'silver','all'];
         //dd(66);
         return view('backoffice.products.create',[
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'materialsType' => $materialsType
         ]);
     }
 
@@ -92,10 +94,11 @@ class ProductController extends Controller
             'new_price_silver' => $request->new_price_silver,
             'quantity' => $request->quantity,
             'path_small_1' => $file1_name,
-            'path_small_2' => $file2_name,
+            'path_small_2' => $file2_name ?? '',
             'description' => $request->description,
             'active' => 0,
             'has_size' => $request->size ? 1 : 0,
+            'material_type' => $request->material_type
         ]);
         session()->flash('status','Product add successfully');
        return redirect()->back();
@@ -109,10 +112,15 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //$product = Product::findOrFail($id);
-        $product = Product::where('active',1)->with(['images'=> function($q){
+        $product = Product::findOrFail($id);
+        $product = Product::where('active',1)->with(['images'=> function($q) use ($product){
             $q->where('active', '=', 1);
-            $q->where('material', '=', 'gold');
+            if ($product->material_type == "gold" || $product->material_type == "all" ) {
+                $q->where('material', '=', 'gold');
+            }else{
+                $q->where('material', '=', 'silver');
+            }
+             
         }])->findOrFail($id);
 
         $product_sum = Review::where('product_id',$id)->sum('note');
@@ -148,9 +156,11 @@ class ProductController extends Controller
         $product = Product::with('subCategory', 'subCategory.category', 'subCategory.category.collection')->findOrFail($id);
 
         $subcategories = SubCategory::all();
+        $materialsType = ['gold', 'silver','all'];
         return view('backoffice.products.edit', [
             'product' => $product,
             'subcategories' => $subcategories,
+            'materialsType' => $materialsType,
         ]);
     }
 
@@ -175,6 +185,7 @@ class ProductController extends Controller
         $product->sub_category_id = $request->subcategory;
         $product->description = $request->description;
         $product->has_size = $request->size ? 1 : 0;
+        $product->material_type = $request->material_type;
 
         $hasFile1 = $request->hasFile('image1');
         $hasFile2 = $request->hasFile('image2');
