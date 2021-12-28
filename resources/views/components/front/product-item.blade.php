@@ -6,9 +6,7 @@
             {{-- <img class="primary-img"
                 src="{{ asset('front/assets/images/product/small/1-1.jpg') }}" alt="{{ $product->name }}">
             --}}
-            {{-- <img class="secondary-img"
-                src="{{ asset('front/assets/images/product/small/1-2.jpg') }}" alt="Hiraola's Product Image">
-            --}}
+        
             <img class="primary-img" src="{{ $product->material_type != 'silver' ? $product->url_1() : $product->url_2()}}" alt="{{ $product->name }}">
             @if ($product->material_type == "all")
                 <img class="secondary-img" src="{{ $product->url_2() }}" alt="{{ $product->name }}">
